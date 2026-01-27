@@ -67,10 +67,38 @@ public class CFBamJpaDbKeyHash256GenDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDbKeyHash256Gen ensureRec(ICFBamDbKeyHash256Gen rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDbKeyHash256Gen) {
+			return( (CFBamJpaDbKeyHash256Gen)rec );
+		}
+		else {
+			CFBamJpaDbKeyHash256Gen mapped = new CFBamJpaDbKeyHash256Gen();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDbKeyHash256GenH newHRec() {
         ICFBamDbKeyHash256GenH hrec =
             new CFBamJpaDbKeyHash256GenH();
         return( hrec );
     }
+
+	public CFBamJpaDbKeyHash256GenH ensureHRec(ICFBamDbKeyHash256GenH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDbKeyHash256GenH) {
+			return( (CFBamJpaDbKeyHash256GenH)hrec );
+		}
+		else {
+			CFBamJpaDbKeyHash256GenH mapped = new CFBamJpaDbKeyHash256GenH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

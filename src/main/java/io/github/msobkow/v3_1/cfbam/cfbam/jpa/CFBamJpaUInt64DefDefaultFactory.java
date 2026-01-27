@@ -67,10 +67,38 @@ public class CFBamJpaUInt64DefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaUInt64Def ensureRec(ICFBamUInt64Def rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaUInt64Def) {
+			return( (CFBamJpaUInt64Def)rec );
+		}
+		else {
+			CFBamJpaUInt64Def mapped = new CFBamJpaUInt64Def();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamUInt64DefH newHRec() {
         ICFBamUInt64DefH hrec =
             new CFBamJpaUInt64DefH();
         return( hrec );
     }
+
+	public CFBamJpaUInt64DefH ensureHRec(ICFBamUInt64DefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaUInt64DefH) {
+			return( (CFBamJpaUInt64DefH)hrec );
+		}
+		else {
+			CFBamJpaUInt64DefH mapped = new CFBamJpaUInt64DefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

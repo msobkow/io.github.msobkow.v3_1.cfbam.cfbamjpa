@@ -67,6 +67,20 @@ public class CFBamJpaNumberColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaNumberColByTableIdxKey ensureByTableIdxKey(ICFBamNumberColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaNumberColByTableIdxKey) {
+			return( (CFBamJpaNumberColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaNumberColByTableIdxKey mapped = new CFBamJpaNumberColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNumberCol newRec() {
         ICFBamNumberCol rec =
@@ -74,10 +88,38 @@ public class CFBamJpaNumberColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaNumberCol ensureRec(ICFBamNumberCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaNumberCol) {
+			return( (CFBamJpaNumberCol)rec );
+		}
+		else {
+			CFBamJpaNumberCol mapped = new CFBamJpaNumberCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNumberColH newHRec() {
         ICFBamNumberColH hrec =
             new CFBamJpaNumberColH();
         return( hrec );
     }
+
+	public CFBamJpaNumberColH ensureHRec(ICFBamNumberColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaNumberColH) {
+			return( (CFBamJpaNumberColH)hrec );
+		}
+		else {
+			CFBamJpaNumberColH mapped = new CFBamJpaNumberColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

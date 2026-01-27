@@ -67,10 +67,38 @@ public class CFBamJpaUuidGenDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaUuidGen ensureRec(ICFBamUuidGen rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaUuidGen) {
+			return( (CFBamJpaUuidGen)rec );
+		}
+		else {
+			CFBamJpaUuidGen mapped = new CFBamJpaUuidGen();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamUuidGenH newHRec() {
         ICFBamUuidGenH hrec =
             new CFBamJpaUuidGenH();
         return( hrec );
     }
+
+	public CFBamJpaUuidGenH ensureHRec(ICFBamUuidGenH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaUuidGenH) {
+			return( (CFBamJpaUuidGenH)hrec );
+		}
+		else {
+			CFBamJpaUuidGenH mapped = new CFBamJpaUuidGenH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

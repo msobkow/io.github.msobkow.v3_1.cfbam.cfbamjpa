@@ -67,12 +67,44 @@ public class CFBamJpaScopeDefaultFactory
         return( hpkey );
     }
 
+	public CFBamJpaScopeHPKey ensureHPKey(ICFBamScopeHPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof CFBamJpaScopeHPKey) {
+			return( (CFBamJpaScopeHPKey)key );
+		}
+		else {
+			CFBamJpaScopeHPKey mapped = new CFBamJpaScopeHPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());
+			mapped.setRequiredId( key.getRequiredId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamScopeByTenantIdxKey newByTenantIdxKey() {
 	ICFBamScopeByTenantIdxKey key =
             new CFBamJpaScopeByTenantIdxKey();
 	return( key );
     }
+
+	public CFBamJpaScopeByTenantIdxKey ensureByTenantIdxKey(ICFBamScopeByTenantIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaScopeByTenantIdxKey) {
+			return( (CFBamJpaScopeByTenantIdxKey)key );
+		}
+		else {
+			CFBamJpaScopeByTenantIdxKey mapped = new CFBamJpaScopeByTenantIdxKey();
+			mapped.setRequiredTenantId( key.getRequiredTenantId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamScope newRec() {
@@ -81,10 +113,38 @@ public class CFBamJpaScopeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaScope ensureRec(ICFBamScope rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaScope) {
+			return( (CFBamJpaScope)rec );
+		}
+		else {
+			CFBamJpaScope mapped = new CFBamJpaScope();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamScopeH newHRec() {
         ICFBamScopeH hrec =
             new CFBamJpaScopeH();
         return( hrec );
     }
+
+	public CFBamJpaScopeH ensureHRec(ICFBamScopeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaScopeH) {
+			return( (CFBamJpaScopeH)hrec );
+		}
+		else {
+			CFBamJpaScopeH mapped = new CFBamJpaScopeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

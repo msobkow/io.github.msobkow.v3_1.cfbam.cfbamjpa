@@ -67,12 +67,40 @@ public class CFBamJpaSchemaDefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaDefByCTenantIdxKey ensureByCTenantIdxKey(ICFBamSchemaDefByCTenantIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByCTenantIdxKey) {
+			return( (CFBamJpaSchemaDefByCTenantIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByCTenantIdxKey mapped = new CFBamJpaSchemaDefByCTenantIdxKey();
+			mapped.setRequiredCTenantId( key.getRequiredCTenantId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaDefByMinorVersionIdxKey newByMinorVersionIdxKey() {
 	ICFBamSchemaDefByMinorVersionIdxKey key =
             new CFBamJpaSchemaDefByMinorVersionIdxKey();
 	return( key );
     }
+
+	public CFBamJpaSchemaDefByMinorVersionIdxKey ensureByMinorVersionIdxKey(ICFBamSchemaDefByMinorVersionIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByMinorVersionIdxKey) {
+			return( (CFBamJpaSchemaDefByMinorVersionIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByMinorVersionIdxKey mapped = new CFBamJpaSchemaDefByMinorVersionIdxKey();
+			mapped.setRequiredMinorVersionId( key.getRequiredMinorVersionId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamSchemaDefByUNameIdxKey newByUNameIdxKey() {
@@ -81,12 +109,42 @@ public class CFBamJpaSchemaDefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaDefByUNameIdxKey ensureByUNameIdxKey(ICFBamSchemaDefByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByUNameIdxKey) {
+			return( (CFBamJpaSchemaDefByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByUNameIdxKey mapped = new CFBamJpaSchemaDefByUNameIdxKey();
+			mapped.setRequiredMinorVersionId( key.getRequiredMinorVersionId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaDefByAuthEMailIdxKey newByAuthEMailIdxKey() {
 	ICFBamSchemaDefByAuthEMailIdxKey key =
             new CFBamJpaSchemaDefByAuthEMailIdxKey();
 	return( key );
     }
+
+	public CFBamJpaSchemaDefByAuthEMailIdxKey ensureByAuthEMailIdxKey(ICFBamSchemaDefByAuthEMailIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByAuthEMailIdxKey) {
+			return( (CFBamJpaSchemaDefByAuthEMailIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByAuthEMailIdxKey mapped = new CFBamJpaSchemaDefByAuthEMailIdxKey();
+			mapped.setRequiredCTenantId( key.getRequiredCTenantId() );
+			mapped.setRequiredAuthorEMail( key.getRequiredAuthorEMail() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamSchemaDefByProjectURLIdxKey newByProjectURLIdxKey() {
@@ -95,12 +153,42 @@ public class CFBamJpaSchemaDefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaDefByProjectURLIdxKey ensureByProjectURLIdxKey(ICFBamSchemaDefByProjectURLIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByProjectURLIdxKey) {
+			return( (CFBamJpaSchemaDefByProjectURLIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByProjectURLIdxKey mapped = new CFBamJpaSchemaDefByProjectURLIdxKey();
+			mapped.setRequiredCTenantId( key.getRequiredCTenantId() );
+			mapped.setRequiredProjectURL( key.getRequiredProjectURL() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaDefByPubURIIdxKey newByPubURIIdxKey() {
 	ICFBamSchemaDefByPubURIIdxKey key =
             new CFBamJpaSchemaDefByPubURIIdxKey();
 	return( key );
     }
+
+	public CFBamJpaSchemaDefByPubURIIdxKey ensureByPubURIIdxKey(ICFBamSchemaDefByPubURIIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaDefByPubURIIdxKey) {
+			return( (CFBamJpaSchemaDefByPubURIIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaDefByPubURIIdxKey mapped = new CFBamJpaSchemaDefByPubURIIdxKey();
+			mapped.setRequiredCTenantId( key.getRequiredCTenantId() );
+			mapped.setRequiredPublishURI( key.getRequiredPublishURI() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamSchemaDef newRec() {
@@ -109,10 +197,38 @@ public class CFBamJpaSchemaDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaSchemaDef ensureRec(ICFBamSchemaDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaSchemaDef) {
+			return( (CFBamJpaSchemaDef)rec );
+		}
+		else {
+			CFBamJpaSchemaDef mapped = new CFBamJpaSchemaDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaDefH newHRec() {
         ICFBamSchemaDefH hrec =
             new CFBamJpaSchemaDefH();
         return( hrec );
     }
+
+	public CFBamJpaSchemaDefH ensureHRec(ICFBamSchemaDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaSchemaDefH) {
+			return( (CFBamJpaSchemaDefH)hrec );
+		}
+		else {
+			CFBamJpaSchemaDefH mapped = new CFBamJpaSchemaDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

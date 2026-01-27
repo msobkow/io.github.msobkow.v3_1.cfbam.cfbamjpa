@@ -67,10 +67,38 @@ public class CFBamJpaEnumDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaEnumDef ensureRec(ICFBamEnumDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaEnumDef) {
+			return( (CFBamJpaEnumDef)rec );
+		}
+		else {
+			CFBamJpaEnumDef mapped = new CFBamJpaEnumDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamEnumDefH newHRec() {
         ICFBamEnumDefH hrec =
             new CFBamJpaEnumDefH();
         return( hrec );
     }
+
+	public CFBamJpaEnumDefH ensureHRec(ICFBamEnumDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaEnumDefH) {
+			return( (CFBamJpaEnumDefH)hrec );
+		}
+		else {
+			CFBamJpaEnumDefH mapped = new CFBamJpaEnumDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

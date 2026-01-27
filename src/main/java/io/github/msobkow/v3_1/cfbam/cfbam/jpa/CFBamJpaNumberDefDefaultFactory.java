@@ -67,10 +67,38 @@ public class CFBamJpaNumberDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaNumberDef ensureRec(ICFBamNumberDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaNumberDef) {
+			return( (CFBamJpaNumberDef)rec );
+		}
+		else {
+			CFBamJpaNumberDef mapped = new CFBamJpaNumberDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNumberDefH newHRec() {
         ICFBamNumberDefH hrec =
             new CFBamJpaNumberDefH();
         return( hrec );
     }
+
+	public CFBamJpaNumberDefH ensureHRec(ICFBamNumberDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaNumberDefH) {
+			return( (CFBamJpaNumberDefH)hrec );
+		}
+		else {
+			CFBamJpaNumberDefH mapped = new CFBamJpaNumberDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

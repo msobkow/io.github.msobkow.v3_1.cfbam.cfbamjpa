@@ -67,10 +67,38 @@ public class CFBamJpaDbKeyHash128DefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDbKeyHash128Def ensureRec(ICFBamDbKeyHash128Def rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDbKeyHash128Def) {
+			return( (CFBamJpaDbKeyHash128Def)rec );
+		}
+		else {
+			CFBamJpaDbKeyHash128Def mapped = new CFBamJpaDbKeyHash128Def();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDbKeyHash128DefH newHRec() {
         ICFBamDbKeyHash128DefH hrec =
             new CFBamJpaDbKeyHash128DefH();
         return( hrec );
     }
+
+	public CFBamJpaDbKeyHash128DefH ensureHRec(ICFBamDbKeyHash128DefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDbKeyHash128DefH) {
+			return( (CFBamJpaDbKeyHash128DefH)hrec );
+		}
+		else {
+			CFBamJpaDbKeyHash128DefH mapped = new CFBamJpaDbKeyHash128DefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

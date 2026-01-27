@@ -67,10 +67,38 @@ public class CFBamJpaTextDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTextDef ensureRec(ICFBamTextDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTextDef) {
+			return( (CFBamJpaTextDef)rec );
+		}
+		else {
+			CFBamJpaTextDef mapped = new CFBamJpaTextDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTextDefH newHRec() {
         ICFBamTextDefH hrec =
             new CFBamJpaTextDefH();
         return( hrec );
     }
+
+	public CFBamJpaTextDefH ensureHRec(ICFBamTextDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTextDefH) {
+			return( (CFBamJpaTextDefH)hrec );
+		}
+		else {
+			CFBamJpaTextDefH mapped = new CFBamJpaTextDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

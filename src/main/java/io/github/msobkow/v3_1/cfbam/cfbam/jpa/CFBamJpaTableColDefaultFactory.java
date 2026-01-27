@@ -67,12 +67,40 @@ public class CFBamJpaTableColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTableColByTableIdxKey ensureByTableIdxKey(ICFBamTableColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTableColByTableIdxKey) {
+			return( (CFBamJpaTableColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaTableColByTableIdxKey mapped = new CFBamJpaTableColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTableColByDataIdxKey newByDataIdxKey() {
 	ICFBamTableColByDataIdxKey key =
             new CFBamJpaTableColByDataIdxKey();
 	return( key );
     }
+
+	public CFBamJpaTableColByDataIdxKey ensureByDataIdxKey(ICFBamTableColByDataIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTableColByDataIdxKey) {
+			return( (CFBamJpaTableColByDataIdxKey)key );
+		}
+		else {
+			CFBamJpaTableColByDataIdxKey mapped = new CFBamJpaTableColByDataIdxKey();
+			mapped.setOptionalDataId( key.getOptionalDataId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamTableCol newRec() {
@@ -81,10 +109,38 @@ public class CFBamJpaTableColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTableCol ensureRec(ICFBamTableCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTableCol) {
+			return( (CFBamJpaTableCol)rec );
+		}
+		else {
+			CFBamJpaTableCol mapped = new CFBamJpaTableCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTableColH newHRec() {
         ICFBamTableColH hrec =
             new CFBamJpaTableColH();
         return( hrec );
     }
+
+	public CFBamJpaTableColH ensureHRec(ICFBamTableColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTableColH) {
+			return( (CFBamJpaTableColH)hrec );
+		}
+		else {
+			CFBamJpaTableColH mapped = new CFBamJpaTableColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

@@ -67,6 +67,20 @@ public class CFBamJpaNumberTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaNumberTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamNumberTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaNumberTypeBySchemaIdxKey) {
+			return( (CFBamJpaNumberTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaNumberTypeBySchemaIdxKey mapped = new CFBamJpaNumberTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNumberType newRec() {
         ICFBamNumberType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaNumberTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaNumberType ensureRec(ICFBamNumberType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaNumberType) {
+			return( (CFBamJpaNumberType)rec );
+		}
+		else {
+			CFBamJpaNumberType mapped = new CFBamJpaNumberType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNumberTypeH newHRec() {
         ICFBamNumberTypeH hrec =
             new CFBamJpaNumberTypeH();
         return( hrec );
     }
+
+	public CFBamJpaNumberTypeH ensureHRec(ICFBamNumberTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaNumberTypeH) {
+			return( (CFBamJpaNumberTypeH)hrec );
+		}
+		else {
+			CFBamJpaNumberTypeH mapped = new CFBamJpaNumberTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

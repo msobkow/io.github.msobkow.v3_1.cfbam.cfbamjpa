@@ -67,6 +67,20 @@ public class CFBamJpaStringTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaStringTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamStringTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaStringTypeBySchemaIdxKey) {
+			return( (CFBamJpaStringTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaStringTypeBySchemaIdxKey mapped = new CFBamJpaStringTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamStringType newRec() {
         ICFBamStringType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaStringTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaStringType ensureRec(ICFBamStringType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaStringType) {
+			return( (CFBamJpaStringType)rec );
+		}
+		else {
+			CFBamJpaStringType mapped = new CFBamJpaStringType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamStringTypeH newHRec() {
         ICFBamStringTypeH hrec =
             new CFBamJpaStringTypeH();
         return( hrec );
     }
+
+	public CFBamJpaStringTypeH ensureHRec(ICFBamStringTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaStringTypeH) {
+			return( (CFBamJpaStringTypeH)hrec );
+		}
+		else {
+			CFBamJpaStringTypeH mapped = new CFBamJpaStringTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

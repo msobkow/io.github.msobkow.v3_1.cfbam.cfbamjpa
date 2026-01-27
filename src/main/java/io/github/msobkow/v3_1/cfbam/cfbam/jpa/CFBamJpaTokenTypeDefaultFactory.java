@@ -67,6 +67,20 @@ public class CFBamJpaTokenTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTokenTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamTokenTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTokenTypeBySchemaIdxKey) {
+			return( (CFBamJpaTokenTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaTokenTypeBySchemaIdxKey mapped = new CFBamJpaTokenTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTokenType newRec() {
         ICFBamTokenType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTokenTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTokenType ensureRec(ICFBamTokenType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTokenType) {
+			return( (CFBamJpaTokenType)rec );
+		}
+		else {
+			CFBamJpaTokenType mapped = new CFBamJpaTokenType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTokenTypeH newHRec() {
         ICFBamTokenTypeH hrec =
             new CFBamJpaTokenTypeH();
         return( hrec );
     }
+
+	public CFBamJpaTokenTypeH ensureHRec(ICFBamTokenTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTokenTypeH) {
+			return( (CFBamJpaTokenTypeH)hrec );
+		}
+		else {
+			CFBamJpaTokenTypeH mapped = new CFBamJpaTokenTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

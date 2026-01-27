@@ -67,6 +67,20 @@ public class CFBamJpaFloatTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaFloatTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamFloatTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaFloatTypeBySchemaIdxKey) {
+			return( (CFBamJpaFloatTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaFloatTypeBySchemaIdxKey mapped = new CFBamJpaFloatTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamFloatType newRec() {
         ICFBamFloatType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaFloatTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaFloatType ensureRec(ICFBamFloatType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaFloatType) {
+			return( (CFBamJpaFloatType)rec );
+		}
+		else {
+			CFBamJpaFloatType mapped = new CFBamJpaFloatType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamFloatTypeH newHRec() {
         ICFBamFloatTypeH hrec =
             new CFBamJpaFloatTypeH();
         return( hrec );
     }
+
+	public CFBamJpaFloatTypeH ensureHRec(ICFBamFloatTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaFloatTypeH) {
+			return( (CFBamJpaFloatTypeH)hrec );
+		}
+		else {
+			CFBamJpaFloatTypeH mapped = new CFBamJpaFloatTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

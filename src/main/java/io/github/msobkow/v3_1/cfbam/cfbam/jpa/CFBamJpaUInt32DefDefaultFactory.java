@@ -67,10 +67,38 @@ public class CFBamJpaUInt32DefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaUInt32Def ensureRec(ICFBamUInt32Def rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaUInt32Def) {
+			return( (CFBamJpaUInt32Def)rec );
+		}
+		else {
+			CFBamJpaUInt32Def mapped = new CFBamJpaUInt32Def();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamUInt32DefH newHRec() {
         ICFBamUInt32DefH hrec =
             new CFBamJpaUInt32DefH();
         return( hrec );
     }
+
+	public CFBamJpaUInt32DefH ensureHRec(ICFBamUInt32DefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaUInt32DefH) {
+			return( (CFBamJpaUInt32DefH)hrec );
+		}
+		else {
+			CFBamJpaUInt32DefH mapped = new CFBamJpaUInt32DefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

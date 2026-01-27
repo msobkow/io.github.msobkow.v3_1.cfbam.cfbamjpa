@@ -67,12 +67,41 @@ public class CFBamJpaDelTopDepDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDelTopDepByDelTopDepTblIdxKey ensureByDelTopDepTblIdxKey(ICFBamDelTopDepByDelTopDepTblIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelTopDepByDelTopDepTblIdxKey) {
+			return( (CFBamJpaDelTopDepByDelTopDepTblIdxKey)key );
+		}
+		else {
+			CFBamJpaDelTopDepByDelTopDepTblIdxKey mapped = new CFBamJpaDelTopDepByDelTopDepTblIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDelTopDepByUNameIdxKey newByUNameIdxKey() {
 	ICFBamDelTopDepByUNameIdxKey key =
             new CFBamJpaDelTopDepByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaDelTopDepByUNameIdxKey ensureByUNameIdxKey(ICFBamDelTopDepByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelTopDepByUNameIdxKey) {
+			return( (CFBamJpaDelTopDepByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaDelTopDepByUNameIdxKey mapped = new CFBamJpaDelTopDepByUNameIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamDelTopDepByPrevIdxKey newByPrevIdxKey() {
@@ -81,12 +110,40 @@ public class CFBamJpaDelTopDepDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDelTopDepByPrevIdxKey ensureByPrevIdxKey(ICFBamDelTopDepByPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelTopDepByPrevIdxKey) {
+			return( (CFBamJpaDelTopDepByPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaDelTopDepByPrevIdxKey mapped = new CFBamJpaDelTopDepByPrevIdxKey();
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDelTopDepByNextIdxKey newByNextIdxKey() {
 	ICFBamDelTopDepByNextIdxKey key =
             new CFBamJpaDelTopDepByNextIdxKey();
 	return( key );
     }
+
+	public CFBamJpaDelTopDepByNextIdxKey ensureByNextIdxKey(ICFBamDelTopDepByNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelTopDepByNextIdxKey) {
+			return( (CFBamJpaDelTopDepByNextIdxKey)key );
+		}
+		else {
+			CFBamJpaDelTopDepByNextIdxKey mapped = new CFBamJpaDelTopDepByNextIdxKey();
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamDelTopDep newRec() {
@@ -95,10 +152,38 @@ public class CFBamJpaDelTopDepDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDelTopDep ensureRec(ICFBamDelTopDep rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDelTopDep) {
+			return( (CFBamJpaDelTopDep)rec );
+		}
+		else {
+			CFBamJpaDelTopDep mapped = new CFBamJpaDelTopDep();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDelTopDepH newHRec() {
         ICFBamDelTopDepH hrec =
             new CFBamJpaDelTopDepH();
         return( hrec );
     }
+
+	public CFBamJpaDelTopDepH ensureHRec(ICFBamDelTopDepH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDelTopDepH) {
+			return( (CFBamJpaDelTopDepH)hrec );
+		}
+		else {
+			CFBamJpaDelTopDepH mapped = new CFBamJpaDelTopDepH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

@@ -67,6 +67,20 @@ public class CFBamJpaTimestampTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTimestampTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamTimestampTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTimestampTypeBySchemaIdxKey) {
+			return( (CFBamJpaTimestampTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaTimestampTypeBySchemaIdxKey mapped = new CFBamJpaTimestampTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimestampType newRec() {
         ICFBamTimestampType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTimestampTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTimestampType ensureRec(ICFBamTimestampType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTimestampType) {
+			return( (CFBamJpaTimestampType)rec );
+		}
+		else {
+			CFBamJpaTimestampType mapped = new CFBamJpaTimestampType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimestampTypeH newHRec() {
         ICFBamTimestampTypeH hrec =
             new CFBamJpaTimestampTypeH();
         return( hrec );
     }
+
+	public CFBamJpaTimestampTypeH ensureHRec(ICFBamTimestampTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTimestampTypeH) {
+			return( (CFBamJpaTimestampTypeH)hrec );
+		}
+		else {
+			CFBamJpaTimestampTypeH mapped = new CFBamJpaTimestampTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

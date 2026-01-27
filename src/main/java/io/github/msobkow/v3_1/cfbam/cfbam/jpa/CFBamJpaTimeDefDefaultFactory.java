@@ -67,10 +67,38 @@ public class CFBamJpaTimeDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTimeDef ensureRec(ICFBamTimeDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTimeDef) {
+			return( (CFBamJpaTimeDef)rec );
+		}
+		else {
+			CFBamJpaTimeDef mapped = new CFBamJpaTimeDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimeDefH newHRec() {
         ICFBamTimeDefH hrec =
             new CFBamJpaTimeDefH();
         return( hrec );
     }
+
+	public CFBamJpaTimeDefH ensureHRec(ICFBamTimeDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTimeDefH) {
+			return( (CFBamJpaTimeDefH)hrec );
+		}
+		else {
+			CFBamJpaTimeDefH mapped = new CFBamJpaTimeDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

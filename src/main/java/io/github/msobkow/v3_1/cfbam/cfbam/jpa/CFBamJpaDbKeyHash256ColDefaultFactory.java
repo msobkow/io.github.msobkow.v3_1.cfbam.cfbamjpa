@@ -67,6 +67,20 @@ public class CFBamJpaDbKeyHash256ColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDbKeyHash256ColByTableIdxKey ensureByTableIdxKey(ICFBamDbKeyHash256ColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDbKeyHash256ColByTableIdxKey) {
+			return( (CFBamJpaDbKeyHash256ColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaDbKeyHash256ColByTableIdxKey mapped = new CFBamJpaDbKeyHash256ColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDbKeyHash256Col newRec() {
         ICFBamDbKeyHash256Col rec =
@@ -74,10 +88,38 @@ public class CFBamJpaDbKeyHash256ColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDbKeyHash256Col ensureRec(ICFBamDbKeyHash256Col rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDbKeyHash256Col) {
+			return( (CFBamJpaDbKeyHash256Col)rec );
+		}
+		else {
+			CFBamJpaDbKeyHash256Col mapped = new CFBamJpaDbKeyHash256Col();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDbKeyHash256ColH newHRec() {
         ICFBamDbKeyHash256ColH hrec =
             new CFBamJpaDbKeyHash256ColH();
         return( hrec );
     }
+
+	public CFBamJpaDbKeyHash256ColH ensureHRec(ICFBamDbKeyHash256ColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDbKeyHash256ColH) {
+			return( (CFBamJpaDbKeyHash256ColH)hrec );
+		}
+		else {
+			CFBamJpaDbKeyHash256ColH mapped = new CFBamJpaDbKeyHash256ColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

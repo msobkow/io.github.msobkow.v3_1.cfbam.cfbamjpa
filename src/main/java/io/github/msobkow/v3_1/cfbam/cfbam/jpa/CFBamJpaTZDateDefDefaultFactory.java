@@ -67,10 +67,38 @@ public class CFBamJpaTZDateDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTZDateDef ensureRec(ICFBamTZDateDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTZDateDef) {
+			return( (CFBamJpaTZDateDef)rec );
+		}
+		else {
+			CFBamJpaTZDateDef mapped = new CFBamJpaTZDateDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTZDateDefH newHRec() {
         ICFBamTZDateDefH hrec =
             new CFBamJpaTZDateDefH();
         return( hrec );
     }
+
+	public CFBamJpaTZDateDefH ensureHRec(ICFBamTZDateDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTZDateDefH) {
+			return( (CFBamJpaTZDateDefH)hrec );
+		}
+		else {
+			CFBamJpaTZDateDefH mapped = new CFBamJpaTZDateDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

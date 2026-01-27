@@ -67,12 +67,41 @@ public class CFBamJpaSchemaRefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaRefBySchemaIdxKey ensureBySchemaIdxKey(ICFBamSchemaRefBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaRefBySchemaIdxKey) {
+			return( (CFBamJpaSchemaRefBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaRefBySchemaIdxKey mapped = new CFBamJpaSchemaRefBySchemaIdxKey();
+			mapped.setRequiredSchemaId( key.getRequiredSchemaId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaRefByUNameIdxKey newByUNameIdxKey() {
 	ICFBamSchemaRefByUNameIdxKey key =
             new CFBamJpaSchemaRefByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaSchemaRefByUNameIdxKey ensureByUNameIdxKey(ICFBamSchemaRefByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaRefByUNameIdxKey) {
+			return( (CFBamJpaSchemaRefByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaRefByUNameIdxKey mapped = new CFBamJpaSchemaRefByUNameIdxKey();
+			mapped.setRequiredSchemaId( key.getRequiredSchemaId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamSchemaRefByRefSchemaIdxKey newByRefSchemaIdxKey() {
@@ -81,12 +110,40 @@ public class CFBamJpaSchemaRefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaRefByRefSchemaIdxKey ensureByRefSchemaIdxKey(ICFBamSchemaRefByRefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaRefByRefSchemaIdxKey) {
+			return( (CFBamJpaSchemaRefByRefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaRefByRefSchemaIdxKey mapped = new CFBamJpaSchemaRefByRefSchemaIdxKey();
+			mapped.setOptionalRefSchemaId( key.getOptionalRefSchemaId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaRefByPrevIdxKey newByPrevIdxKey() {
 	ICFBamSchemaRefByPrevIdxKey key =
             new CFBamJpaSchemaRefByPrevIdxKey();
 	return( key );
     }
+
+	public CFBamJpaSchemaRefByPrevIdxKey ensureByPrevIdxKey(ICFBamSchemaRefByPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaRefByPrevIdxKey) {
+			return( (CFBamJpaSchemaRefByPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaRefByPrevIdxKey mapped = new CFBamJpaSchemaRefByPrevIdxKey();
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamSchemaRefByNextIdxKey newByNextIdxKey() {
@@ -95,6 +152,20 @@ public class CFBamJpaSchemaRefDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaSchemaRefByNextIdxKey ensureByNextIdxKey(ICFBamSchemaRefByNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaSchemaRefByNextIdxKey) {
+			return( (CFBamJpaSchemaRefByNextIdxKey)key );
+		}
+		else {
+			CFBamJpaSchemaRefByNextIdxKey mapped = new CFBamJpaSchemaRefByNextIdxKey();
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaRef newRec() {
         ICFBamSchemaRef rec =
@@ -102,10 +173,38 @@ public class CFBamJpaSchemaRefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaSchemaRef ensureRec(ICFBamSchemaRef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaSchemaRef) {
+			return( (CFBamJpaSchemaRef)rec );
+		}
+		else {
+			CFBamJpaSchemaRef mapped = new CFBamJpaSchemaRef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamSchemaRefH newHRec() {
         ICFBamSchemaRefH hrec =
             new CFBamJpaSchemaRefH();
         return( hrec );
     }
+
+	public CFBamJpaSchemaRefH ensureHRec(ICFBamSchemaRefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaSchemaRefH) {
+			return( (CFBamJpaSchemaRefH)hrec );
+		}
+		else {
+			CFBamJpaSchemaRefH mapped = new CFBamJpaSchemaRefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

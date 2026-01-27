@@ -67,6 +67,20 @@ public class CFBamJpaDateColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDateColByTableIdxKey ensureByTableIdxKey(ICFBamDateColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDateColByTableIdxKey) {
+			return( (CFBamJpaDateColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaDateColByTableIdxKey mapped = new CFBamJpaDateColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDateCol newRec() {
         ICFBamDateCol rec =
@@ -74,10 +88,38 @@ public class CFBamJpaDateColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDateCol ensureRec(ICFBamDateCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDateCol) {
+			return( (CFBamJpaDateCol)rec );
+		}
+		else {
+			CFBamJpaDateCol mapped = new CFBamJpaDateCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDateColH newHRec() {
         ICFBamDateColH hrec =
             new CFBamJpaDateColH();
         return( hrec );
     }
+
+	public CFBamJpaDateColH ensureHRec(ICFBamDateColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDateColH) {
+			return( (CFBamJpaDateColH)hrec );
+		}
+		else {
+			CFBamJpaDateColH mapped = new CFBamJpaDateColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

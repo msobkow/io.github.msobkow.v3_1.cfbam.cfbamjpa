@@ -67,6 +67,20 @@ public class CFBamJpaTimeColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTimeColByTableIdxKey ensureByTableIdxKey(ICFBamTimeColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTimeColByTableIdxKey) {
+			return( (CFBamJpaTimeColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaTimeColByTableIdxKey mapped = new CFBamJpaTimeColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimeCol newRec() {
         ICFBamTimeCol rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTimeColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTimeCol ensureRec(ICFBamTimeCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTimeCol) {
+			return( (CFBamJpaTimeCol)rec );
+		}
+		else {
+			CFBamJpaTimeCol mapped = new CFBamJpaTimeCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimeColH newHRec() {
         ICFBamTimeColH hrec =
             new CFBamJpaTimeColH();
         return( hrec );
     }
+
+	public CFBamJpaTimeColH ensureHRec(ICFBamTimeColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTimeColH) {
+			return( (CFBamJpaTimeColH)hrec );
+		}
+		else {
+			CFBamJpaTimeColH mapped = new CFBamJpaTimeColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

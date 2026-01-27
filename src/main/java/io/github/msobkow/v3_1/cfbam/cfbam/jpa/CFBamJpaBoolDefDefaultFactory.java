@@ -67,10 +67,38 @@ public class CFBamJpaBoolDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaBoolDef ensureRec(ICFBamBoolDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaBoolDef) {
+			return( (CFBamJpaBoolDef)rec );
+		}
+		else {
+			CFBamJpaBoolDef mapped = new CFBamJpaBoolDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamBoolDefH newHRec() {
         ICFBamBoolDefH hrec =
             new CFBamJpaBoolDefH();
         return( hrec );
     }
+
+	public CFBamJpaBoolDefH ensureHRec(ICFBamBoolDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaBoolDefH) {
+			return( (CFBamJpaBoolDefH)hrec );
+		}
+		else {
+			CFBamJpaBoolDefH mapped = new CFBamJpaBoolDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

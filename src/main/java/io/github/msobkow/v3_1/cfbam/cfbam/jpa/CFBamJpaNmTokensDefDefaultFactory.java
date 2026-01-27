@@ -67,10 +67,38 @@ public class CFBamJpaNmTokensDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaNmTokensDef ensureRec(ICFBamNmTokensDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaNmTokensDef) {
+			return( (CFBamJpaNmTokensDef)rec );
+		}
+		else {
+			CFBamJpaNmTokensDef mapped = new CFBamJpaNmTokensDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamNmTokensDefH newHRec() {
         ICFBamNmTokensDefH hrec =
             new CFBamJpaNmTokensDefH();
         return( hrec );
     }
+
+	public CFBamJpaNmTokensDefH ensureHRec(ICFBamNmTokensDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaNmTokensDefH) {
+			return( (CFBamJpaNmTokensDefH)hrec );
+		}
+		else {
+			CFBamJpaNmTokensDefH mapped = new CFBamJpaNmTokensDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

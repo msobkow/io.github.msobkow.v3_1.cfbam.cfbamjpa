@@ -67,6 +67,20 @@ public class CFBamJpaTimeTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTimeTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamTimeTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTimeTypeBySchemaIdxKey) {
+			return( (CFBamJpaTimeTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaTimeTypeBySchemaIdxKey mapped = new CFBamJpaTimeTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimeType newRec() {
         ICFBamTimeType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTimeTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTimeType ensureRec(ICFBamTimeType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTimeType) {
+			return( (CFBamJpaTimeType)rec );
+		}
+		else {
+			CFBamJpaTimeType mapped = new CFBamJpaTimeType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTimeTypeH newHRec() {
         ICFBamTimeTypeH hrec =
             new CFBamJpaTimeTypeH();
         return( hrec );
     }
+
+	public CFBamJpaTimeTypeH ensureHRec(ICFBamTimeTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTimeTypeH) {
+			return( (CFBamJpaTimeTypeH)hrec );
+		}
+		else {
+			CFBamJpaTimeTypeH mapped = new CFBamJpaTimeTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

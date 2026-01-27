@@ -67,12 +67,45 @@ public class CFBamJpaIndexColDefaultFactory
         return( hpkey );
     }
 
+	public CFBamJpaIndexColHPKey ensureHPKey(ICFBamIndexColHPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof CFBamJpaIndexColHPKey) {
+			return( (CFBamJpaIndexColHPKey)key );
+		}
+		else {
+			CFBamJpaIndexColHPKey mapped = new CFBamJpaIndexColHPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());
+			mapped.setRequiredId( key.getRequiredId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexColByUNameIdxKey newByUNameIdxKey() {
 	ICFBamIndexColByUNameIdxKey key =
             new CFBamJpaIndexColByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaIndexColByUNameIdxKey ensureByUNameIdxKey(ICFBamIndexColByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByUNameIdxKey) {
+			return( (CFBamJpaIndexColByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByUNameIdxKey mapped = new CFBamJpaIndexColByUNameIdxKey();
+			mapped.setRequiredIndexId( key.getRequiredIndexId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamIndexColByIndexIdxKey newByIndexIdxKey() {
@@ -81,12 +114,40 @@ public class CFBamJpaIndexColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaIndexColByIndexIdxKey ensureByIndexIdxKey(ICFBamIndexColByIndexIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByIndexIdxKey) {
+			return( (CFBamJpaIndexColByIndexIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByIndexIdxKey mapped = new CFBamJpaIndexColByIndexIdxKey();
+			mapped.setRequiredIndexId( key.getRequiredIndexId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexColByDefSchemaIdxKey newByDefSchemaIdxKey() {
 	ICFBamIndexColByDefSchemaIdxKey key =
             new CFBamJpaIndexColByDefSchemaIdxKey();
 	return( key );
     }
+
+	public CFBamJpaIndexColByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamIndexColByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByDefSchemaIdxKey) {
+			return( (CFBamJpaIndexColByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByDefSchemaIdxKey mapped = new CFBamJpaIndexColByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamIndexColByColIdxKey newByColIdxKey() {
@@ -95,12 +156,40 @@ public class CFBamJpaIndexColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaIndexColByColIdxKey ensureByColIdxKey(ICFBamIndexColByColIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByColIdxKey) {
+			return( (CFBamJpaIndexColByColIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByColIdxKey mapped = new CFBamJpaIndexColByColIdxKey();
+			mapped.setRequiredColumnId( key.getRequiredColumnId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexColByPrevIdxKey newByPrevIdxKey() {
 	ICFBamIndexColByPrevIdxKey key =
             new CFBamJpaIndexColByPrevIdxKey();
 	return( key );
     }
+
+	public CFBamJpaIndexColByPrevIdxKey ensureByPrevIdxKey(ICFBamIndexColByPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByPrevIdxKey) {
+			return( (CFBamJpaIndexColByPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByPrevIdxKey mapped = new CFBamJpaIndexColByPrevIdxKey();
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamIndexColByNextIdxKey newByNextIdxKey() {
@@ -109,12 +198,41 @@ public class CFBamJpaIndexColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaIndexColByNextIdxKey ensureByNextIdxKey(ICFBamIndexColByNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByNextIdxKey) {
+			return( (CFBamJpaIndexColByNextIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByNextIdxKey mapped = new CFBamJpaIndexColByNextIdxKey();
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexColByIdxPrevIdxKey newByIdxPrevIdxKey() {
 	ICFBamIndexColByIdxPrevIdxKey key =
             new CFBamJpaIndexColByIdxPrevIdxKey();
 	return( key );
     }
+
+	public CFBamJpaIndexColByIdxPrevIdxKey ensureByIdxPrevIdxKey(ICFBamIndexColByIdxPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByIdxPrevIdxKey) {
+			return( (CFBamJpaIndexColByIdxPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByIdxPrevIdxKey mapped = new CFBamJpaIndexColByIdxPrevIdxKey();
+			mapped.setRequiredIndexId( key.getRequiredIndexId() );
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamIndexColByIdxNextIdxKey newByIdxNextIdxKey() {
@@ -123,6 +241,21 @@ public class CFBamJpaIndexColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaIndexColByIdxNextIdxKey ensureByIdxNextIdxKey(ICFBamIndexColByIdxNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaIndexColByIdxNextIdxKey) {
+			return( (CFBamJpaIndexColByIdxNextIdxKey)key );
+		}
+		else {
+			CFBamJpaIndexColByIdxNextIdxKey mapped = new CFBamJpaIndexColByIdxNextIdxKey();
+			mapped.setRequiredIndexId( key.getRequiredIndexId() );
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexCol newRec() {
         ICFBamIndexCol rec =
@@ -130,10 +263,38 @@ public class CFBamJpaIndexColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaIndexCol ensureRec(ICFBamIndexCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaIndexCol) {
+			return( (CFBamJpaIndexCol)rec );
+		}
+		else {
+			CFBamJpaIndexCol mapped = new CFBamJpaIndexCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamIndexColH newHRec() {
         ICFBamIndexColH hrec =
             new CFBamJpaIndexColH();
         return( hrec );
     }
+
+	public CFBamJpaIndexColH ensureHRec(ICFBamIndexColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaIndexColH) {
+			return( (CFBamJpaIndexColH)hrec );
+		}
+		else {
+			CFBamJpaIndexColH mapped = new CFBamJpaIndexColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

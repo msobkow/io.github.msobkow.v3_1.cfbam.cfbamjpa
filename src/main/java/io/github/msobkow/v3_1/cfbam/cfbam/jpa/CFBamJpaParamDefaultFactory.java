@@ -67,12 +67,45 @@ public class CFBamJpaParamDefaultFactory
         return( hpkey );
     }
 
+	public CFBamJpaParamHPKey ensureHPKey(ICFBamParamHPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof CFBamJpaParamHPKey) {
+			return( (CFBamJpaParamHPKey)key );
+		}
+		else {
+			CFBamJpaParamHPKey mapped = new CFBamJpaParamHPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());
+			mapped.setRequiredId( key.getRequiredId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParamByUNameIdxKey newByUNameIdxKey() {
 	ICFBamParamByUNameIdxKey key =
             new CFBamJpaParamByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaParamByUNameIdxKey ensureByUNameIdxKey(ICFBamParamByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByUNameIdxKey) {
+			return( (CFBamJpaParamByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByUNameIdxKey mapped = new CFBamJpaParamByUNameIdxKey();
+			mapped.setRequiredServerMethodId( key.getRequiredServerMethodId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamParamByServerMethodIdxKey newByServerMethodIdxKey() {
@@ -81,12 +114,40 @@ public class CFBamJpaParamDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaParamByServerMethodIdxKey ensureByServerMethodIdxKey(ICFBamParamByServerMethodIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByServerMethodIdxKey) {
+			return( (CFBamJpaParamByServerMethodIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByServerMethodIdxKey mapped = new CFBamJpaParamByServerMethodIdxKey();
+			mapped.setRequiredServerMethodId( key.getRequiredServerMethodId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParamByDefSchemaIdxKey newByDefSchemaIdxKey() {
 	ICFBamParamByDefSchemaIdxKey key =
             new CFBamJpaParamByDefSchemaIdxKey();
 	return( key );
     }
+
+	public CFBamJpaParamByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamParamByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByDefSchemaIdxKey) {
+			return( (CFBamJpaParamByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByDefSchemaIdxKey mapped = new CFBamJpaParamByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamParamByServerTypeIdxKey newByServerTypeIdxKey() {
@@ -95,12 +156,40 @@ public class CFBamJpaParamDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaParamByServerTypeIdxKey ensureByServerTypeIdxKey(ICFBamParamByServerTypeIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByServerTypeIdxKey) {
+			return( (CFBamJpaParamByServerTypeIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByServerTypeIdxKey mapped = new CFBamJpaParamByServerTypeIdxKey();
+			mapped.setOptionalTypeId( key.getOptionalTypeId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParamByPrevIdxKey newByPrevIdxKey() {
 	ICFBamParamByPrevIdxKey key =
             new CFBamJpaParamByPrevIdxKey();
 	return( key );
     }
+
+	public CFBamJpaParamByPrevIdxKey ensureByPrevIdxKey(ICFBamParamByPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByPrevIdxKey) {
+			return( (CFBamJpaParamByPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByPrevIdxKey mapped = new CFBamJpaParamByPrevIdxKey();
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamParamByNextIdxKey newByNextIdxKey() {
@@ -109,12 +198,41 @@ public class CFBamJpaParamDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaParamByNextIdxKey ensureByNextIdxKey(ICFBamParamByNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByNextIdxKey) {
+			return( (CFBamJpaParamByNextIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByNextIdxKey mapped = new CFBamJpaParamByNextIdxKey();
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParamByContPrevIdxKey newByContPrevIdxKey() {
 	ICFBamParamByContPrevIdxKey key =
             new CFBamJpaParamByContPrevIdxKey();
 	return( key );
     }
+
+	public CFBamJpaParamByContPrevIdxKey ensureByContPrevIdxKey(ICFBamParamByContPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByContPrevIdxKey) {
+			return( (CFBamJpaParamByContPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByContPrevIdxKey mapped = new CFBamJpaParamByContPrevIdxKey();
+			mapped.setRequiredServerMethodId( key.getRequiredServerMethodId() );
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamParamByContNextIdxKey newByContNextIdxKey() {
@@ -123,6 +241,21 @@ public class CFBamJpaParamDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaParamByContNextIdxKey ensureByContNextIdxKey(ICFBamParamByContNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaParamByContNextIdxKey) {
+			return( (CFBamJpaParamByContNextIdxKey)key );
+		}
+		else {
+			CFBamJpaParamByContNextIdxKey mapped = new CFBamJpaParamByContNextIdxKey();
+			mapped.setRequiredServerMethodId( key.getRequiredServerMethodId() );
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParam newRec() {
         ICFBamParam rec =
@@ -130,10 +263,38 @@ public class CFBamJpaParamDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaParam ensureRec(ICFBamParam rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaParam) {
+			return( (CFBamJpaParam)rec );
+		}
+		else {
+			CFBamJpaParam mapped = new CFBamJpaParam();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamParamH newHRec() {
         ICFBamParamH hrec =
             new CFBamJpaParamH();
         return( hrec );
     }
+
+	public CFBamJpaParamH ensureHRec(ICFBamParamH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaParamH) {
+			return( (CFBamJpaParamH)hrec );
+		}
+		else {
+			CFBamJpaParamH mapped = new CFBamJpaParamH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

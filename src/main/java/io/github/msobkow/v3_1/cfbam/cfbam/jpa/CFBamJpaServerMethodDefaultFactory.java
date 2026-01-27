@@ -67,12 +67,41 @@ public class CFBamJpaServerMethodDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaServerMethodByUNameIdxKey ensureByUNameIdxKey(ICFBamServerMethodByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaServerMethodByUNameIdxKey) {
+			return( (CFBamJpaServerMethodByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaServerMethodByUNameIdxKey mapped = new CFBamJpaServerMethodByUNameIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerMethodByMethTableIdxKey newByMethTableIdxKey() {
 	ICFBamServerMethodByMethTableIdxKey key =
             new CFBamJpaServerMethodByMethTableIdxKey();
 	return( key );
     }
+
+	public CFBamJpaServerMethodByMethTableIdxKey ensureByMethTableIdxKey(ICFBamServerMethodByMethTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaServerMethodByMethTableIdxKey) {
+			return( (CFBamJpaServerMethodByMethTableIdxKey)key );
+		}
+		else {
+			CFBamJpaServerMethodByMethTableIdxKey mapped = new CFBamJpaServerMethodByMethTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamServerMethodByDefSchemaIdxKey newByDefSchemaIdxKey() {
@@ -81,6 +110,20 @@ public class CFBamJpaServerMethodDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaServerMethodByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamServerMethodByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaServerMethodByDefSchemaIdxKey) {
+			return( (CFBamJpaServerMethodByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaServerMethodByDefSchemaIdxKey mapped = new CFBamJpaServerMethodByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerMethod newRec() {
         ICFBamServerMethod rec =
@@ -88,10 +131,38 @@ public class CFBamJpaServerMethodDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaServerMethod ensureRec(ICFBamServerMethod rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaServerMethod) {
+			return( (CFBamJpaServerMethod)rec );
+		}
+		else {
+			CFBamJpaServerMethod mapped = new CFBamJpaServerMethod();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerMethodH newHRec() {
         ICFBamServerMethodH hrec =
             new CFBamJpaServerMethodH();
         return( hrec );
     }
+
+	public CFBamJpaServerMethodH ensureHRec(ICFBamServerMethodH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaServerMethodH) {
+			return( (CFBamJpaServerMethodH)hrec );
+		}
+		else {
+			CFBamJpaServerMethodH mapped = new CFBamJpaServerMethodH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

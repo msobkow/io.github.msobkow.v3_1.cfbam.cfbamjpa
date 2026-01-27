@@ -67,6 +67,20 @@ public class CFBamJpaUInt32TypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaUInt32TypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamUInt32TypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaUInt32TypeBySchemaIdxKey) {
+			return( (CFBamJpaUInt32TypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaUInt32TypeBySchemaIdxKey mapped = new CFBamJpaUInt32TypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamUInt32Type newRec() {
         ICFBamUInt32Type rec =
@@ -74,10 +88,38 @@ public class CFBamJpaUInt32TypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaUInt32Type ensureRec(ICFBamUInt32Type rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaUInt32Type) {
+			return( (CFBamJpaUInt32Type)rec );
+		}
+		else {
+			CFBamJpaUInt32Type mapped = new CFBamJpaUInt32Type();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamUInt32TypeH newHRec() {
         ICFBamUInt32TypeH hrec =
             new CFBamJpaUInt32TypeH();
         return( hrec );
     }
+
+	public CFBamJpaUInt32TypeH ensureHRec(ICFBamUInt32TypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaUInt32TypeH) {
+			return( (CFBamJpaUInt32TypeH)hrec );
+		}
+		else {
+			CFBamJpaUInt32TypeH mapped = new CFBamJpaUInt32TypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

@@ -67,12 +67,41 @@ public class CFBamJpaClearSubDep2DefaultFactory
 	return( key );
     }
 
+	public CFBamJpaClearSubDep2ByClearSubDep1IdxKey ensureByClearSubDep1IdxKey(ICFBamClearSubDep2ByClearSubDep1IdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaClearSubDep2ByClearSubDep1IdxKey) {
+			return( (CFBamJpaClearSubDep2ByClearSubDep1IdxKey)key );
+		}
+		else {
+			CFBamJpaClearSubDep2ByClearSubDep1IdxKey mapped = new CFBamJpaClearSubDep2ByClearSubDep1IdxKey();
+			mapped.setRequiredClearSubDep1Id( key.getRequiredClearSubDep1Id() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamClearSubDep2ByUNameIdxKey newByUNameIdxKey() {
 	ICFBamClearSubDep2ByUNameIdxKey key =
             new CFBamJpaClearSubDep2ByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaClearSubDep2ByUNameIdxKey ensureByUNameIdxKey(ICFBamClearSubDep2ByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaClearSubDep2ByUNameIdxKey) {
+			return( (CFBamJpaClearSubDep2ByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaClearSubDep2ByUNameIdxKey mapped = new CFBamJpaClearSubDep2ByUNameIdxKey();
+			mapped.setRequiredClearSubDep1Id( key.getRequiredClearSubDep1Id() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamClearSubDep2 newRec() {
@@ -81,10 +110,38 @@ public class CFBamJpaClearSubDep2DefaultFactory
         return( rec );
     }
 
+	public CFBamJpaClearSubDep2 ensureRec(ICFBamClearSubDep2 rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaClearSubDep2) {
+			return( (CFBamJpaClearSubDep2)rec );
+		}
+		else {
+			CFBamJpaClearSubDep2 mapped = new CFBamJpaClearSubDep2();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamClearSubDep2H newHRec() {
         ICFBamClearSubDep2H hrec =
             new CFBamJpaClearSubDep2H();
         return( hrec );
     }
+
+	public CFBamJpaClearSubDep2H ensureHRec(ICFBamClearSubDep2H hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaClearSubDep2H) {
+			return( (CFBamJpaClearSubDep2H)hrec );
+		}
+		else {
+			CFBamJpaClearSubDep2H mapped = new CFBamJpaClearSubDep2H();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

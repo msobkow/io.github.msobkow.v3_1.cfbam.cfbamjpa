@@ -67,10 +67,38 @@ public class CFBamJpaAtomDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaAtom ensureRec(ICFBamAtom rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaAtom) {
+			return( (CFBamJpaAtom)rec );
+		}
+		else {
+			CFBamJpaAtom mapped = new CFBamJpaAtom();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamAtomH newHRec() {
         ICFBamAtomH hrec =
             new CFBamJpaAtomH();
         return( hrec );
     }
+
+	public CFBamJpaAtomH ensureHRec(ICFBamAtomH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaAtomH) {
+			return( (CFBamJpaAtomH)hrec );
+		}
+		else {
+			CFBamJpaAtomH mapped = new CFBamJpaAtomH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

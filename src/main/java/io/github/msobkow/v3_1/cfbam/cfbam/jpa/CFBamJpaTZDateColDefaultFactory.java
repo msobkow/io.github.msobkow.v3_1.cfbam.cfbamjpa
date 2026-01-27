@@ -67,6 +67,20 @@ public class CFBamJpaTZDateColDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTZDateColByTableIdxKey ensureByTableIdxKey(ICFBamTZDateColByTableIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTZDateColByTableIdxKey) {
+			return( (CFBamJpaTZDateColByTableIdxKey)key );
+		}
+		else {
+			CFBamJpaTZDateColByTableIdxKey mapped = new CFBamJpaTZDateColByTableIdxKey();
+			mapped.setRequiredTableId( key.getRequiredTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTZDateCol newRec() {
         ICFBamTZDateCol rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTZDateColDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTZDateCol ensureRec(ICFBamTZDateCol rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTZDateCol) {
+			return( (CFBamJpaTZDateCol)rec );
+		}
+		else {
+			CFBamJpaTZDateCol mapped = new CFBamJpaTZDateCol();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTZDateColH newHRec() {
         ICFBamTZDateColH hrec =
             new CFBamJpaTZDateColH();
         return( hrec );
     }
+
+	public CFBamJpaTZDateColH ensureHRec(ICFBamTZDateColH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTZDateColH) {
+			return( (CFBamJpaTZDateColH)hrec );
+		}
+		else {
+			CFBamJpaTZDateColH mapped = new CFBamJpaTZDateColH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

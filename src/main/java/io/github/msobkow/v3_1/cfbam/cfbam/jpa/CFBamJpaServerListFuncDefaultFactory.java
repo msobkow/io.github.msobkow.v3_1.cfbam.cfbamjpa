@@ -67,6 +67,20 @@ public class CFBamJpaServerListFuncDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaServerListFuncByRetTblIdxKey ensureByRetTblIdxKey(ICFBamServerListFuncByRetTblIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaServerListFuncByRetTblIdxKey) {
+			return( (CFBamJpaServerListFuncByRetTblIdxKey)key );
+		}
+		else {
+			CFBamJpaServerListFuncByRetTblIdxKey mapped = new CFBamJpaServerListFuncByRetTblIdxKey();
+			mapped.setOptionalRetTableId( key.getOptionalRetTableId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerListFunc newRec() {
         ICFBamServerListFunc rec =
@@ -74,10 +88,38 @@ public class CFBamJpaServerListFuncDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaServerListFunc ensureRec(ICFBamServerListFunc rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaServerListFunc) {
+			return( (CFBamJpaServerListFunc)rec );
+		}
+		else {
+			CFBamJpaServerListFunc mapped = new CFBamJpaServerListFunc();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerListFuncH newHRec() {
         ICFBamServerListFuncH hrec =
             new CFBamJpaServerListFuncH();
         return( hrec );
     }
+
+	public CFBamJpaServerListFuncH ensureHRec(ICFBamServerListFuncH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaServerListFuncH) {
+			return( (CFBamJpaServerListFuncH)hrec );
+		}
+		else {
+			CFBamJpaServerListFuncH mapped = new CFBamJpaServerListFuncH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

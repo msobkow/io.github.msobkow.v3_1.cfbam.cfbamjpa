@@ -67,12 +67,41 @@ public class CFBamJpaDelSubDep3DefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDelSubDep3ByDelSubDep2IdxKey ensureByDelSubDep2IdxKey(ICFBamDelSubDep3ByDelSubDep2IdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelSubDep3ByDelSubDep2IdxKey) {
+			return( (CFBamJpaDelSubDep3ByDelSubDep2IdxKey)key );
+		}
+		else {
+			CFBamJpaDelSubDep3ByDelSubDep2IdxKey mapped = new CFBamJpaDelSubDep3ByDelSubDep2IdxKey();
+			mapped.setRequiredDelSubDep2Id( key.getRequiredDelSubDep2Id() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDelSubDep3ByUNameIdxKey newByUNameIdxKey() {
 	ICFBamDelSubDep3ByUNameIdxKey key =
             new CFBamJpaDelSubDep3ByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaDelSubDep3ByUNameIdxKey ensureByUNameIdxKey(ICFBamDelSubDep3ByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDelSubDep3ByUNameIdxKey) {
+			return( (CFBamJpaDelSubDep3ByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaDelSubDep3ByUNameIdxKey mapped = new CFBamJpaDelSubDep3ByUNameIdxKey();
+			mapped.setRequiredDelSubDep2Id( key.getRequiredDelSubDep2Id() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamDelSubDep3 newRec() {
@@ -81,10 +110,38 @@ public class CFBamJpaDelSubDep3DefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDelSubDep3 ensureRec(ICFBamDelSubDep3 rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDelSubDep3) {
+			return( (CFBamJpaDelSubDep3)rec );
+		}
+		else {
+			CFBamJpaDelSubDep3 mapped = new CFBamJpaDelSubDep3();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDelSubDep3H newHRec() {
         ICFBamDelSubDep3H hrec =
             new CFBamJpaDelSubDep3H();
         return( hrec );
     }
+
+	public CFBamJpaDelSubDep3H ensureHRec(ICFBamDelSubDep3H hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDelSubDep3H) {
+			return( (CFBamJpaDelSubDep3H)hrec );
+		}
+		else {
+			CFBamJpaDelSubDep3H mapped = new CFBamJpaDelSubDep3H();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

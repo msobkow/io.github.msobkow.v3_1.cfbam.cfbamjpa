@@ -67,12 +67,40 @@ public class CFBamJpaPopDepDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaPopDepByRelationIdxKey ensureByRelationIdxKey(ICFBamPopDepByRelationIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaPopDepByRelationIdxKey) {
+			return( (CFBamJpaPopDepByRelationIdxKey)key );
+		}
+		else {
+			CFBamJpaPopDepByRelationIdxKey mapped = new CFBamJpaPopDepByRelationIdxKey();
+			mapped.setRequiredRelationId( key.getRequiredRelationId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamPopDepByDefSchemaIdxKey newByDefSchemaIdxKey() {
 	ICFBamPopDepByDefSchemaIdxKey key =
             new CFBamJpaPopDepByDefSchemaIdxKey();
 	return( key );
     }
+
+	public CFBamJpaPopDepByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamPopDepByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaPopDepByDefSchemaIdxKey) {
+			return( (CFBamJpaPopDepByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaPopDepByDefSchemaIdxKey mapped = new CFBamJpaPopDepByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamPopDep newRec() {
@@ -81,10 +109,38 @@ public class CFBamJpaPopDepDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaPopDep ensureRec(ICFBamPopDep rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaPopDep) {
+			return( (CFBamJpaPopDep)rec );
+		}
+		else {
+			CFBamJpaPopDep mapped = new CFBamJpaPopDep();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamPopDepH newHRec() {
         ICFBamPopDepH hrec =
             new CFBamJpaPopDepH();
         return( hrec );
     }
+
+	public CFBamJpaPopDepH ensureHRec(ICFBamPopDepH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaPopDepH) {
+			return( (CFBamJpaPopDepH)hrec );
+		}
+		else {
+			CFBamJpaPopDepH mapped = new CFBamJpaPopDepH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

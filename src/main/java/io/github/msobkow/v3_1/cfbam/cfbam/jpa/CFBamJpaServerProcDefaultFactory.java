@@ -67,10 +67,38 @@ public class CFBamJpaServerProcDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaServerProc ensureRec(ICFBamServerProc rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaServerProc) {
+			return( (CFBamJpaServerProc)rec );
+		}
+		else {
+			CFBamJpaServerProc mapped = new CFBamJpaServerProc();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamServerProcH newHRec() {
         ICFBamServerProcH hrec =
             new CFBamJpaServerProcH();
         return( hrec );
     }
+
+	public CFBamJpaServerProcH ensureHRec(ICFBamServerProcH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaServerProcH) {
+			return( (CFBamJpaServerProcH)hrec );
+		}
+		else {
+			CFBamJpaServerProcH mapped = new CFBamJpaServerProcH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

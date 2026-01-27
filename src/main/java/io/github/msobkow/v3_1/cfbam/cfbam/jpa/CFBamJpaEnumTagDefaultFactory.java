@@ -67,12 +67,44 @@ public class CFBamJpaEnumTagDefaultFactory
         return( hpkey );
     }
 
+	public CFBamJpaEnumTagHPKey ensureHPKey(ICFBamEnumTagHPKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if( key instanceof CFBamJpaEnumTagHPKey) {
+			return( (CFBamJpaEnumTagHPKey)key );
+		}
+		else {
+			CFBamJpaEnumTagHPKey mapped = new CFBamJpaEnumTagHPKey();
+			mapped.setAuditClusterId(key.getAuditClusterId());
+			mapped.setAuditActionId(key.getAuditActionId());
+			mapped.setAuditSessionId(key.getAuditSessionId());
+			mapped.setAuditStamp(key.getAuditStamp());
+			mapped.setRequiredId( key.getRequiredId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamEnumTagByEnumIdxKey newByEnumIdxKey() {
 	ICFBamEnumTagByEnumIdxKey key =
             new CFBamJpaEnumTagByEnumIdxKey();
 	return( key );
     }
+
+	public CFBamJpaEnumTagByEnumIdxKey ensureByEnumIdxKey(ICFBamEnumTagByEnumIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaEnumTagByEnumIdxKey) {
+			return( (CFBamJpaEnumTagByEnumIdxKey)key );
+		}
+		else {
+			CFBamJpaEnumTagByEnumIdxKey mapped = new CFBamJpaEnumTagByEnumIdxKey();
+			mapped.setRequiredEnumId( key.getRequiredEnumId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamEnumTagByDefSchemaIdxKey newByDefSchemaIdxKey() {
@@ -81,12 +113,41 @@ public class CFBamJpaEnumTagDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaEnumTagByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamEnumTagByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaEnumTagByDefSchemaIdxKey) {
+			return( (CFBamJpaEnumTagByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaEnumTagByDefSchemaIdxKey mapped = new CFBamJpaEnumTagByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamEnumTagByEnumNameIdxKey newByEnumNameIdxKey() {
 	ICFBamEnumTagByEnumNameIdxKey key =
             new CFBamJpaEnumTagByEnumNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaEnumTagByEnumNameIdxKey ensureByEnumNameIdxKey(ICFBamEnumTagByEnumNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaEnumTagByEnumNameIdxKey) {
+			return( (CFBamJpaEnumTagByEnumNameIdxKey)key );
+		}
+		else {
+			CFBamJpaEnumTagByEnumNameIdxKey mapped = new CFBamJpaEnumTagByEnumNameIdxKey();
+			mapped.setRequiredEnumId( key.getRequiredEnumId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamEnumTagByPrevIdxKey newByPrevIdxKey() {
@@ -95,12 +156,40 @@ public class CFBamJpaEnumTagDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaEnumTagByPrevIdxKey ensureByPrevIdxKey(ICFBamEnumTagByPrevIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaEnumTagByPrevIdxKey) {
+			return( (CFBamJpaEnumTagByPrevIdxKey)key );
+		}
+		else {
+			CFBamJpaEnumTagByPrevIdxKey mapped = new CFBamJpaEnumTagByPrevIdxKey();
+			mapped.setOptionalPrevId( key.getOptionalPrevId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamEnumTagByNextIdxKey newByNextIdxKey() {
 	ICFBamEnumTagByNextIdxKey key =
             new CFBamJpaEnumTagByNextIdxKey();
 	return( key );
     }
+
+	public CFBamJpaEnumTagByNextIdxKey ensureByNextIdxKey(ICFBamEnumTagByNextIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaEnumTagByNextIdxKey) {
+			return( (CFBamJpaEnumTagByNextIdxKey)key );
+		}
+		else {
+			CFBamJpaEnumTagByNextIdxKey mapped = new CFBamJpaEnumTagByNextIdxKey();
+			mapped.setOptionalNextId( key.getOptionalNextId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamEnumTag newRec() {
@@ -109,10 +198,38 @@ public class CFBamJpaEnumTagDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaEnumTag ensureRec(ICFBamEnumTag rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaEnumTag) {
+			return( (CFBamJpaEnumTag)rec );
+		}
+		else {
+			CFBamJpaEnumTag mapped = new CFBamJpaEnumTag();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamEnumTagH newHRec() {
         ICFBamEnumTagH hrec =
             new CFBamJpaEnumTagH();
         return( hrec );
     }
+
+	public CFBamJpaEnumTagH ensureHRec(ICFBamEnumTagH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaEnumTagH) {
+			return( (CFBamJpaEnumTagH)hrec );
+		}
+		else {
+			CFBamJpaEnumTagH mapped = new CFBamJpaEnumTagH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

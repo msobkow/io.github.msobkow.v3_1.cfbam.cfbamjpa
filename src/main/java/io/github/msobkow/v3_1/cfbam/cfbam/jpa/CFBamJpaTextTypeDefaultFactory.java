@@ -67,6 +67,20 @@ public class CFBamJpaTextTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaTextTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamTextTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaTextTypeBySchemaIdxKey) {
+			return( (CFBamJpaTextTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaTextTypeBySchemaIdxKey mapped = new CFBamJpaTextTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTextType newRec() {
         ICFBamTextType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaTextTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaTextType ensureRec(ICFBamTextType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaTextType) {
+			return( (CFBamJpaTextType)rec );
+		}
+		else {
+			CFBamJpaTextType mapped = new CFBamJpaTextType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamTextTypeH newHRec() {
         ICFBamTextTypeH hrec =
             new CFBamJpaTextTypeH();
         return( hrec );
     }
+
+	public CFBamJpaTextTypeH ensureHRec(ICFBamTextTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaTextTypeH) {
+			return( (CFBamJpaTextTypeH)hrec );
+		}
+		else {
+			CFBamJpaTextTypeH mapped = new CFBamJpaTextTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

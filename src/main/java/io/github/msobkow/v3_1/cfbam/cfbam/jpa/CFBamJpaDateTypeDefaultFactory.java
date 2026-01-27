@@ -67,6 +67,20 @@ public class CFBamJpaDateTypeDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaDateTypeBySchemaIdxKey ensureBySchemaIdxKey(ICFBamDateTypeBySchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaDateTypeBySchemaIdxKey) {
+			return( (CFBamJpaDateTypeBySchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaDateTypeBySchemaIdxKey mapped = new CFBamJpaDateTypeBySchemaIdxKey();
+			mapped.setRequiredSchemaDefId( key.getRequiredSchemaDefId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDateType newRec() {
         ICFBamDateType rec =
@@ -74,10 +88,38 @@ public class CFBamJpaDateTypeDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaDateType ensureRec(ICFBamDateType rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaDateType) {
+			return( (CFBamJpaDateType)rec );
+		}
+		else {
+			CFBamJpaDateType mapped = new CFBamJpaDateType();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamDateTypeH newHRec() {
         ICFBamDateTypeH hrec =
             new CFBamJpaDateTypeH();
         return( hrec );
     }
+
+	public CFBamJpaDateTypeH ensureHRec(ICFBamDateTypeH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaDateTypeH) {
+			return( (CFBamJpaDateTypeH)hrec );
+		}
+		else {
+			CFBamJpaDateTypeH mapped = new CFBamJpaDateTypeH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

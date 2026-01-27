@@ -67,10 +67,38 @@ public class CFBamJpaFloatDefDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaFloatDef ensureRec(ICFBamFloatDef rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaFloatDef) {
+			return( (CFBamJpaFloatDef)rec );
+		}
+		else {
+			CFBamJpaFloatDef mapped = new CFBamJpaFloatDef();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamFloatDefH newHRec() {
         ICFBamFloatDefH hrec =
             new CFBamJpaFloatDefH();
         return( hrec );
     }
+
+	public CFBamJpaFloatDefH ensureHRec(ICFBamFloatDefH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaFloatDefH) {
+			return( (CFBamJpaFloatDefH)hrec );
+		}
+		else {
+			CFBamJpaFloatDefH mapped = new CFBamJpaFloatDefH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

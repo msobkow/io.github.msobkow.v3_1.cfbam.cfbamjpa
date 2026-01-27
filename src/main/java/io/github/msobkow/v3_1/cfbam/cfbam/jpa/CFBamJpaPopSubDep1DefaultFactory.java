@@ -67,12 +67,41 @@ public class CFBamJpaPopSubDep1DefaultFactory
 	return( key );
     }
 
+	public CFBamJpaPopSubDep1ByPopTopDepIdxKey ensureByPopTopDepIdxKey(ICFBamPopSubDep1ByPopTopDepIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaPopSubDep1ByPopTopDepIdxKey) {
+			return( (CFBamJpaPopSubDep1ByPopTopDepIdxKey)key );
+		}
+		else {
+			CFBamJpaPopSubDep1ByPopTopDepIdxKey mapped = new CFBamJpaPopSubDep1ByPopTopDepIdxKey();
+			mapped.setRequiredPopTopDepId( key.getRequiredPopTopDepId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamPopSubDep1ByUNameIdxKey newByUNameIdxKey() {
 	ICFBamPopSubDep1ByUNameIdxKey key =
             new CFBamJpaPopSubDep1ByUNameIdxKey();
 	return( key );
     }
+
+	public CFBamJpaPopSubDep1ByUNameIdxKey ensureByUNameIdxKey(ICFBamPopSubDep1ByUNameIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaPopSubDep1ByUNameIdxKey) {
+			return( (CFBamJpaPopSubDep1ByUNameIdxKey)key );
+		}
+		else {
+			CFBamJpaPopSubDep1ByUNameIdxKey mapped = new CFBamJpaPopSubDep1ByUNameIdxKey();
+			mapped.setRequiredPopTopDepId( key.getRequiredPopTopDepId() );
+			mapped.setRequiredName( key.getRequiredName() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamPopSubDep1 newRec() {
@@ -81,10 +110,38 @@ public class CFBamJpaPopSubDep1DefaultFactory
         return( rec );
     }
 
+	public CFBamJpaPopSubDep1 ensureRec(ICFBamPopSubDep1 rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaPopSubDep1) {
+			return( (CFBamJpaPopSubDep1)rec );
+		}
+		else {
+			CFBamJpaPopSubDep1 mapped = new CFBamJpaPopSubDep1();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamPopSubDep1H newHRec() {
         ICFBamPopSubDep1H hrec =
             new CFBamJpaPopSubDep1H();
         return( hrec );
     }
+
+	public CFBamJpaPopSubDep1H ensureHRec(ICFBamPopSubDep1H hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaPopSubDep1H) {
+			return( (CFBamJpaPopSubDep1H)hrec );
+		}
+		else {
+			CFBamJpaPopSubDep1H mapped = new CFBamJpaPopSubDep1H();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

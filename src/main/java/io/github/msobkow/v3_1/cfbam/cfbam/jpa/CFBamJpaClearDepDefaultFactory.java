@@ -67,12 +67,40 @@ public class CFBamJpaClearDepDefaultFactory
 	return( key );
     }
 
+	public CFBamJpaClearDepByClearDepIdxKey ensureByClearDepIdxKey(ICFBamClearDepByClearDepIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaClearDepByClearDepIdxKey) {
+			return( (CFBamJpaClearDepByClearDepIdxKey)key );
+		}
+		else {
+			CFBamJpaClearDepByClearDepIdxKey mapped = new CFBamJpaClearDepByClearDepIdxKey();
+			mapped.setRequiredRelationId( key.getRequiredRelationId() );
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamClearDepByDefSchemaIdxKey newByDefSchemaIdxKey() {
 	ICFBamClearDepByDefSchemaIdxKey key =
             new CFBamJpaClearDepByDefSchemaIdxKey();
 	return( key );
     }
+
+	public CFBamJpaClearDepByDefSchemaIdxKey ensureByDefSchemaIdxKey(ICFBamClearDepByDefSchemaIdxKey key) {
+		if (key == null) {
+			return( null );
+		}
+		else if (key instanceof CFBamJpaClearDepByDefSchemaIdxKey) {
+			return( (CFBamJpaClearDepByDefSchemaIdxKey)key );
+		}
+		else {
+			CFBamJpaClearDepByDefSchemaIdxKey mapped = new CFBamJpaClearDepByDefSchemaIdxKey();
+			mapped.setOptionalDefSchemaId( key.getOptionalDefSchemaId() );
+			return( mapped );
+		}
+	}
 
     @Override
     public ICFBamClearDep newRec() {
@@ -81,10 +109,38 @@ public class CFBamJpaClearDepDefaultFactory
         return( rec );
     }
 
+	public CFBamJpaClearDep ensureRec(ICFBamClearDep rec) {
+		if( rec == null ) {
+			return( null );
+		}
+		else if (rec instanceof CFBamJpaClearDep) {
+			return( (CFBamJpaClearDep)rec );
+		}
+		else {
+			CFBamJpaClearDep mapped = new CFBamJpaClearDep();
+			mapped.set(rec);
+			return( mapped );
+		}
+	}
+
     @Override
     public ICFBamClearDepH newHRec() {
         ICFBamClearDepH hrec =
             new CFBamJpaClearDepH();
         return( hrec );
     }
+
+	public CFBamJpaClearDepH ensureHRec(ICFBamClearDepH hrec) {
+		if (hrec == null) {
+			return( null );
+		}
+		else if( hrec instanceof CFBamJpaClearDepH) {
+			return( (CFBamJpaClearDepH)hrec );
+		}
+		else {
+			CFBamJpaClearDepH mapped = new CFBamJpaClearDepH();
+			mapped.set(hrec);
+			return( mapped );
+		}
+	}
 }

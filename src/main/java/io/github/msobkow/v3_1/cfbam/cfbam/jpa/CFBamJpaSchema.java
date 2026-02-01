@@ -2308,412 +2308,412 @@ public class CFBamJpaSchema
 
 	@Override
 	public void wireTableTableInstances() {
-		if (tableScope == null) {
+		if (tableScope == null || !(tableScope instanceof CFBamJpaScopeTable)) {
 			tableScope = new CFBamJpaScopeTable(this);
 		}
-		if (tableSchemaDef == null) {
+		if (tableSchemaDef == null || !(tableSchemaDef instanceof CFBamJpaSchemaDefTable)) {
 			tableSchemaDef = new CFBamJpaSchemaDefTable(this);
 		}
-		if (tableSchemaRef == null) {
+		if (tableSchemaRef == null || !(tableSchemaRef instanceof CFBamJpaSchemaRefTable)) {
 			tableSchemaRef = new CFBamJpaSchemaRefTable(this);
 		}
-		if (tableServerMethod == null) {
+		if (tableServerMethod == null || !(tableServerMethod instanceof CFBamJpaServerMethodTable)) {
 			tableServerMethod = new CFBamJpaServerMethodTable(this);
 		}
-		if (tableServerObjFunc == null) {
+		if (tableServerObjFunc == null || !(tableServerObjFunc instanceof CFBamJpaServerObjFuncTable)) {
 			tableServerObjFunc = new CFBamJpaServerObjFuncTable(this);
 		}
-		if (tableServerProc == null) {
+		if (tableServerProc == null || !(tableServerProc instanceof CFBamJpaServerProcTable)) {
 			tableServerProc = new CFBamJpaServerProcTable(this);
 		}
-		if (tableTable == null) {
+		if (tableTable == null || !(tableTable instanceof CFBamJpaTableTable)) {
 			tableTable = new CFBamJpaTableTable(this);
 		}
-		if (tableValue == null) {
+		if (tableValue == null || !(tableValue instanceof CFBamJpaValueTable)) {
 			tableValue = new CFBamJpaValueTable(this);
 		}
-		if (tableAtom == null) {
+		if (tableAtom == null || !(tableAtom instanceof CFBamJpaAtomTable)) {
 			tableAtom = new CFBamJpaAtomTable(this);
 		}
-		if (tableBlobDef == null) {
+		if (tableBlobDef == null || !(tableBlobDef instanceof CFBamJpaBlobDefTable)) {
 			tableBlobDef = new CFBamJpaBlobDefTable(this);
 		}
-		if (tableBlobType == null) {
+		if (tableBlobType == null || !(tableBlobType instanceof CFBamJpaBlobTypeTable)) {
 			tableBlobType = new CFBamJpaBlobTypeTable(this);
 		}
-		if (tableBoolDef == null) {
+		if (tableBoolDef == null || !(tableBoolDef instanceof CFBamJpaBoolDefTable)) {
 			tableBoolDef = new CFBamJpaBoolDefTable(this);
 		}
-		if (tableBoolType == null) {
+		if (tableBoolType == null || !(tableBoolType instanceof CFBamJpaBoolTypeTable)) {
 			tableBoolType = new CFBamJpaBoolTypeTable(this);
 		}
-		if (tableChain == null) {
+		if (tableChain == null || !(tableChain instanceof CFBamJpaChainTable)) {
 			tableChain = new CFBamJpaChainTable(this);
 		}
-		if (tableClearDep == null) {
+		if (tableClearDep == null || !(tableClearDep instanceof CFBamJpaClearDepTable)) {
 			tableClearDep = new CFBamJpaClearDepTable(this);
 		}
-		if (tableClearSubDep1 == null) {
+		if (tableClearSubDep1 == null || !(tableClearSubDep1 instanceof CFBamJpaClearSubDep1Table)) {
 			tableClearSubDep1 = new CFBamJpaClearSubDep1Table(this);
 		}
-		if (tableClearSubDep2 == null) {
+		if (tableClearSubDep2 == null || !(tableClearSubDep2 instanceof CFBamJpaClearSubDep2Table)) {
 			tableClearSubDep2 = new CFBamJpaClearSubDep2Table(this);
 		}
-		if (tableClearSubDep3 == null) {
+		if (tableClearSubDep3 == null || !(tableClearSubDep3 instanceof CFBamJpaClearSubDep3Table)) {
 			tableClearSubDep3 = new CFBamJpaClearSubDep3Table(this);
 		}
-		if (tableClearTopDep == null) {
+		if (tableClearTopDep == null || !(tableClearTopDep instanceof CFBamJpaClearTopDepTable)) {
 			tableClearTopDep = new CFBamJpaClearTopDepTable(this);
 		}
-		if (tableDateDef == null) {
+		if (tableDateDef == null || !(tableDateDef instanceof CFBamJpaDateDefTable)) {
 			tableDateDef = new CFBamJpaDateDefTable(this);
 		}
-		if (tableDateType == null) {
+		if (tableDateType == null || !(tableDateType instanceof CFBamJpaDateTypeTable)) {
 			tableDateType = new CFBamJpaDateTypeTable(this);
 		}
-		if (tableDelDep == null) {
+		if (tableDelDep == null || !(tableDelDep instanceof CFBamJpaDelDepTable)) {
 			tableDelDep = new CFBamJpaDelDepTable(this);
 		}
-		if (tableDelSubDep1 == null) {
+		if (tableDelSubDep1 == null || !(tableDelSubDep1 instanceof CFBamJpaDelSubDep1Table)) {
 			tableDelSubDep1 = new CFBamJpaDelSubDep1Table(this);
 		}
-		if (tableDelSubDep2 == null) {
+		if (tableDelSubDep2 == null || !(tableDelSubDep2 instanceof CFBamJpaDelSubDep2Table)) {
 			tableDelSubDep2 = new CFBamJpaDelSubDep2Table(this);
 		}
-		if (tableDelSubDep3 == null) {
+		if (tableDelSubDep3 == null || !(tableDelSubDep3 instanceof CFBamJpaDelSubDep3Table)) {
 			tableDelSubDep3 = new CFBamJpaDelSubDep3Table(this);
 		}
-		if (tableDelTopDep == null) {
+		if (tableDelTopDep == null || !(tableDelTopDep instanceof CFBamJpaDelTopDepTable)) {
 			tableDelTopDep = new CFBamJpaDelTopDepTable(this);
 		}
-		if (tableDoubleDef == null) {
+		if (tableDoubleDef == null || !(tableDoubleDef instanceof CFBamJpaDoubleDefTable)) {
 			tableDoubleDef = new CFBamJpaDoubleDefTable(this);
 		}
-		if (tableDoubleType == null) {
+		if (tableDoubleType == null || !(tableDoubleType instanceof CFBamJpaDoubleTypeTable)) {
 			tableDoubleType = new CFBamJpaDoubleTypeTable(this);
 		}
-		if (tableEnumTag == null) {
+		if (tableEnumTag == null || !(tableEnumTag instanceof CFBamJpaEnumTagTable)) {
 			tableEnumTag = new CFBamJpaEnumTagTable(this);
 		}
-		if (tableFloatDef == null) {
+		if (tableFloatDef == null || !(tableFloatDef instanceof CFBamJpaFloatDefTable)) {
 			tableFloatDef = new CFBamJpaFloatDefTable(this);
 		}
-		if (tableFloatType == null) {
+		if (tableFloatType == null || !(tableFloatType instanceof CFBamJpaFloatTypeTable)) {
 			tableFloatType = new CFBamJpaFloatTypeTable(this);
 		}
-		if (tableIndex == null) {
+		if (tableIndex == null || !(tableIndex instanceof CFBamJpaIndexTable)) {
 			tableIndex = new CFBamJpaIndexTable(this);
 		}
-		if (tableIndexCol == null) {
+		if (tableIndexCol == null || !(tableIndexCol instanceof CFBamJpaIndexColTable)) {
 			tableIndexCol = new CFBamJpaIndexColTable(this);
 		}
-		if (tableInt16Def == null) {
+		if (tableInt16Def == null || !(tableInt16Def instanceof CFBamJpaInt16DefTable)) {
 			tableInt16Def = new CFBamJpaInt16DefTable(this);
 		}
-		if (tableInt16Type == null) {
+		if (tableInt16Type == null || !(tableInt16Type instanceof CFBamJpaInt16TypeTable)) {
 			tableInt16Type = new CFBamJpaInt16TypeTable(this);
 		}
-		if (tableInt32Def == null) {
+		if (tableInt32Def == null || !(tableInt32Def instanceof CFBamJpaInt32DefTable)) {
 			tableInt32Def = new CFBamJpaInt32DefTable(this);
 		}
-		if (tableInt32Type == null) {
+		if (tableInt32Type == null || !(tableInt32Type instanceof CFBamJpaInt32TypeTable)) {
 			tableInt32Type = new CFBamJpaInt32TypeTable(this);
 		}
-		if (tableInt64Def == null) {
+		if (tableInt64Def == null || !(tableInt64Def instanceof CFBamJpaInt64DefTable)) {
 			tableInt64Def = new CFBamJpaInt64DefTable(this);
 		}
-		if (tableInt64Type == null) {
+		if (tableInt64Type == null || !(tableInt64Type instanceof CFBamJpaInt64TypeTable)) {
 			tableInt64Type = new CFBamJpaInt64TypeTable(this);
 		}
-		if (tableNmTokenDef == null) {
+		if (tableNmTokenDef == null || !(tableNmTokenDef instanceof CFBamJpaNmTokenDefTable)) {
 			tableNmTokenDef = new CFBamJpaNmTokenDefTable(this);
 		}
-		if (tableNmTokenType == null) {
+		if (tableNmTokenType == null || !(tableNmTokenType instanceof CFBamJpaNmTokenTypeTable)) {
 			tableNmTokenType = new CFBamJpaNmTokenTypeTable(this);
 		}
-		if (tableNmTokensDef == null) {
+		if (tableNmTokensDef == null || !(tableNmTokensDef instanceof CFBamJpaNmTokensDefTable)) {
 			tableNmTokensDef = new CFBamJpaNmTokensDefTable(this);
 		}
-		if (tableNmTokensType == null) {
+		if (tableNmTokensType == null || !(tableNmTokensType instanceof CFBamJpaNmTokensTypeTable)) {
 			tableNmTokensType = new CFBamJpaNmTokensTypeTable(this);
 		}
-		if (tableNumberDef == null) {
+		if (tableNumberDef == null || !(tableNumberDef instanceof CFBamJpaNumberDefTable)) {
 			tableNumberDef = new CFBamJpaNumberDefTable(this);
 		}
-		if (tableNumberType == null) {
+		if (tableNumberType == null || !(tableNumberType instanceof CFBamJpaNumberTypeTable)) {
 			tableNumberType = new CFBamJpaNumberTypeTable(this);
 		}
-		if (tableParam == null) {
+		if (tableParam == null || !(tableParam instanceof CFBamJpaParamTable)) {
 			tableParam = new CFBamJpaParamTable(this);
 		}
-		if (tablePopDep == null) {
+		if (tablePopDep == null || !(tablePopDep instanceof CFBamJpaPopDepTable)) {
 			tablePopDep = new CFBamJpaPopDepTable(this);
 		}
-		if (tablePopSubDep1 == null) {
+		if (tablePopSubDep1 == null || !(tablePopSubDep1 instanceof CFBamJpaPopSubDep1Table)) {
 			tablePopSubDep1 = new CFBamJpaPopSubDep1Table(this);
 		}
-		if (tablePopSubDep2 == null) {
+		if (tablePopSubDep2 == null || !(tablePopSubDep2 instanceof CFBamJpaPopSubDep2Table)) {
 			tablePopSubDep2 = new CFBamJpaPopSubDep2Table(this);
 		}
-		if (tablePopSubDep3 == null) {
+		if (tablePopSubDep3 == null || !(tablePopSubDep3 instanceof CFBamJpaPopSubDep3Table)) {
 			tablePopSubDep3 = new CFBamJpaPopSubDep3Table(this);
 		}
-		if (tablePopTopDep == null) {
+		if (tablePopTopDep == null || !(tablePopTopDep instanceof CFBamJpaPopTopDepTable)) {
 			tablePopTopDep = new CFBamJpaPopTopDepTable(this);
 		}
-		if (tableRelation == null) {
+		if (tableRelation == null || !(tableRelation instanceof CFBamJpaRelationTable)) {
 			tableRelation = new CFBamJpaRelationTable(this);
 		}
-		if (tableRelationCol == null) {
+		if (tableRelationCol == null || !(tableRelationCol instanceof CFBamJpaRelationColTable)) {
 			tableRelationCol = new CFBamJpaRelationColTable(this);
 		}
-		if (tableServerListFunc == null) {
+		if (tableServerListFunc == null || !(tableServerListFunc instanceof CFBamJpaServerListFuncTable)) {
 			tableServerListFunc = new CFBamJpaServerListFuncTable(this);
 		}
-		if (tableDbKeyHash128Def == null) {
+		if (tableDbKeyHash128Def == null || !(tableDbKeyHash128Def instanceof CFBamJpaDbKeyHash128DefTable)) {
 			tableDbKeyHash128Def = new CFBamJpaDbKeyHash128DefTable(this);
 		}
-		if (tableDbKeyHash128Col == null) {
+		if (tableDbKeyHash128Col == null || !(tableDbKeyHash128Col instanceof CFBamJpaDbKeyHash128ColTable)) {
 			tableDbKeyHash128Col = new CFBamJpaDbKeyHash128ColTable(this);
 		}
-		if (tableDbKeyHash128Type == null) {
+		if (tableDbKeyHash128Type == null || !(tableDbKeyHash128Type instanceof CFBamJpaDbKeyHash128TypeTable)) {
 			tableDbKeyHash128Type = new CFBamJpaDbKeyHash128TypeTable(this);
 		}
-		if (tableDbKeyHash128Gen == null) {
+		if (tableDbKeyHash128Gen == null || !(tableDbKeyHash128Gen instanceof CFBamJpaDbKeyHash128GenTable)) {
 			tableDbKeyHash128Gen = new CFBamJpaDbKeyHash128GenTable(this);
 		}
-		if (tableDbKeyHash160Def == null) {
+		if (tableDbKeyHash160Def == null || !(tableDbKeyHash160Def instanceof CFBamJpaDbKeyHash160DefTable)) {
 			tableDbKeyHash160Def = new CFBamJpaDbKeyHash160DefTable(this);
 		}
-		if (tableDbKeyHash160Col == null) {
+		if (tableDbKeyHash160Col == null || !(tableDbKeyHash160Col instanceof CFBamJpaDbKeyHash160ColTable)) {
 			tableDbKeyHash160Col = new CFBamJpaDbKeyHash160ColTable(this);
 		}
-		if (tableDbKeyHash160Type == null) {
+		if (tableDbKeyHash160Type == null || !(tableDbKeyHash160Type instanceof CFBamJpaDbKeyHash160TypeTable)) {
 			tableDbKeyHash160Type = new CFBamJpaDbKeyHash160TypeTable(this);
 		}
-		if (tableDbKeyHash160Gen == null) {
+		if (tableDbKeyHash160Gen == null || !(tableDbKeyHash160Gen instanceof CFBamJpaDbKeyHash160GenTable)) {
 			tableDbKeyHash160Gen = new CFBamJpaDbKeyHash160GenTable(this);
 		}
-		if (tableDbKeyHash224Def == null) {
+		if (tableDbKeyHash224Def == null || !(tableDbKeyHash224Def instanceof CFBamJpaDbKeyHash224DefTable)) {
 			tableDbKeyHash224Def = new CFBamJpaDbKeyHash224DefTable(this);
 		}
-		if (tableDbKeyHash224Col == null) {
+		if (tableDbKeyHash224Col == null || !(tableDbKeyHash224Col instanceof CFBamJpaDbKeyHash224ColTable)) {
 			tableDbKeyHash224Col = new CFBamJpaDbKeyHash224ColTable(this);
 		}
-		if (tableDbKeyHash224Type == null) {
+		if (tableDbKeyHash224Type == null || !(tableDbKeyHash224Type instanceof CFBamJpaDbKeyHash224TypeTable)) {
 			tableDbKeyHash224Type = new CFBamJpaDbKeyHash224TypeTable(this);
 		}
-		if (tableDbKeyHash224Gen == null) {
+		if (tableDbKeyHash224Gen == null || !(tableDbKeyHash224Gen instanceof CFBamJpaDbKeyHash224GenTable)) {
 			tableDbKeyHash224Gen = new CFBamJpaDbKeyHash224GenTable(this);
 		}
-		if (tableDbKeyHash256Def == null) {
+		if (tableDbKeyHash256Def == null || !(tableDbKeyHash256Def instanceof CFBamJpaDbKeyHash256DefTable)) {
 			tableDbKeyHash256Def = new CFBamJpaDbKeyHash256DefTable(this);
 		}
-		if (tableDbKeyHash256Col == null) {
+		if (tableDbKeyHash256Col == null || !(tableDbKeyHash256Col instanceof CFBamJpaDbKeyHash256ColTable)) {
 			tableDbKeyHash256Col = new CFBamJpaDbKeyHash256ColTable(this);
 		}
-		if (tableDbKeyHash256Type == null) {
+		if (tableDbKeyHash256Type == null || !(tableDbKeyHash256Type instanceof CFBamJpaDbKeyHash256TypeTable)) {
 			tableDbKeyHash256Type = new CFBamJpaDbKeyHash256TypeTable(this);
 		}
-		if (tableDbKeyHash256Gen == null) {
+		if (tableDbKeyHash256Gen == null || !(tableDbKeyHash256Gen instanceof CFBamJpaDbKeyHash256GenTable)) {
 			tableDbKeyHash256Gen = new CFBamJpaDbKeyHash256GenTable(this);
 		}
-		if (tableDbKeyHash384Def == null) {
+		if (tableDbKeyHash384Def == null || !(tableDbKeyHash384Def instanceof CFBamJpaDbKeyHash384DefTable)) {
 			tableDbKeyHash384Def = new CFBamJpaDbKeyHash384DefTable(this);
 		}
-		if (tableDbKeyHash384Col == null) {
+		if (tableDbKeyHash384Col == null || !(tableDbKeyHash384Col instanceof CFBamJpaDbKeyHash384ColTable)) {
 			tableDbKeyHash384Col = new CFBamJpaDbKeyHash384ColTable(this);
 		}
-		if (tableDbKeyHash384Type == null) {
+		if (tableDbKeyHash384Type == null || !(tableDbKeyHash384Type instanceof CFBamJpaDbKeyHash384TypeTable)) {
 			tableDbKeyHash384Type = new CFBamJpaDbKeyHash384TypeTable(this);
 		}
-		if (tableDbKeyHash384Gen == null) {
+		if (tableDbKeyHash384Gen == null || !(tableDbKeyHash384Gen instanceof CFBamJpaDbKeyHash384GenTable)) {
 			tableDbKeyHash384Gen = new CFBamJpaDbKeyHash384GenTable(this);
 		}
-		if (tableDbKeyHash512Def == null) {
+		if (tableDbKeyHash512Def == null || !(tableDbKeyHash512Def instanceof CFBamJpaDbKeyHash512DefTable)) {
 			tableDbKeyHash512Def = new CFBamJpaDbKeyHash512DefTable(this);
 		}
-		if (tableDbKeyHash512Col == null) {
+		if (tableDbKeyHash512Col == null || !(tableDbKeyHash512Col instanceof CFBamJpaDbKeyHash512ColTable)) {
 			tableDbKeyHash512Col = new CFBamJpaDbKeyHash512ColTable(this);
 		}
-		if (tableDbKeyHash512Type == null) {
+		if (tableDbKeyHash512Type == null || !(tableDbKeyHash512Type instanceof CFBamJpaDbKeyHash512TypeTable)) {
 			tableDbKeyHash512Type = new CFBamJpaDbKeyHash512TypeTable(this);
 		}
-		if (tableDbKeyHash512Gen == null) {
+		if (tableDbKeyHash512Gen == null || !(tableDbKeyHash512Gen instanceof CFBamJpaDbKeyHash512GenTable)) {
 			tableDbKeyHash512Gen = new CFBamJpaDbKeyHash512GenTable(this);
 		}
-		if (tableStringDef == null) {
+		if (tableStringDef == null || !(tableStringDef instanceof CFBamJpaStringDefTable)) {
 			tableStringDef = new CFBamJpaStringDefTable(this);
 		}
-		if (tableStringType == null) {
+		if (tableStringType == null || !(tableStringType instanceof CFBamJpaStringTypeTable)) {
 			tableStringType = new CFBamJpaStringTypeTable(this);
 		}
-		if (tableTZDateDef == null) {
+		if (tableTZDateDef == null || !(tableTZDateDef instanceof CFBamJpaTZDateDefTable)) {
 			tableTZDateDef = new CFBamJpaTZDateDefTable(this);
 		}
-		if (tableTZDateType == null) {
+		if (tableTZDateType == null || !(tableTZDateType instanceof CFBamJpaTZDateTypeTable)) {
 			tableTZDateType = new CFBamJpaTZDateTypeTable(this);
 		}
-		if (tableTZTimeDef == null) {
+		if (tableTZTimeDef == null || !(tableTZTimeDef instanceof CFBamJpaTZTimeDefTable)) {
 			tableTZTimeDef = new CFBamJpaTZTimeDefTable(this);
 		}
-		if (tableTZTimeType == null) {
+		if (tableTZTimeType == null || !(tableTZTimeType instanceof CFBamJpaTZTimeTypeTable)) {
 			tableTZTimeType = new CFBamJpaTZTimeTypeTable(this);
 		}
-		if (tableTZTimestampDef == null) {
+		if (tableTZTimestampDef == null || !(tableTZTimestampDef instanceof CFBamJpaTZTimestampDefTable)) {
 			tableTZTimestampDef = new CFBamJpaTZTimestampDefTable(this);
 		}
-		if (tableTZTimestampType == null) {
+		if (tableTZTimestampType == null || !(tableTZTimestampType instanceof CFBamJpaTZTimestampTypeTable)) {
 			tableTZTimestampType = new CFBamJpaTZTimestampTypeTable(this);
 		}
-		if (tableTableCol == null) {
+		if (tableTableCol == null || !(tableTableCol instanceof CFBamJpaTableColTable)) {
 			tableTableCol = new CFBamJpaTableColTable(this);
 		}
-		if (tableTextDef == null) {
+		if (tableTextDef == null || !(tableTextDef instanceof CFBamJpaTextDefTable)) {
 			tableTextDef = new CFBamJpaTextDefTable(this);
 		}
-		if (tableTextType == null) {
+		if (tableTextType == null || !(tableTextType instanceof CFBamJpaTextTypeTable)) {
 			tableTextType = new CFBamJpaTextTypeTable(this);
 		}
-		if (tableTimeDef == null) {
+		if (tableTimeDef == null || !(tableTimeDef instanceof CFBamJpaTimeDefTable)) {
 			tableTimeDef = new CFBamJpaTimeDefTable(this);
 		}
-		if (tableTimeType == null) {
+		if (tableTimeType == null || !(tableTimeType instanceof CFBamJpaTimeTypeTable)) {
 			tableTimeType = new CFBamJpaTimeTypeTable(this);
 		}
-		if (tableTimestampDef == null) {
+		if (tableTimestampDef == null || !(tableTimestampDef instanceof CFBamJpaTimestampDefTable)) {
 			tableTimestampDef = new CFBamJpaTimestampDefTable(this);
 		}
-		if (tableTimestampType == null) {
+		if (tableTimestampType == null || !(tableTimestampType instanceof CFBamJpaTimestampTypeTable)) {
 			tableTimestampType = new CFBamJpaTimestampTypeTable(this);
 		}
-		if (tableTokenDef == null) {
+		if (tableTokenDef == null || !(tableTokenDef instanceof CFBamJpaTokenDefTable)) {
 			tableTokenDef = new CFBamJpaTokenDefTable(this);
 		}
-		if (tableTokenType == null) {
+		if (tableTokenType == null || !(tableTokenType instanceof CFBamJpaTokenTypeTable)) {
 			tableTokenType = new CFBamJpaTokenTypeTable(this);
 		}
-		if (tableUInt16Def == null) {
+		if (tableUInt16Def == null || !(tableUInt16Def instanceof CFBamJpaUInt16DefTable)) {
 			tableUInt16Def = new CFBamJpaUInt16DefTable(this);
 		}
-		if (tableUInt16Type == null) {
+		if (tableUInt16Type == null || !(tableUInt16Type instanceof CFBamJpaUInt16TypeTable)) {
 			tableUInt16Type = new CFBamJpaUInt16TypeTable(this);
 		}
-		if (tableUInt32Def == null) {
+		if (tableUInt32Def == null || !(tableUInt32Def instanceof CFBamJpaUInt32DefTable)) {
 			tableUInt32Def = new CFBamJpaUInt32DefTable(this);
 		}
-		if (tableUInt32Type == null) {
+		if (tableUInt32Type == null || !(tableUInt32Type instanceof CFBamJpaUInt32TypeTable)) {
 			tableUInt32Type = new CFBamJpaUInt32TypeTable(this);
 		}
-		if (tableUInt64Def == null) {
+		if (tableUInt64Def == null || !(tableUInt64Def instanceof CFBamJpaUInt64DefTable)) {
 			tableUInt64Def = new CFBamJpaUInt64DefTable(this);
 		}
-		if (tableUInt64Type == null) {
+		if (tableUInt64Type == null || !(tableUInt64Type instanceof CFBamJpaUInt64TypeTable)) {
 			tableUInt64Type = new CFBamJpaUInt64TypeTable(this);
 		}
-		if (tableUuidDef == null) {
+		if (tableUuidDef == null || !(tableUuidDef instanceof CFBamJpaUuidDefTable)) {
 			tableUuidDef = new CFBamJpaUuidDefTable(this);
 		}
-		if (tableUuid6Def == null) {
+		if (tableUuid6Def == null || !(tableUuid6Def instanceof CFBamJpaUuid6DefTable)) {
 			tableUuid6Def = new CFBamJpaUuid6DefTable(this);
 		}
-		if (tableUuidType == null) {
+		if (tableUuidType == null || !(tableUuidType instanceof CFBamJpaUuidTypeTable)) {
 			tableUuidType = new CFBamJpaUuidTypeTable(this);
 		}
-		if (tableUuid6Type == null) {
+		if (tableUuid6Type == null || !(tableUuid6Type instanceof CFBamJpaUuid6TypeTable)) {
 			tableUuid6Type = new CFBamJpaUuid6TypeTable(this);
 		}
-		if (tableBlobCol == null) {
+		if (tableBlobCol == null || !(tableBlobCol instanceof CFBamJpaBlobColTable)) {
 			tableBlobCol = new CFBamJpaBlobColTable(this);
 		}
-		if (tableBoolCol == null) {
+		if (tableBoolCol == null || !(tableBoolCol instanceof CFBamJpaBoolColTable)) {
 			tableBoolCol = new CFBamJpaBoolColTable(this);
 		}
-		if (tableDateCol == null) {
+		if (tableDateCol == null || !(tableDateCol instanceof CFBamJpaDateColTable)) {
 			tableDateCol = new CFBamJpaDateColTable(this);
 		}
-		if (tableDoubleCol == null) {
+		if (tableDoubleCol == null || !(tableDoubleCol instanceof CFBamJpaDoubleColTable)) {
 			tableDoubleCol = new CFBamJpaDoubleColTable(this);
 		}
-		if (tableEnumDef == null) {
+		if (tableEnumDef == null || !(tableEnumDef instanceof CFBamJpaEnumDefTable)) {
 			tableEnumDef = new CFBamJpaEnumDefTable(this);
 		}
-		if (tableEnumType == null) {
+		if (tableEnumType == null || !(tableEnumType instanceof CFBamJpaEnumTypeTable)) {
 			tableEnumType = new CFBamJpaEnumTypeTable(this);
 		}
-		if (tableFloatCol == null) {
+		if (tableFloatCol == null || !(tableFloatCol instanceof CFBamJpaFloatColTable)) {
 			tableFloatCol = new CFBamJpaFloatColTable(this);
 		}
-		if (tableId16Gen == null) {
+		if (tableId16Gen == null || !(tableId16Gen instanceof CFBamJpaId16GenTable)) {
 			tableId16Gen = new CFBamJpaId16GenTable(this);
 		}
-		if (tableId32Gen == null) {
+		if (tableId32Gen == null || !(tableId32Gen instanceof CFBamJpaId32GenTable)) {
 			tableId32Gen = new CFBamJpaId32GenTable(this);
 		}
-		if (tableId64Gen == null) {
+		if (tableId64Gen == null || !(tableId64Gen instanceof CFBamJpaId64GenTable)) {
 			tableId64Gen = new CFBamJpaId64GenTable(this);
 		}
-		if (tableInt16Col == null) {
+		if (tableInt16Col == null || !(tableInt16Col instanceof CFBamJpaInt16ColTable)) {
 			tableInt16Col = new CFBamJpaInt16ColTable(this);
 		}
-		if (tableInt32Col == null) {
+		if (tableInt32Col == null || !(tableInt32Col instanceof CFBamJpaInt32ColTable)) {
 			tableInt32Col = new CFBamJpaInt32ColTable(this);
 		}
-		if (tableInt64Col == null) {
+		if (tableInt64Col == null || !(tableInt64Col instanceof CFBamJpaInt64ColTable)) {
 			tableInt64Col = new CFBamJpaInt64ColTable(this);
 		}
-		if (tableNmTokenCol == null) {
+		if (tableNmTokenCol == null || !(tableNmTokenCol instanceof CFBamJpaNmTokenColTable)) {
 			tableNmTokenCol = new CFBamJpaNmTokenColTable(this);
 		}
-		if (tableNmTokensCol == null) {
+		if (tableNmTokensCol == null || !(tableNmTokensCol instanceof CFBamJpaNmTokensColTable)) {
 			tableNmTokensCol = new CFBamJpaNmTokensColTable(this);
 		}
-		if (tableNumberCol == null) {
+		if (tableNumberCol == null || !(tableNumberCol instanceof CFBamJpaNumberColTable)) {
 			tableNumberCol = new CFBamJpaNumberColTable(this);
 		}
-		if (tableStringCol == null) {
+		if (tableStringCol == null || !(tableStringCol instanceof CFBamJpaStringColTable)) {
 			tableStringCol = new CFBamJpaStringColTable(this);
 		}
-		if (tableTZDateCol == null) {
+		if (tableTZDateCol == null || !(tableTZDateCol instanceof CFBamJpaTZDateColTable)) {
 			tableTZDateCol = new CFBamJpaTZDateColTable(this);
 		}
-		if (tableTZTimeCol == null) {
+		if (tableTZTimeCol == null || !(tableTZTimeCol instanceof CFBamJpaTZTimeColTable)) {
 			tableTZTimeCol = new CFBamJpaTZTimeColTable(this);
 		}
-		if (tableTZTimestampCol == null) {
+		if (tableTZTimestampCol == null || !(tableTZTimestampCol instanceof CFBamJpaTZTimestampColTable)) {
 			tableTZTimestampCol = new CFBamJpaTZTimestampColTable(this);
 		}
-		if (tableTextCol == null) {
+		if (tableTextCol == null || !(tableTextCol instanceof CFBamJpaTextColTable)) {
 			tableTextCol = new CFBamJpaTextColTable(this);
 		}
-		if (tableTimeCol == null) {
+		if (tableTimeCol == null || !(tableTimeCol instanceof CFBamJpaTimeColTable)) {
 			tableTimeCol = new CFBamJpaTimeColTable(this);
 		}
-		if (tableTimestampCol == null) {
+		if (tableTimestampCol == null || !(tableTimestampCol instanceof CFBamJpaTimestampColTable)) {
 			tableTimestampCol = new CFBamJpaTimestampColTable(this);
 		}
-		if (tableTokenCol == null) {
+		if (tableTokenCol == null || !(tableTokenCol instanceof CFBamJpaTokenColTable)) {
 			tableTokenCol = new CFBamJpaTokenColTable(this);
 		}
-		if (tableUInt16Col == null) {
+		if (tableUInt16Col == null || !(tableUInt16Col instanceof CFBamJpaUInt16ColTable)) {
 			tableUInt16Col = new CFBamJpaUInt16ColTable(this);
 		}
-		if (tableUInt32Col == null) {
+		if (tableUInt32Col == null || !(tableUInt32Col instanceof CFBamJpaUInt32ColTable)) {
 			tableUInt32Col = new CFBamJpaUInt32ColTable(this);
 		}
-		if (tableUInt64Col == null) {
+		if (tableUInt64Col == null || !(tableUInt64Col instanceof CFBamJpaUInt64ColTable)) {
 			tableUInt64Col = new CFBamJpaUInt64ColTable(this);
 		}
-		if (tableUuidCol == null) {
+		if (tableUuidCol == null || !(tableUuidCol instanceof CFBamJpaUuidColTable)) {
 			tableUuidCol = new CFBamJpaUuidColTable(this);
 		}
-		if (tableUuid6Col == null) {
+		if (tableUuid6Col == null || !(tableUuid6Col instanceof CFBamJpaUuid6ColTable)) {
 			tableUuid6Col = new CFBamJpaUuid6ColTable(this);
 		}
-		if (tableUuidGen == null) {
+		if (tableUuidGen == null || !(tableUuidGen instanceof CFBamJpaUuidGenTable)) {
 			tableUuidGen = new CFBamJpaUuidGenTable(this);
 		}
-		if (tableUuid6Gen == null) {
+		if (tableUuid6Gen == null || !(tableUuid6Gen instanceof CFBamJpaUuid6GenTable)) {
 			tableUuid6Gen = new CFBamJpaUuid6GenTable(this);
 		}
 	}

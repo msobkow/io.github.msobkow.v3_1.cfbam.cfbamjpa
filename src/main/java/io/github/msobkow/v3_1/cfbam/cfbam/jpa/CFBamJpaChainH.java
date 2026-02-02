@@ -72,7 +72,7 @@ public class CFBamJpaChainH
     implements ICFBamChainH, Comparable<Object>, Serializable
 {
 	@AttributeOverrides({
-		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false ) ),
+		@AttributeOverride(name="auditClusterId", column = @Column( name="auditClusterId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH ) ),
 		@AttributeOverride(name="auditStamp", column = @Column( name="auditStamp", nullable=false ) ),
 		@AttributeOverride(name="auditAction", column = @Column( name="auditAction", nullable=false ) ),
 		@AttributeOverride(name="requiredRevision", column = @Column( name="requiredRevision", nullable=false ) ),
@@ -215,12 +215,12 @@ public class CFBamJpaChainH
     }
 
     @Override
-    public long getAuditClusterId() {
+    public CFLibDbKeyHash256 getAuditClusterId() {
         return pkey.getAuditClusterId();
     }
 
     @Override
-    public void setAuditClusterId(long auditClusterId) {
+    public void setAuditClusterId(CFLibDbKeyHash256 auditClusterId) {
         pkey.setAuditClusterId(auditClusterId);
     }
 

@@ -58,8 +58,10 @@ import io.github.msobkow.v3_1.cfint.cfint.jpa.*;
 public class CFBamJpaIndexColHPKey
 	implements ICFBamIndexColHPKey, Comparable<Object>, Serializable
 {
-	@Column(name="auditClusterId", nullable=false)
-	protected long auditClusterId;
+	@AttributeOverrides({
+		@AttributeOverride(name="bytes", column=@Column(name="auditClusterId", nullable=false, length=CFLibDbKeyHash256.HASH_LENGTH) )
+	})
+	protected CFLibDbKeyHash256 auditClusterId;
 
 	@Column(name="auditStamp", nullable=false)
 	protected LocalDateTime auditStamp;
@@ -90,12 +92,12 @@ public class CFBamJpaIndexColHPKey
 	}
 
 	@Override
-	public long getAuditClusterId() {
+	public CFLibDbKeyHash256 getAuditClusterId() {
 		return( auditClusterId );
 	}
 
 	@Override
-	public void setAuditClusterId( long value ) {
+	public void setAuditClusterId( CFLibDbKeyHash256 value ) {
 		auditClusterId = value;
 	}
 
@@ -181,7 +183,17 @@ public class CFBamJpaIndexColHPKey
 		}
 		else if (obj instanceof ICFBamIndexColHPKey) {
 			ICFBamIndexColHPKey rhs = (ICFBamIndexColHPKey)obj;
-			if (getAuditClusterId() != rhs.getAuditClusterId()) {
+			if (getAuditClusterId() != null) {
+				if (rhs.getAuditClusterId() != null) {
+					if ( ! getAuditClusterId().equals(rhs.getAuditClusterId())) {
+						return( false );
+					}
+				}
+				else {
+					return( false );
+				}
+			}
+			else if (rhs.getAuditClusterId() != null) {
 				return( false );
 			}
 			if (getAuditStamp() != null) {
@@ -235,7 +247,17 @@ public class CFBamJpaIndexColHPKey
 		}
 		else if (obj instanceof ICFBamIndexColH) {
 			ICFBamIndexColH rhs = (ICFBamIndexColH)obj;
-			if (getAuditClusterId() != rhs.getAuditClusterId()) {
+			if (getAuditClusterId() != null) {
+				if (rhs.getAuditClusterId() != null) {
+					if ( ! getAuditClusterId().equals(rhs.getAuditClusterId())) {
+						return( false );
+					}
+				}
+				else {
+					return( false );
+				}
+			}
+			else if (rhs.getAuditClusterId() != null) {
 				return( false );
 			}
 			if (getAuditStamp() != null) {
@@ -295,7 +317,9 @@ public class CFBamJpaIndexColHPKey
 	@Override
 	public int hashCode() {
 		int hashCode = 0;
-		hashCode = hashCode + (int)( auditClusterId ) & 0x7fffffff;
+		if( auditClusterId != null ) {
+			hashCode = hashCode + auditClusterId.hashCode();
+		}
 		if( auditStamp != null ) {
 			hashCode = hashCode + auditStamp.hashCode();
 		}
@@ -334,11 +358,19 @@ public class CFBamJpaIndexColHPKey
 		}
 		else if (obj instanceof ICFBamIndexColHPKey) {
 			ICFBamIndexColHPKey rhs = (ICFBamIndexColHPKey)obj;
-			if (getAuditClusterId() < rhs.getAuditClusterId()) {
-				return( -1 );
+			if( getAuditClusterId() == null ) {
+				if( rhs.getAuditClusterId() != null ) {
+					return( -1 );
+				}
 			}
-			else if (getAuditClusterId() > rhs.getAuditClusterId()) {
+			else if( rhs.getAuditClusterId() == null ) {
 				return( 1 );
+			}
+			else {
+				cmp = getAuditClusterId().compareTo( rhs.getAuditClusterId() );
+				if( cmp != 0 ) {
+					return( cmp );
+				}
 			}
 			if( getAuditStamp() == null ) {
 				if( rhs.getAuditStamp() != null ) {
@@ -398,11 +430,19 @@ public class CFBamJpaIndexColHPKey
 		}
 		else if (obj instanceof ICFBamIndexColH) {
 			ICFBamIndexColH rhs = (ICFBamIndexColH)obj;
-			if (getAuditClusterId() < rhs.getAuditClusterId()) {
-				return( -1 );
+			if( getAuditClusterId() == null ) {
+				if( rhs.getAuditClusterId() != null ) {
+					return( -1 );
+				}
 			}
-			else if (getAuditClusterId() > rhs.getAuditClusterId()) {
+			else if( rhs.getAuditClusterId() == null ) {
 				return( 1 );
+			}
+			else {
+				cmp = getAuditClusterId().compareTo( rhs.getAuditClusterId() );
+				if( cmp != 0 ) {
+					return( cmp );
+				}
 			}
 			if( getAuditStamp() == null ) {
 				if( rhs.getAuditStamp() != null ) {
@@ -471,7 +511,7 @@ public class CFBamJpaIndexColHPKey
 
 	@Override
 	public String getXmlAttrFragment() {
-		String ret = " auditClusterId=\"" + auditClusterId + "\""
+		String ret = " auditClusterId=\"" + (auditClusterId != null ? auditClusterId.toString() : "null" ) + "\""
 			+ " auditStamp=\"" + (auditStamp != null ? CFLibXmlUtil.formatTimestamp(auditStamp) : "null") + "\""
 			+ " auditAction=\"" + auditActionId + "\""
 			+ " requiredRevision=\"" + requiredRevision + "\""

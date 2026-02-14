@@ -82,7 +82,6 @@ public class CFBamJpaIndexCol
 	protected Set<CFBamJpaRelationCol> optionalChildrenRefRelFromCol;
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="requiredLookupToCol")
 	protected Set<CFBamJpaRelationCol> optionalChildrenRefRelToCol;
-	@Version
 	protected int requiredRevision;
 
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)

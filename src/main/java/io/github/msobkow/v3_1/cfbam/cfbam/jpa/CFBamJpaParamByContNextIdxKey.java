@@ -94,8 +94,8 @@ public class CFBamJpaParamByContNextIdxKey
 		}
 		else if (obj instanceof ICFBamParamByContNextIdxKey) {
 			ICFBamParamByContNextIdxKey rhs = (ICFBamParamByContNextIdxKey)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -105,12 +105,12 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -120,7 +120,7 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}
@@ -128,8 +128,8 @@ public class CFBamJpaParamByContNextIdxKey
 		}
 		else if (obj instanceof ICFBamParam) {
 			ICFBamParam rhs = (ICFBamParam)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -139,12 +139,12 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -154,7 +154,7 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}
@@ -162,8 +162,8 @@ public class CFBamJpaParamByContNextIdxKey
 		}
 		else if (obj instanceof ICFBamParamH) {
 			ICFBamParamH rhs = (ICFBamParamH)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -173,12 +173,12 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -188,7 +188,7 @@ public class CFBamJpaParamByContNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}

@@ -168,8 +168,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
         if (!super.equals(obj)) {
             return( false );
         }
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -179,7 +179,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -198,8 +198,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 					return( false );
 				}
 			}
-			if( getOptionalDataId() != null && !getOptionalDataId().isNull() ) {
-				if( rhs.getOptionalDataId() != null && !rhs.getOptionalDataId().isNull() ) {
+			if( getOptionalDataId() != null ) {
+				if( rhs.getOptionalDataId() != null ) {
 					if( ! getOptionalDataId().equals( rhs.getOptionalDataId() ) ) {
 						return( false );
 					}
@@ -209,7 +209,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getOptionalDataId() != null && !getOptionalDataId().isNull()) {
+				if( rhs.getOptionalDataId() != null ) {
 					return( false );
 				}
 			}
@@ -238,8 +238,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
         if (!super.equals(obj)) {
             return( false );
         }
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -249,7 +249,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -268,8 +268,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 					return( false );
 				}
 			}
-			if( getOptionalDataId() != null && !getOptionalDataId().isNull() ) {
-				if( rhs.getOptionalDataId() != null && !rhs.getOptionalDataId().isNull() ) {
+			if( getOptionalDataId() != null ) {
+				if( rhs.getOptionalDataId() != null ) {
 					if( ! getOptionalDataId().equals( rhs.getOptionalDataId() ) ) {
 						return( false );
 					}
@@ -279,7 +279,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getOptionalDataId() != null && !getOptionalDataId().isNull()) {
+				if( rhs.getOptionalDataId() != null ) {
 					return( false );
 				}
 			}
@@ -305,8 +305,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
         }
         else if (obj instanceof ICFBamTableColByTableIdxKey) {
             ICFBamTableColByTableIdxKey rhs = (ICFBamTableColByTableIdxKey)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -316,7 +316,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -324,8 +324,8 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
         }
         else if (obj instanceof ICFBamTableColByDataIdxKey) {
             ICFBamTableColByDataIdxKey rhs = (ICFBamTableColByDataIdxKey)obj;
-			if( getOptionalDataId() != null && !getOptionalDataId().isNull() ) {
-				if( rhs.getOptionalDataId() != null && !rhs.getOptionalDataId().isNull() ) {
+			if( getOptionalDataId() != null ) {
+				if( rhs.getOptionalDataId() != null ) {
 					if( ! getOptionalDataId().equals( rhs.getOptionalDataId() ) ) {
 						return( false );
 					}
@@ -335,7 +335,7 @@ public class CFBamJpaTableColH extends CFBamJpaValueH
 				}
 			}
 			else {
-				if( rhs.getOptionalDataId() != null && !getOptionalDataId().isNull()) {
+				if( rhs.getOptionalDataId() != null ) {
 					return( false );
 				}
 			}

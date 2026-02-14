@@ -82,8 +82,8 @@ public class CFBamJpaParamByServerMethodIdxKey
 		}
 		else if (obj instanceof ICFBamParamByServerMethodIdxKey) {
 			ICFBamParamByServerMethodIdxKey rhs = (ICFBamParamByServerMethodIdxKey)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -93,7 +93,7 @@ public class CFBamJpaParamByServerMethodIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
@@ -101,8 +101,8 @@ public class CFBamJpaParamByServerMethodIdxKey
 		}
 		else if (obj instanceof ICFBamParam) {
 			ICFBamParam rhs = (ICFBamParam)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -112,7 +112,7 @@ public class CFBamJpaParamByServerMethodIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
@@ -120,8 +120,8 @@ public class CFBamJpaParamByServerMethodIdxKey
 		}
 		else if (obj instanceof ICFBamParamH) {
 			ICFBamParamH rhs = (ICFBamParamH)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -131,7 +131,7 @@ public class CFBamJpaParamByServerMethodIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}

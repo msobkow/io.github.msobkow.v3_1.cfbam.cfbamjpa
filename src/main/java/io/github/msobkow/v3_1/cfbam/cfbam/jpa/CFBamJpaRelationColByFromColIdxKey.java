@@ -82,8 +82,8 @@ public class CFBamJpaRelationColByFromColIdxKey
 		}
 		else if (obj instanceof ICFBamRelationColByFromColIdxKey) {
 			ICFBamRelationColByFromColIdxKey rhs = (ICFBamRelationColByFromColIdxKey)obj;
-			if( getRequiredFromColId() != null && !getRequiredFromColId().isNull() ) {
-				if( rhs.getRequiredFromColId() != null && !rhs.getRequiredFromColId().isNull() ) {
+			if( getRequiredFromColId() != null ) {
+				if( rhs.getRequiredFromColId() != null ) {
 					if( ! getRequiredFromColId().equals( rhs.getRequiredFromColId() ) ) {
 						return( false );
 					}
@@ -93,7 +93,7 @@ public class CFBamJpaRelationColByFromColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredFromColId() != null && !getRequiredFromColId().isNull()) {
+				if( rhs.getRequiredFromColId() != null ) {
 					return( false );
 				}
 			}
@@ -101,8 +101,8 @@ public class CFBamJpaRelationColByFromColIdxKey
 		}
 		else if (obj instanceof ICFBamRelationCol) {
 			ICFBamRelationCol rhs = (ICFBamRelationCol)obj;
-			if( getRequiredFromColId() != null && !getRequiredFromColId().isNull() ) {
-				if( rhs.getRequiredFromColId() != null && !rhs.getRequiredFromColId().isNull() ) {
+			if( getRequiredFromColId() != null ) {
+				if( rhs.getRequiredFromColId() != null ) {
 					if( ! getRequiredFromColId().equals( rhs.getRequiredFromColId() ) ) {
 						return( false );
 					}
@@ -112,7 +112,7 @@ public class CFBamJpaRelationColByFromColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredFromColId() != null && !getRequiredFromColId().isNull()) {
+				if( rhs.getRequiredFromColId() != null ) {
 					return( false );
 				}
 			}
@@ -120,8 +120,8 @@ public class CFBamJpaRelationColByFromColIdxKey
 		}
 		else if (obj instanceof ICFBamRelationColH) {
 			ICFBamRelationColH rhs = (ICFBamRelationColH)obj;
-			if( getRequiredFromColId() != null && !getRequiredFromColId().isNull() ) {
-				if( rhs.getRequiredFromColId() != null && !rhs.getRequiredFromColId().isNull() ) {
+			if( getRequiredFromColId() != null ) {
+				if( rhs.getRequiredFromColId() != null ) {
 					if( ! getRequiredFromColId().equals( rhs.getRequiredFromColId() ) ) {
 						return( false );
 					}
@@ -131,7 +131,7 @@ public class CFBamJpaRelationColByFromColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredFromColId() != null && !getRequiredFromColId().isNull()) {
+				if( rhs.getRequiredFromColId() != null ) {
 					return( false );
 				}
 			}

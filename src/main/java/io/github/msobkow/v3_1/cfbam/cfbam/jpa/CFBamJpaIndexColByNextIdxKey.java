@@ -76,8 +76,8 @@ public class CFBamJpaIndexColByNextIdxKey
 		}
 		else if (obj instanceof ICFBamIndexColByNextIdxKey) {
 			ICFBamIndexColByNextIdxKey rhs = (ICFBamIndexColByNextIdxKey)obj;
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -87,7 +87,7 @@ public class CFBamJpaIndexColByNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}
@@ -95,8 +95,8 @@ public class CFBamJpaIndexColByNextIdxKey
 		}
 		else if (obj instanceof ICFBamIndexCol) {
 			ICFBamIndexCol rhs = (ICFBamIndexCol)obj;
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -106,7 +106,7 @@ public class CFBamJpaIndexColByNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}
@@ -114,8 +114,8 @@ public class CFBamJpaIndexColByNextIdxKey
 		}
 		else if (obj instanceof ICFBamIndexColH) {
 			ICFBamIndexColH rhs = (ICFBamIndexColH)obj;
-			if( getOptionalNextId() != null && !getOptionalNextId().isNull() ) {
-				if( rhs.getOptionalNextId() != null && !rhs.getOptionalNextId().isNull() ) {
+			if( getOptionalNextId() != null ) {
+				if( rhs.getOptionalNextId() != null ) {
 					if( ! getOptionalNextId().equals( rhs.getOptionalNextId() ) ) {
 						return( false );
 					}
@@ -125,7 +125,7 @@ public class CFBamJpaIndexColByNextIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalNextId() != null && !getOptionalNextId().isNull()) {
+				if( rhs.getOptionalNextId() != null ) {
 					return( false );
 				}
 			}

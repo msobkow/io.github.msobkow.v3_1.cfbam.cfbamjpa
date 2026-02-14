@@ -108,8 +108,8 @@ public class CFBamJpaValueByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamValueByUNameIdxKey) {
 			ICFBamValueByUNameIdxKey rhs = (ICFBamValueByUNameIdxKey)obj;
-			if( getRequiredScopeId() != null && !getRequiredScopeId().isNull() ) {
-				if( rhs.getRequiredScopeId() != null && !rhs.getRequiredScopeId().isNull() ) {
+			if( getRequiredScopeId() != null ) {
+				if( rhs.getRequiredScopeId() != null ) {
 					if( ! getRequiredScopeId().equals( rhs.getRequiredScopeId() ) ) {
 						return( false );
 					}
@@ -119,7 +119,7 @@ public class CFBamJpaValueByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredScopeId() != null && !getRequiredScopeId().isNull()) {
+				if( rhs.getRequiredScopeId() != null ) {
 					return( false );
 				}
 			}
@@ -142,8 +142,8 @@ public class CFBamJpaValueByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamValue) {
 			ICFBamValue rhs = (ICFBamValue)obj;
-			if( getRequiredScopeId() != null && !getRequiredScopeId().isNull() ) {
-				if( rhs.getRequiredScopeId() != null && !rhs.getRequiredScopeId().isNull() ) {
+			if( getRequiredScopeId() != null ) {
+				if( rhs.getRequiredScopeId() != null ) {
 					if( ! getRequiredScopeId().equals( rhs.getRequiredScopeId() ) ) {
 						return( false );
 					}
@@ -153,7 +153,7 @@ public class CFBamJpaValueByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredScopeId() != null && !getRequiredScopeId().isNull()) {
+				if( rhs.getRequiredScopeId() != null ) {
 					return( false );
 				}
 			}
@@ -176,8 +176,8 @@ public class CFBamJpaValueByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamValueH) {
 			ICFBamValueH rhs = (ICFBamValueH)obj;
-			if( getRequiredScopeId() != null && !getRequiredScopeId().isNull() ) {
-				if( rhs.getRequiredScopeId() != null && !rhs.getRequiredScopeId().isNull() ) {
+			if( getRequiredScopeId() != null ) {
+				if( rhs.getRequiredScopeId() != null ) {
 					if( ! getRequiredScopeId().equals( rhs.getRequiredScopeId() ) ) {
 						return( false );
 					}
@@ -187,7 +187,7 @@ public class CFBamJpaValueByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredScopeId() != null && !getRequiredScopeId().isNull()) {
+				if( rhs.getRequiredScopeId() != null ) {
 					return( false );
 				}
 			}

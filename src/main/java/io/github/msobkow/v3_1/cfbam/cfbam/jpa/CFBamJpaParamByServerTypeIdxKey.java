@@ -76,8 +76,8 @@ public class CFBamJpaParamByServerTypeIdxKey
 		}
 		else if (obj instanceof ICFBamParamByServerTypeIdxKey) {
 			ICFBamParamByServerTypeIdxKey rhs = (ICFBamParamByServerTypeIdxKey)obj;
-			if( getOptionalTypeId() != null && !getOptionalTypeId().isNull() ) {
-				if( rhs.getOptionalTypeId() != null && !rhs.getOptionalTypeId().isNull() ) {
+			if( getOptionalTypeId() != null ) {
+				if( rhs.getOptionalTypeId() != null ) {
 					if( ! getOptionalTypeId().equals( rhs.getOptionalTypeId() ) ) {
 						return( false );
 					}
@@ -87,7 +87,7 @@ public class CFBamJpaParamByServerTypeIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalTypeId() != null && !getOptionalTypeId().isNull()) {
+				if( rhs.getOptionalTypeId() != null ) {
 					return( false );
 				}
 			}
@@ -95,8 +95,8 @@ public class CFBamJpaParamByServerTypeIdxKey
 		}
 		else if (obj instanceof ICFBamParam) {
 			ICFBamParam rhs = (ICFBamParam)obj;
-			if( getOptionalTypeId() != null && !getOptionalTypeId().isNull() ) {
-				if( rhs.getOptionalTypeId() != null && !rhs.getOptionalTypeId().isNull() ) {
+			if( getOptionalTypeId() != null ) {
+				if( rhs.getOptionalTypeId() != null ) {
 					if( ! getOptionalTypeId().equals( rhs.getOptionalTypeId() ) ) {
 						return( false );
 					}
@@ -106,7 +106,7 @@ public class CFBamJpaParamByServerTypeIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalTypeId() != null && !getOptionalTypeId().isNull()) {
+				if( rhs.getOptionalTypeId() != null ) {
 					return( false );
 				}
 			}
@@ -114,8 +114,8 @@ public class CFBamJpaParamByServerTypeIdxKey
 		}
 		else if (obj instanceof ICFBamParamH) {
 			ICFBamParamH rhs = (ICFBamParamH)obj;
-			if( getOptionalTypeId() != null && !getOptionalTypeId().isNull() ) {
-				if( rhs.getOptionalTypeId() != null && !rhs.getOptionalTypeId().isNull() ) {
+			if( getOptionalTypeId() != null ) {
+				if( rhs.getOptionalTypeId() != null ) {
 					if( ! getOptionalTypeId().equals( rhs.getOptionalTypeId() ) ) {
 						return( false );
 					}
@@ -125,7 +125,7 @@ public class CFBamJpaParamByServerTypeIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalTypeId() != null && !getOptionalTypeId().isNull()) {
+				if( rhs.getOptionalTypeId() != null ) {
 					return( false );
 				}
 			}

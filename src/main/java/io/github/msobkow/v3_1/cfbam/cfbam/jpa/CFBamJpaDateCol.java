@@ -125,8 +125,8 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 				return( false );
 			}
 			ICFBamDateCol rhs = (ICFBamDateCol)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -136,7 +136,7 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -147,8 +147,8 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 				return( false );
 			}
 			ICFBamDateColH rhs = (ICFBamDateColH)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -158,7 +158,7 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -169,8 +169,8 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 		}
 		else if (obj instanceof ICFBamDateColByTableIdxKey) {
 			ICFBamDateColByTableIdxKey rhs = (ICFBamDateColByTableIdxKey)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -180,7 +180,7 @@ public class CFBamJpaDateCol extends CFBamJpaDateDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}

@@ -82,8 +82,8 @@ public class CFBamJpaIndexColByColIdxKey
 		}
 		else if (obj instanceof ICFBamIndexColByColIdxKey) {
 			ICFBamIndexColByColIdxKey rhs = (ICFBamIndexColByColIdxKey)obj;
-			if( getRequiredColumnId() != null && !getRequiredColumnId().isNull() ) {
-				if( rhs.getRequiredColumnId() != null && !rhs.getRequiredColumnId().isNull() ) {
+			if( getRequiredColumnId() != null ) {
+				if( rhs.getRequiredColumnId() != null ) {
 					if( ! getRequiredColumnId().equals( rhs.getRequiredColumnId() ) ) {
 						return( false );
 					}
@@ -93,7 +93,7 @@ public class CFBamJpaIndexColByColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredColumnId() != null && !getRequiredColumnId().isNull()) {
+				if( rhs.getRequiredColumnId() != null ) {
 					return( false );
 				}
 			}
@@ -101,8 +101,8 @@ public class CFBamJpaIndexColByColIdxKey
 		}
 		else if (obj instanceof ICFBamIndexCol) {
 			ICFBamIndexCol rhs = (ICFBamIndexCol)obj;
-			if( getRequiredColumnId() != null && !getRequiredColumnId().isNull() ) {
-				if( rhs.getRequiredColumnId() != null && !rhs.getRequiredColumnId().isNull() ) {
+			if( getRequiredColumnId() != null ) {
+				if( rhs.getRequiredColumnId() != null ) {
 					if( ! getRequiredColumnId().equals( rhs.getRequiredColumnId() ) ) {
 						return( false );
 					}
@@ -112,7 +112,7 @@ public class CFBamJpaIndexColByColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredColumnId() != null && !getRequiredColumnId().isNull()) {
+				if( rhs.getRequiredColumnId() != null ) {
 					return( false );
 				}
 			}
@@ -120,8 +120,8 @@ public class CFBamJpaIndexColByColIdxKey
 		}
 		else if (obj instanceof ICFBamIndexColH) {
 			ICFBamIndexColH rhs = (ICFBamIndexColH)obj;
-			if( getRequiredColumnId() != null && !getRequiredColumnId().isNull() ) {
-				if( rhs.getRequiredColumnId() != null && !rhs.getRequiredColumnId().isNull() ) {
+			if( getRequiredColumnId() != null ) {
+				if( rhs.getRequiredColumnId() != null ) {
 					if( ! getRequiredColumnId().equals( rhs.getRequiredColumnId() ) ) {
 						return( false );
 					}
@@ -131,7 +131,7 @@ public class CFBamJpaIndexColByColIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredColumnId() != null && !getRequiredColumnId().isNull()) {
+				if( rhs.getRequiredColumnId() != null ) {
 					return( false );
 				}
 			}

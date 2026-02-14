@@ -125,8 +125,8 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 				return( false );
 			}
 			ICFBamUuidCol rhs = (ICFBamUuidCol)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -136,7 +136,7 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -147,8 +147,8 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 				return( false );
 			}
 			ICFBamUuidColH rhs = (ICFBamUuidColH)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -158,7 +158,7 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -169,8 +169,8 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 		}
 		else if (obj instanceof ICFBamUuidColByTableIdxKey) {
 			ICFBamUuidColByTableIdxKey rhs = (ICFBamUuidColByTableIdxKey)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -180,7 +180,7 @@ public class CFBamJpaUuidCol extends CFBamJpaUuidDef
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}

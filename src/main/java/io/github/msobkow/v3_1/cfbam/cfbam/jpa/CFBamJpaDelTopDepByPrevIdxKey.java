@@ -76,8 +76,8 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 		}
 		else if (obj instanceof ICFBamDelTopDepByPrevIdxKey) {
 			ICFBamDelTopDepByPrevIdxKey rhs = (ICFBamDelTopDepByPrevIdxKey)obj;
-			if( getOptionalPrevId() != null && !getOptionalPrevId().isNull() ) {
-				if( rhs.getOptionalPrevId() != null && !rhs.getOptionalPrevId().isNull() ) {
+			if( getOptionalPrevId() != null ) {
+				if( rhs.getOptionalPrevId() != null ) {
 					if( ! getOptionalPrevId().equals( rhs.getOptionalPrevId() ) ) {
 						return( false );
 					}
@@ -87,7 +87,7 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalPrevId() != null && !getOptionalPrevId().isNull()) {
+				if( rhs.getOptionalPrevId() != null ) {
 					return( false );
 				}
 			}
@@ -95,8 +95,8 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 		}
 		else if (obj instanceof ICFBamDelTopDep) {
 			ICFBamDelTopDep rhs = (ICFBamDelTopDep)obj;
-			if( getOptionalPrevId() != null && !getOptionalPrevId().isNull() ) {
-				if( rhs.getOptionalPrevId() != null && !rhs.getOptionalPrevId().isNull() ) {
+			if( getOptionalPrevId() != null ) {
+				if( rhs.getOptionalPrevId() != null ) {
 					if( ! getOptionalPrevId().equals( rhs.getOptionalPrevId() ) ) {
 						return( false );
 					}
@@ -106,7 +106,7 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalPrevId() != null && !getOptionalPrevId().isNull()) {
+				if( rhs.getOptionalPrevId() != null ) {
 					return( false );
 				}
 			}
@@ -114,8 +114,8 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 		}
 		else if (obj instanceof ICFBamDelTopDepH) {
 			ICFBamDelTopDepH rhs = (ICFBamDelTopDepH)obj;
-			if( getOptionalPrevId() != null && !getOptionalPrevId().isNull() ) {
-				if( rhs.getOptionalPrevId() != null && !rhs.getOptionalPrevId().isNull() ) {
+			if( getOptionalPrevId() != null ) {
+				if( rhs.getOptionalPrevId() != null ) {
 					if( ! getOptionalPrevId().equals( rhs.getOptionalPrevId() ) ) {
 						return( false );
 					}
@@ -125,7 +125,7 @@ public class CFBamJpaDelTopDepByPrevIdxKey
 				}
 			}
 			else {
-				if( rhs.getOptionalPrevId() != null && !getOptionalPrevId().isNull()) {
+				if( rhs.getOptionalPrevId() != null ) {
 					return( false );
 				}
 			}

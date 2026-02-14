@@ -125,8 +125,8 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 				return( false );
 			}
 			ICFBamDbKeyHash160Col rhs = (ICFBamDbKeyHash160Col)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -136,7 +136,7 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -147,8 +147,8 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 				return( false );
 			}
 			ICFBamDbKeyHash160ColH rhs = (ICFBamDbKeyHash160ColH)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -158,7 +158,7 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}
@@ -169,8 +169,8 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 		}
 		else if (obj instanceof ICFBamDbKeyHash160ColByTableIdxKey) {
 			ICFBamDbKeyHash160ColByTableIdxKey rhs = (ICFBamDbKeyHash160ColByTableIdxKey)obj;
-			if( getRequiredTableId() != null && !getRequiredTableId().isNull() ) {
-				if( rhs.getRequiredTableId() != null && !rhs.getRequiredTableId().isNull() ) {
+			if( getRequiredTableId() != null ) {
+				if( rhs.getRequiredTableId() != null ) {
 					if( ! getRequiredTableId().equals( rhs.getRequiredTableId() ) ) {
 						return( false );
 					}
@@ -180,7 +180,7 @@ public class CFBamJpaDbKeyHash160Col extends CFBamJpaDbKeyHash160Def
 				}
 			}
 			else {
-				if( rhs.getRequiredTableId() != null && !getRequiredTableId().isNull()) {
+				if( rhs.getRequiredTableId() != null ) {
 					return( false );
 				}
 			}

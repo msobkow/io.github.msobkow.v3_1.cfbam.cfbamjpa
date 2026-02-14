@@ -125,8 +125,8 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 				return( false );
 			}
 			ICFBamDbKeyHash256Type rhs = (ICFBamDbKeyHash256Type)obj;
-			if( getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull() ) {
-				if( rhs.getRequiredSchemaDefId() != null && !rhs.getRequiredSchemaDefId().isNull() ) {
+			if( getRequiredSchemaDefId() != null ) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					if( ! getRequiredSchemaDefId().equals( rhs.getRequiredSchemaDefId() ) ) {
 						return( false );
 					}
@@ -136,7 +136,7 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 				}
 			}
 			else {
-				if( rhs.getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull()) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					return( false );
 				}
 			}
@@ -147,8 +147,8 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 				return( false );
 			}
 			ICFBamDbKeyHash256TypeH rhs = (ICFBamDbKeyHash256TypeH)obj;
-			if( getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull() ) {
-				if( rhs.getRequiredSchemaDefId() != null && !rhs.getRequiredSchemaDefId().isNull() ) {
+			if( getRequiredSchemaDefId() != null ) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					if( ! getRequiredSchemaDefId().equals( rhs.getRequiredSchemaDefId() ) ) {
 						return( false );
 					}
@@ -158,7 +158,7 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 				}
 			}
 			else {
-				if( rhs.getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull()) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					return( false );
 				}
 			}
@@ -169,8 +169,8 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 		}
 		else if (obj instanceof ICFBamDbKeyHash256TypeBySchemaIdxKey) {
 			ICFBamDbKeyHash256TypeBySchemaIdxKey rhs = (ICFBamDbKeyHash256TypeBySchemaIdxKey)obj;
-			if( getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull() ) {
-				if( rhs.getRequiredSchemaDefId() != null && !rhs.getRequiredSchemaDefId().isNull() ) {
+			if( getRequiredSchemaDefId() != null ) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					if( ! getRequiredSchemaDefId().equals( rhs.getRequiredSchemaDefId() ) ) {
 						return( false );
 					}
@@ -180,7 +180,7 @@ public class CFBamJpaDbKeyHash256Type extends CFBamJpaDbKeyHash256Def
 				}
 			}
 			else {
-				if( rhs.getRequiredSchemaDefId() != null && !getRequiredSchemaDefId().isNull()) {
+				if( rhs.getRequiredSchemaDefId() != null ) {
 					return( false );
 				}
 			}

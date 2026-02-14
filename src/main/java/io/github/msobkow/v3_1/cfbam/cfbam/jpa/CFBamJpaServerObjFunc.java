@@ -132,8 +132,8 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 				return( false );
 			}
 			ICFBamServerObjFunc rhs = (ICFBamServerObjFunc)obj;
-			if( getOptionalRetTableId() != null && !getOptionalRetTableId().isNull() ) {
-				if( rhs.getOptionalRetTableId() != null && !rhs.getOptionalRetTableId().isNull() ) {
+			if( getOptionalRetTableId() != null ) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					if( ! getOptionalRetTableId().equals( rhs.getOptionalRetTableId() ) ) {
 						return( false );
 					}
@@ -143,7 +143,7 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 				}
 			}
 			else {
-				if( rhs.getOptionalRetTableId() != null && !getOptionalRetTableId().isNull()) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					return( false );
 				}
 			}
@@ -154,8 +154,8 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 				return( false );
 			}
 			ICFBamServerObjFuncH rhs = (ICFBamServerObjFuncH)obj;
-			if( getOptionalRetTableId() != null && !getOptionalRetTableId().isNull() ) {
-				if( rhs.getOptionalRetTableId() != null && !rhs.getOptionalRetTableId().isNull() ) {
+			if( getOptionalRetTableId() != null ) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					if( ! getOptionalRetTableId().equals( rhs.getOptionalRetTableId() ) ) {
 						return( false );
 					}
@@ -165,7 +165,7 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 				}
 			}
 			else {
-				if( rhs.getOptionalRetTableId() != null && !getOptionalRetTableId().isNull()) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					return( false );
 				}
 			}
@@ -176,8 +176,8 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 		}
 		else if (obj instanceof ICFBamServerObjFuncByRetTblIdxKey) {
 			ICFBamServerObjFuncByRetTblIdxKey rhs = (ICFBamServerObjFuncByRetTblIdxKey)obj;
-			if( getOptionalRetTableId() != null && !getOptionalRetTableId().isNull() ) {
-				if( rhs.getOptionalRetTableId() != null && !rhs.getOptionalRetTableId().isNull() ) {
+			if( getOptionalRetTableId() != null ) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					if( ! getOptionalRetTableId().equals( rhs.getOptionalRetTableId() ) ) {
 						return( false );
 					}
@@ -187,7 +187,7 @@ public class CFBamJpaServerObjFunc extends CFBamJpaServerMethod
 				}
 			}
 			else {
-				if( rhs.getOptionalRetTableId() != null && !getOptionalRetTableId().isNull()) {
+				if( rhs.getOptionalRetTableId() != null ) {
 					return( false );
 				}
 			}

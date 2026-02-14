@@ -138,8 +138,8 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
         if (!super.equals(obj)) {
             return( false );
         }
-			if( getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull() ) {
-				if( rhs.getRequiredPopSubDep2Id() != null && !rhs.getRequiredPopSubDep2Id().isNull() ) {
+			if( getRequiredPopSubDep2Id() != null ) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					if( ! getRequiredPopSubDep2Id().equals( rhs.getRequiredPopSubDep2Id() ) ) {
 						return( false );
 					}
@@ -149,7 +149,7 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
 				}
 			}
 			else {
-				if( rhs.getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull()) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					return( false );
 				}
 			}
@@ -178,8 +178,8 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
         if (!super.equals(obj)) {
             return( false );
         }
-			if( getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull() ) {
-				if( rhs.getRequiredPopSubDep2Id() != null && !rhs.getRequiredPopSubDep2Id().isNull() ) {
+			if( getRequiredPopSubDep2Id() != null ) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					if( ! getRequiredPopSubDep2Id().equals( rhs.getRequiredPopSubDep2Id() ) ) {
 						return( false );
 					}
@@ -189,7 +189,7 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
 				}
 			}
 			else {
-				if( rhs.getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull()) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					return( false );
 				}
 			}
@@ -215,8 +215,8 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
         }
         else if (obj instanceof ICFBamPopSubDep3ByPopSubDep2IdxKey) {
             ICFBamPopSubDep3ByPopSubDep2IdxKey rhs = (ICFBamPopSubDep3ByPopSubDep2IdxKey)obj;
-			if( getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull() ) {
-				if( rhs.getRequiredPopSubDep2Id() != null && !rhs.getRequiredPopSubDep2Id().isNull() ) {
+			if( getRequiredPopSubDep2Id() != null ) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					if( ! getRequiredPopSubDep2Id().equals( rhs.getRequiredPopSubDep2Id() ) ) {
 						return( false );
 					}
@@ -226,7 +226,7 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
 				}
 			}
 			else {
-				if( rhs.getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull()) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					return( false );
 				}
 			}
@@ -234,8 +234,8 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
         }
         else if (obj instanceof ICFBamPopSubDep3ByUNameIdxKey) {
             ICFBamPopSubDep3ByUNameIdxKey rhs = (ICFBamPopSubDep3ByUNameIdxKey)obj;
-			if( getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull() ) {
-				if( rhs.getRequiredPopSubDep2Id() != null && !rhs.getRequiredPopSubDep2Id().isNull() ) {
+			if( getRequiredPopSubDep2Id() != null ) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					if( ! getRequiredPopSubDep2Id().equals( rhs.getRequiredPopSubDep2Id() ) ) {
 						return( false );
 					}
@@ -245,7 +245,7 @@ public class CFBamJpaPopSubDep3H extends CFBamJpaPopDepH
 				}
 			}
 			else {
-				if( rhs.getRequiredPopSubDep2Id() != null && !getRequiredPopSubDep2Id().isNull()) {
+				if( rhs.getRequiredPopSubDep2Id() != null ) {
 					return( false );
 				}
 			}

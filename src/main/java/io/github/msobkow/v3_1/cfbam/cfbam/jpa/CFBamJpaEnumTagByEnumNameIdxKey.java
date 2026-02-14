@@ -108,8 +108,8 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 		}
 		else if (obj instanceof ICFBamEnumTagByEnumNameIdxKey) {
 			ICFBamEnumTagByEnumNameIdxKey rhs = (ICFBamEnumTagByEnumNameIdxKey)obj;
-			if( getRequiredEnumId() != null && !getRequiredEnumId().isNull() ) {
-				if( rhs.getRequiredEnumId() != null && !rhs.getRequiredEnumId().isNull() ) {
+			if( getRequiredEnumId() != null ) {
+				if( rhs.getRequiredEnumId() != null ) {
 					if( ! getRequiredEnumId().equals( rhs.getRequiredEnumId() ) ) {
 						return( false );
 					}
@@ -119,7 +119,7 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredEnumId() != null && !getRequiredEnumId().isNull()) {
+				if( rhs.getRequiredEnumId() != null ) {
 					return( false );
 				}
 			}
@@ -142,8 +142,8 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 		}
 		else if (obj instanceof ICFBamEnumTag) {
 			ICFBamEnumTag rhs = (ICFBamEnumTag)obj;
-			if( getRequiredEnumId() != null && !getRequiredEnumId().isNull() ) {
-				if( rhs.getRequiredEnumId() != null && !rhs.getRequiredEnumId().isNull() ) {
+			if( getRequiredEnumId() != null ) {
+				if( rhs.getRequiredEnumId() != null ) {
 					if( ! getRequiredEnumId().equals( rhs.getRequiredEnumId() ) ) {
 						return( false );
 					}
@@ -153,7 +153,7 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredEnumId() != null && !getRequiredEnumId().isNull()) {
+				if( rhs.getRequiredEnumId() != null ) {
 					return( false );
 				}
 			}
@@ -176,8 +176,8 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 		}
 		else if (obj instanceof ICFBamEnumTagH) {
 			ICFBamEnumTagH rhs = (ICFBamEnumTagH)obj;
-			if( getRequiredEnumId() != null && !getRequiredEnumId().isNull() ) {
-				if( rhs.getRequiredEnumId() != null && !rhs.getRequiredEnumId().isNull() ) {
+			if( getRequiredEnumId() != null ) {
+				if( rhs.getRequiredEnumId() != null ) {
 					if( ! getRequiredEnumId().equals( rhs.getRequiredEnumId() ) ) {
 						return( false );
 					}
@@ -187,7 +187,7 @@ public class CFBamJpaEnumTagByEnumNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredEnumId() != null && !getRequiredEnumId().isNull()) {
+				if( rhs.getRequiredEnumId() != null ) {
 					return( false );
 				}
 			}

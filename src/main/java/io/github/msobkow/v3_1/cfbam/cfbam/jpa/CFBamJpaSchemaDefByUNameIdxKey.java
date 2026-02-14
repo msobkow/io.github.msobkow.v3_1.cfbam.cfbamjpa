@@ -108,8 +108,8 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamSchemaDefByUNameIdxKey) {
 			ICFBamSchemaDefByUNameIdxKey rhs = (ICFBamSchemaDefByUNameIdxKey)obj;
-			if( getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull() ) {
-				if( rhs.getRequiredMinorVersionId() != null && !rhs.getRequiredMinorVersionId().isNull() ) {
+			if( getRequiredMinorVersionId() != null ) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					if( ! getRequiredMinorVersionId().equals( rhs.getRequiredMinorVersionId() ) ) {
 						return( false );
 					}
@@ -119,7 +119,7 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull()) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					return( false );
 				}
 			}
@@ -142,8 +142,8 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamSchemaDef) {
 			ICFBamSchemaDef rhs = (ICFBamSchemaDef)obj;
-			if( getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull() ) {
-				if( rhs.getRequiredMinorVersionId() != null && !rhs.getRequiredMinorVersionId().isNull() ) {
+			if( getRequiredMinorVersionId() != null ) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					if( ! getRequiredMinorVersionId().equals( rhs.getRequiredMinorVersionId() ) ) {
 						return( false );
 					}
@@ -153,7 +153,7 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull()) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					return( false );
 				}
 			}
@@ -176,8 +176,8 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamSchemaDefH) {
 			ICFBamSchemaDefH rhs = (ICFBamSchemaDefH)obj;
-			if( getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull() ) {
-				if( rhs.getRequiredMinorVersionId() != null && !rhs.getRequiredMinorVersionId().isNull() ) {
+			if( getRequiredMinorVersionId() != null ) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					if( ! getRequiredMinorVersionId().equals( rhs.getRequiredMinorVersionId() ) ) {
 						return( false );
 					}
@@ -187,7 +187,7 @@ public class CFBamJpaSchemaDefByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredMinorVersionId() != null && !getRequiredMinorVersionId().isNull()) {
+				if( rhs.getRequiredMinorVersionId() != null ) {
 					return( false );
 				}
 			}

@@ -82,8 +82,8 @@ public class CFBamJpaRelationByToTblIdxKey
 		}
 		else if (obj instanceof ICFBamRelationByToTblIdxKey) {
 			ICFBamRelationByToTblIdxKey rhs = (ICFBamRelationByToTblIdxKey)obj;
-			if( getRequiredToTableId() != null && !getRequiredToTableId().isNull() ) {
-				if( rhs.getRequiredToTableId() != null && !rhs.getRequiredToTableId().isNull() ) {
+			if( getRequiredToTableId() != null ) {
+				if( rhs.getRequiredToTableId() != null ) {
 					if( ! getRequiredToTableId().equals( rhs.getRequiredToTableId() ) ) {
 						return( false );
 					}
@@ -93,7 +93,7 @@ public class CFBamJpaRelationByToTblIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredToTableId() != null && !getRequiredToTableId().isNull()) {
+				if( rhs.getRequiredToTableId() != null ) {
 					return( false );
 				}
 			}
@@ -101,8 +101,8 @@ public class CFBamJpaRelationByToTblIdxKey
 		}
 		else if (obj instanceof ICFBamRelation) {
 			ICFBamRelation rhs = (ICFBamRelation)obj;
-			if( getRequiredToTableId() != null && !getRequiredToTableId().isNull() ) {
-				if( rhs.getRequiredToTableId() != null && !rhs.getRequiredToTableId().isNull() ) {
+			if( getRequiredToTableId() != null ) {
+				if( rhs.getRequiredToTableId() != null ) {
 					if( ! getRequiredToTableId().equals( rhs.getRequiredToTableId() ) ) {
 						return( false );
 					}
@@ -112,7 +112,7 @@ public class CFBamJpaRelationByToTblIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredToTableId() != null && !getRequiredToTableId().isNull()) {
+				if( rhs.getRequiredToTableId() != null ) {
 					return( false );
 				}
 			}
@@ -120,8 +120,8 @@ public class CFBamJpaRelationByToTblIdxKey
 		}
 		else if (obj instanceof ICFBamRelationH) {
 			ICFBamRelationH rhs = (ICFBamRelationH)obj;
-			if( getRequiredToTableId() != null && !getRequiredToTableId().isNull() ) {
-				if( rhs.getRequiredToTableId() != null && !rhs.getRequiredToTableId().isNull() ) {
+			if( getRequiredToTableId() != null ) {
+				if( rhs.getRequiredToTableId() != null ) {
 					if( ! getRequiredToTableId().equals( rhs.getRequiredToTableId() ) ) {
 						return( false );
 					}
@@ -131,7 +131,7 @@ public class CFBamJpaRelationByToTblIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredToTableId() != null && !getRequiredToTableId().isNull()) {
+				if( rhs.getRequiredToTableId() != null ) {
 					return( false );
 				}
 			}

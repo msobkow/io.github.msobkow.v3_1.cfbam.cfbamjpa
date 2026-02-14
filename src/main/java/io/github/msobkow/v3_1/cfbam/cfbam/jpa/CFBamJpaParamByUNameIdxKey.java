@@ -108,8 +108,8 @@ public class CFBamJpaParamByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamParamByUNameIdxKey) {
 			ICFBamParamByUNameIdxKey rhs = (ICFBamParamByUNameIdxKey)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -119,7 +119,7 @@ public class CFBamJpaParamByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
@@ -142,8 +142,8 @@ public class CFBamJpaParamByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamParam) {
 			ICFBamParam rhs = (ICFBamParam)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -153,7 +153,7 @@ public class CFBamJpaParamByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}
@@ -176,8 +176,8 @@ public class CFBamJpaParamByUNameIdxKey
 		}
 		else if (obj instanceof ICFBamParamH) {
 			ICFBamParamH rhs = (ICFBamParamH)obj;
-			if( getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull() ) {
-				if( rhs.getRequiredServerMethodId() != null && !rhs.getRequiredServerMethodId().isNull() ) {
+			if( getRequiredServerMethodId() != null ) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					if( ! getRequiredServerMethodId().equals( rhs.getRequiredServerMethodId() ) ) {
 						return( false );
 					}
@@ -187,7 +187,7 @@ public class CFBamJpaParamByUNameIdxKey
 				}
 			}
 			else {
-				if( rhs.getRequiredServerMethodId() != null && !getRequiredServerMethodId().isNull()) {
+				if( rhs.getRequiredServerMethodId() != null ) {
 					return( false );
 				}
 			}

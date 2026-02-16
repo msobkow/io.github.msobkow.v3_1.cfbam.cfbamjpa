@@ -44,6 +44,8 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;
@@ -53,6 +55,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.jpa.*;
 import io.github.msobkow.v3_1.cfint.cfint.jpa.*;
 
+@Configurable
 public class CFBamJpaSchema
 	implements ICFBamSchema,
 		ICFSecSchema,
@@ -392,6 +395,9 @@ public class CFBamJpaSchema
 	protected ICFBamUuidTypeFactory factoryUuidType;
 	protected ICFBamValueFactory factoryValue;
 
+
+	@Autowired
+	CFBamJpaSchemaService schemaService;
 
 	@Override
 	public int initClassMapEntries(int value) {
@@ -2751,6 +2757,7 @@ public class CFBamJpaSchema
 		ICFBamSchema.setBackingCFBam(schema);
 		schema.wireRecConstructors();
 	}
+
 
 	public CFBamJpaSchema() {
 
@@ -5975,5 +5982,6 @@ public class CFBamJpaSchema
 	}
 
 	public void bootstrapSchema() {
+		schemaService.bootstrapSchema();
 	}
 }

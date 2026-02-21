@@ -45,6 +45,9 @@ import jakarta.transaction.Transactional;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cflib.xml.CFLibXmlUtil;
@@ -53,13 +56,15 @@ import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.jpa.*;
 import io.github.msobkow.v3_1.cfint.cfint.jpa.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.*;
 
 public class CFBamJpaSchema
 	implements ICFBamSchema,
 		ICFSecSchema,
-		ICFIntSchema
+		ICFIntSchema, ApplicationContextAware
 {
+	private ApplicationContext applicationContext = null;
+	private CFBamJpaSchemaService cfbamJpaSchemaService = null;
+
 	protected ICFBamAtomTable tableAtom;
 	protected ICFBamBlobColTable tableBlobCol;
 	protected ICFBamBlobDefTable tableBlobDef;
@@ -394,8 +399,6 @@ public class CFBamJpaSchema
 	protected ICFBamUuidTypeFactory factoryUuidType;
 	protected ICFBamValueFactory factoryValue;
 
-
-	protected CFBamJpaHooksSchema schemaHooks = null;
 
 	@Override
 	public int initClassMapEntries(int value) {
@@ -2756,11 +2759,33 @@ public class CFBamJpaSchema
 		schema.wireRecConstructors();
 	}
 
-	public CFBamJpaHooksSchema getSchemaHooks() {
-		if (schemaHooks == null) {
-			schemaHooks = new CFBamJpaHooksSchema();
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
+	public CFBamJpaSchemaService getJpaSchemaService() {
+		if ( cfbamJpaSchemaService == null ) {
+			if (applicationContext == null) {
+				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext");
+			}
+			try {
+				// Third alternative is scoped, which is a form of singleton as far as I'm aware as of 2026-02-21 -- mark.sobkow@gmail.com
+				if ((!applicationContext.isSingleton("cfbamJpaSchemaService")) && applicationContext.isPrototype("cfbamJpaSchemaService")) {
+					throw new CFLibNotImplementedYetException(getClass(), "getJpaSchemaService",
+						"Bean 'cfbamJpaSchemaService' is not a singleton",
+						"Bean 'cfbamJpaSchemaService' is not a singleton");
+				}
+				cfbamJpaSchemaService = (CFBamJpaSchemaService)(applicationContext.getBean("cfbamJpaSchemaService", CFBamJpaSchemaService.class));
+				if (cfbamJpaSchemaService == null) {
+					throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('cfbamJpaSchemaService', CFBamJpaSchemaService.class)");
+				}
+			}
+			catch (BeansException ex) {
+				throw new CFLibNullArgumentException(getClass(), "getJpaSchemaService", 0, "applicationContext.getBean('cfbamJpaSchemaService', CFBamJpaSchemaService.class)");
+			}
 		}
-		return( schemaHooks );
+		return( cfbamJpaSchemaService );
 	}
 
 
@@ -5987,6 +6012,6 @@ public class CFBamJpaSchema
 	}
 
 	public void bootstrapSchema() {
-		getSchemaHooks().getSchemaService().bootstrapSchema();
+		getJpaSchemaService().bootstrapSchema();
 	}
 }

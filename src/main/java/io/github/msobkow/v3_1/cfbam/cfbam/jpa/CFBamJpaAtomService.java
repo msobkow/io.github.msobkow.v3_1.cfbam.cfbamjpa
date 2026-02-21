@@ -738,5 +738,4 @@ public class CFBamJpaAtomService {
 	}
 
 	// CFBamAtom specified delete-by-index methods
-
 }

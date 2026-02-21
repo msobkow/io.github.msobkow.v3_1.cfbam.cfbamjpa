@@ -934,5 +934,4 @@ public class CFBamJpaFloatTypeService {
 	public void deleteBySchemaIdx(ICFBamFloatTypeBySchemaIdxKey key) {
 		cfbam31FloatTypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

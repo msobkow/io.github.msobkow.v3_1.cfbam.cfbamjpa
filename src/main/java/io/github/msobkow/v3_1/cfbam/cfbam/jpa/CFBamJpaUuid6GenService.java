@@ -910,5 +910,4 @@ public class CFBamJpaUuid6GenService {
 	}
 
 	// CFBamUuid6Gen specified delete-by-index methods
-
 }

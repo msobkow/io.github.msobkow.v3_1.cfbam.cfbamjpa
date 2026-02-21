@@ -428,5 +428,4 @@ public class CFBamJpaDelDepService {
 	public void deleteByDelDepIdx(ICFBamDelDepByDelDepIdxKey key) {
 		cfbam31DelDepRepository.deleteByDelDepIdx(key.getRequiredRelationId());
 	}
-
 }

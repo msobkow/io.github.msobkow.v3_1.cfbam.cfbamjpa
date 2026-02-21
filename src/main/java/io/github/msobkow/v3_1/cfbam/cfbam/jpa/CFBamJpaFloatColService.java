@@ -934,5 +934,4 @@ public class CFBamJpaFloatColService {
 	public void deleteByTableIdx(ICFBamFloatColByTableIdxKey key) {
 		cfbam31FloatColRepository.deleteByTableIdx(key.getRequiredTableId());
 	}
-
 }

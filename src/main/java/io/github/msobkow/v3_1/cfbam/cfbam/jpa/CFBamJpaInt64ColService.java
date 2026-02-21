@@ -934,5 +934,4 @@ public class CFBamJpaInt64ColService {
 	public void deleteByTableIdx(ICFBamInt64ColByTableIdxKey key) {
 		cfbam31Int64ColRepository.deleteByTableIdx(key.getRequiredTableId());
 	}
-
 }

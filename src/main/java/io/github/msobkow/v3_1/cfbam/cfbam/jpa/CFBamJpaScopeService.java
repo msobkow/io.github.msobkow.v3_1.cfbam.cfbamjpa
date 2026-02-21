@@ -270,5 +270,4 @@ public class CFBamJpaScopeService {
 	public void deleteByTenantIdx(ICFBamScopeByTenantIdxKey key) {
 		cfbam31ScopeRepository.deleteByTenantIdx(key.getRequiredTenantId());
 	}
-
 }

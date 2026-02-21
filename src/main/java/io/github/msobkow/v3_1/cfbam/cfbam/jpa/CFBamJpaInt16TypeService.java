@@ -934,5 +934,4 @@ public class CFBamJpaInt16TypeService {
 	public void deleteBySchemaIdx(ICFBamInt16TypeBySchemaIdxKey key) {
 		cfbam31Int16TypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

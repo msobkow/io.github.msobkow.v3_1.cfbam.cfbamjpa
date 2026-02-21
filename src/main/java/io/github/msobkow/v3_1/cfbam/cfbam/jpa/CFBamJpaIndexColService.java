@@ -807,5 +807,4 @@ public class CFBamJpaIndexColService {
 	public void deleteByIdxNextIdx(ICFBamIndexColByIdxNextIdxKey key) {
 		cfbam31IndexColRepository.deleteByIdxNextIdx(key.getRequiredIndexId(), key.getOptionalNextId());
 	}
-
 }

@@ -682,5 +682,4 @@ public class CFBamJpaSchemaRefService {
 	public void deleteByNextIdx(ICFBamSchemaRefByNextIdxKey key) {
 		cfbam31SchemaRefRepository.deleteByNextIdx(key.getOptionalNextId());
 	}
-
 }

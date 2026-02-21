@@ -910,5 +910,4 @@ public class CFBamJpaDbKeyHash256GenService {
 	}
 
 	// CFBamDbKeyHash256Gen specified delete-by-index methods
-
 }

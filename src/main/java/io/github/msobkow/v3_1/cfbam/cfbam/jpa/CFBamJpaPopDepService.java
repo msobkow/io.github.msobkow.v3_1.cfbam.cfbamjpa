@@ -428,5 +428,4 @@ public class CFBamJpaPopDepService {
 	public void deleteByDefSchemaIdx(ICFBamPopDepByDefSchemaIdxKey key) {
 		cfbam31PopDepRepository.deleteByDefSchemaIdx(key.getOptionalDefSchemaId());
 	}
-
 }

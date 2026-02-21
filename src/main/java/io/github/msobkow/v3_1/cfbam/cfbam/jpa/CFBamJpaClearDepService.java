@@ -428,5 +428,4 @@ public class CFBamJpaClearDepService {
 	public void deleteByDefSchemaIdx(ICFBamClearDepByDefSchemaIdxKey key) {
 		cfbam31ClearDepRepository.deleteByDefSchemaIdx(key.getOptionalDefSchemaId());
 	}
-
 }

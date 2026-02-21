@@ -869,5 +869,4 @@ public class CFBamJpaBlobColService {
 	public void deleteByTableIdx(ICFBamBlobColByTableIdxKey key) {
 		cfbam31BlobColRepository.deleteByTableIdx(key.getRequiredTableId());
 	}
-
 }

@@ -886,5 +886,4 @@ public class CFBamJpaUInt64TypeService {
 	public void deleteBySchemaIdx(ICFBamUInt64TypeBySchemaIdxKey key) {
 		cfbam31UInt64TypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

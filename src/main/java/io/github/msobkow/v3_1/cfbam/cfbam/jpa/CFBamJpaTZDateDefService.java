@@ -747,5 +747,4 @@ public class CFBamJpaTZDateDefService {
 	// CFBamAtom specified delete-by-index methods
 
 	// CFBamTZDateDef specified delete-by-index methods
-
 }

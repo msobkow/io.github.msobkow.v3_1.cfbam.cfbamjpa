@@ -526,5 +526,4 @@ public class CFBamJpaIndexService {
 	public void deleteByDefSchemaIdx(ICFBamIndexByDefSchemaIdxKey key) {
 		cfbam31IndexRepository.deleteByDefSchemaIdx(key.getOptionalDefSchemaId());
 	}
-
 }

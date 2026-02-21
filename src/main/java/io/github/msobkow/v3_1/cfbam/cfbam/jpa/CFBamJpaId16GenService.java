@@ -1008,5 +1008,4 @@ public class CFBamJpaId16GenService {
 	}
 
 	// CFBamId16Gen specified delete-by-index methods
-
 }

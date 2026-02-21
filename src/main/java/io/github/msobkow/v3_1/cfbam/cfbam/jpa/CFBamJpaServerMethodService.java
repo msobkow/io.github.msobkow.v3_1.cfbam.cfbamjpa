@@ -564,5 +564,4 @@ public class CFBamJpaServerMethodService {
 	public void deleteByDefSchemaIdx(ICFBamServerMethodByDefSchemaIdxKey key) {
 		cfbam31ServerMethodRepository.deleteByDefSchemaIdx(key.getOptionalDefSchemaId());
 	}
-
 }

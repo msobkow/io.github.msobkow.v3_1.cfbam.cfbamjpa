@@ -904,5 +904,4 @@ public class CFBamJpaNumberColService {
 	public void deleteByTableIdx(ICFBamNumberColByTableIdxKey key) {
 		cfbam31NumberColRepository.deleteByTableIdx(key.getRequiredTableId());
 	}
-
 }

@@ -747,5 +747,4 @@ public class CFBamJpaDbKeyHash256DefService {
 	// CFBamAtom specified delete-by-index methods
 
 	// CFBamDbKeyHash256Def specified delete-by-index methods
-
 }

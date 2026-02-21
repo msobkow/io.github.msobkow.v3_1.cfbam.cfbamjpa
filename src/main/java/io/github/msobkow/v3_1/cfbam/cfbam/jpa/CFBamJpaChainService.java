@@ -596,5 +596,4 @@ public class CFBamJpaChainService {
 	public void deleteByNextRelIdx(ICFBamChainByNextRelIdxKey key) {
 		cfbam31ChainRepository.deleteByNextRelIdx(key.getRequiredNextRelationId());
 	}
-
 }

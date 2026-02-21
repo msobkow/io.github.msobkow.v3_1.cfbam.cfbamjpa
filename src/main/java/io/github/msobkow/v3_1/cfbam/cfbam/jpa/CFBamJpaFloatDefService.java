@@ -845,5 +845,4 @@ public class CFBamJpaFloatDefService {
 	// CFBamAtom specified delete-by-index methods
 
 	// CFBamFloatDef specified delete-by-index methods
-
 }

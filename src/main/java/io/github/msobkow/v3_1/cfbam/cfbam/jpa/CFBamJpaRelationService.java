@@ -853,5 +853,4 @@ public class CFBamJpaRelationService {
 	public void deleteByNarrowedIdx(ICFBamRelationByNarrowedIdxKey key) {
 		cfbam31RelationRepository.deleteByNarrowedIdx(key.getOptionalNarrowedId());
 	}
-
 }

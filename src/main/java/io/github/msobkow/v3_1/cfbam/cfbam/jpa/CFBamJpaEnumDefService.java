@@ -853,5 +853,4 @@ public class CFBamJpaEnumDefService {
 	// CFBamInt16Def specified delete-by-index methods
 
 	// CFBamEnumDef specified delete-by-index methods
-
 }

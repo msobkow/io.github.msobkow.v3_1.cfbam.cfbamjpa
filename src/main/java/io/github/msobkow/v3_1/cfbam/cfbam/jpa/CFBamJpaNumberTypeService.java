@@ -904,5 +904,4 @@ public class CFBamJpaNumberTypeService {
 	public void deleteBySchemaIdx(ICFBamNumberTypeBySchemaIdxKey key) {
 		cfbam31NumberTypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

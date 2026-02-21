@@ -845,5 +845,4 @@ public class CFBamJpaDoubleDefService {
 	// CFBamAtom specified delete-by-index methods
 
 	// CFBamDoubleDef specified delete-by-index methods
-
 }

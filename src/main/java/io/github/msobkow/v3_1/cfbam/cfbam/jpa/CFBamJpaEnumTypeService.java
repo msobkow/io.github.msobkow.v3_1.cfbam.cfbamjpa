@@ -942,5 +942,4 @@ public class CFBamJpaEnumTypeService {
 	public void deleteBySchemaIdx(ICFBamEnumTypeBySchemaIdxKey key) {
 		cfbam31EnumTypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

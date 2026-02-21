@@ -836,5 +836,4 @@ public class CFBamJpaTimestampTypeService {
 	public void deleteBySchemaIdx(ICFBamTimestampTypeBySchemaIdxKey key) {
 		cfbam31TimestampTypeRepository.deleteBySchemaIdx(key.getRequiredSchemaDefId());
 	}
-
 }

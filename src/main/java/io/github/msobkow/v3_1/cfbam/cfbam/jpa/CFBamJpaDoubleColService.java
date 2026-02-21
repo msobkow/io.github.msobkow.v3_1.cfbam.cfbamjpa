@@ -934,5 +934,4 @@ public class CFBamJpaDoubleColService {
 	public void deleteByTableIdx(ICFBamDoubleColByTableIdxKey key) {
 		cfbam31DoubleColRepository.deleteByTableIdx(key.getRequiredTableId());
 	}
-
 }

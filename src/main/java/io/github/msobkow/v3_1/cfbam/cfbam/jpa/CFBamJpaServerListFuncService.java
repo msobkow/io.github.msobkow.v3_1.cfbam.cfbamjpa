@@ -641,5 +641,4 @@ public class CFBamJpaServerListFuncService {
 	public void deleteByRetTblIdx(ICFBamServerListFuncByRetTblIdxKey key) {
 		cfbam31ServerListFuncRepository.deleteByRetTblIdx(key.getOptionalRetTableId());
 	}
-
 }

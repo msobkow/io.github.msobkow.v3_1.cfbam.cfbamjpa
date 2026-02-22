@@ -65,6 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaEnumTagTable database implementation for EnumTag
@@ -72,416 +73,7 @@ import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
 public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 {
 	protected CFBamJpaSchema schema;
-    @Autowired
-    @Qualifier("cfbam31EntityManagerFactory")
-    private LocalContainerEntityManagerFactoryBean cfbamEntityManagerFactory;
-	@Autowired
-	private CFBamJpaScopeService scopeService;
-
-	@Autowired
-	private CFBamJpaSchemaDefService schemadefService;
-
-	@Autowired
-	private CFBamJpaSchemaRefService schemarefService;
-
-	@Autowired
-	private CFBamJpaServerMethodService servermethodService;
-
-	@Autowired
-	private CFBamJpaServerObjFuncService serverobjfuncService;
-
-	@Autowired
-	private CFBamJpaServerProcService serverprocService;
-
-	@Autowired
-	private CFBamJpaTableService tableService;
-
-	@Autowired
-	private CFBamJpaValueService valueService;
-
-	@Autowired
-	private CFBamJpaAtomService atomService;
-
-	@Autowired
-	private CFBamJpaBlobDefService blobdefService;
-
-	@Autowired
-	private CFBamJpaBlobTypeService blobtypeService;
-
-	@Autowired
-	private CFBamJpaBoolDefService booldefService;
-
-	@Autowired
-	private CFBamJpaBoolTypeService booltypeService;
-
-	@Autowired
-	private CFBamJpaChainService chainService;
-
-	@Autowired
-	private CFBamJpaClearDepService cleardepService;
-
-	@Autowired
-	private CFBamJpaClearSubDep1Service clearsubdep1Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep2Service clearsubdep2Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep3Service clearsubdep3Service;
-
-	@Autowired
-	private CFBamJpaClearTopDepService cleartopdepService;
-
-	@Autowired
-	private CFBamJpaDateDefService datedefService;
-
-	@Autowired
-	private CFBamJpaDateTypeService datetypeService;
-
-	@Autowired
-	private CFBamJpaDelDepService deldepService;
-
-	@Autowired
-	private CFBamJpaDelSubDep1Service delsubdep1Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep2Service delsubdep2Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep3Service delsubdep3Service;
-
-	@Autowired
-	private CFBamJpaDelTopDepService deltopdepService;
-
-	@Autowired
-	private CFBamJpaDoubleDefService doubledefService;
-
-	@Autowired
-	private CFBamJpaDoubleTypeService doubletypeService;
-
-	@Autowired
-	private CFBamJpaEnumTagService enumtagService;
-
-	@Autowired
-	private CFBamJpaFloatDefService floatdefService;
-
-	@Autowired
-	private CFBamJpaFloatTypeService floattypeService;
-
-	@Autowired
-	private CFBamJpaIndexService indexService;
-
-	@Autowired
-	private CFBamJpaIndexColService indexcolService;
-
-	@Autowired
-	private CFBamJpaInt16DefService int16defService;
-
-	@Autowired
-	private CFBamJpaInt16TypeService int16typeService;
-
-	@Autowired
-	private CFBamJpaInt32DefService int32defService;
-
-	@Autowired
-	private CFBamJpaInt32TypeService int32typeService;
-
-	@Autowired
-	private CFBamJpaInt64DefService int64defService;
-
-	@Autowired
-	private CFBamJpaInt64TypeService int64typeService;
-
-	@Autowired
-	private CFBamJpaNmTokenDefService nmtokendefService;
-
-	@Autowired
-	private CFBamJpaNmTokenTypeService nmtokentypeService;
-
-	@Autowired
-	private CFBamJpaNmTokensDefService nmtokensdefService;
-
-	@Autowired
-	private CFBamJpaNmTokensTypeService nmtokenstypeService;
-
-	@Autowired
-	private CFBamJpaNumberDefService numberdefService;
-
-	@Autowired
-	private CFBamJpaNumberTypeService numbertypeService;
-
-	@Autowired
-	private CFBamJpaParamService paramService;
-
-	@Autowired
-	private CFBamJpaPopDepService popdepService;
-
-	@Autowired
-	private CFBamJpaPopSubDep1Service popsubdep1Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep2Service popsubdep2Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep3Service popsubdep3Service;
-
-	@Autowired
-	private CFBamJpaPopTopDepService poptopdepService;
-
-	@Autowired
-	private CFBamJpaRelationService relationService;
-
-	@Autowired
-	private CFBamJpaRelationColService relationcolService;
-
-	@Autowired
-	private CFBamJpaServerListFuncService serverlistfuncService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128DefService dbkeyhash128defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128ColService dbkeyhash128colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128TypeService dbkeyhash128typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128GenService dbkeyhash128genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160DefService dbkeyhash160defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160ColService dbkeyhash160colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160TypeService dbkeyhash160typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160GenService dbkeyhash160genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224DefService dbkeyhash224defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224ColService dbkeyhash224colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224TypeService dbkeyhash224typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224GenService dbkeyhash224genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256DefService dbkeyhash256defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256ColService dbkeyhash256colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256TypeService dbkeyhash256typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256GenService dbkeyhash256genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384DefService dbkeyhash384defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384ColService dbkeyhash384colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384TypeService dbkeyhash384typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384GenService dbkeyhash384genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512DefService dbkeyhash512defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512ColService dbkeyhash512colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512TypeService dbkeyhash512typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512GenService dbkeyhash512genService;
-
-	@Autowired
-	private CFBamJpaStringDefService stringdefService;
-
-	@Autowired
-	private CFBamJpaStringTypeService stringtypeService;
-
-	@Autowired
-	private CFBamJpaTZDateDefService tzdatedefService;
-
-	@Autowired
-	private CFBamJpaTZDateTypeService tzdatetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimeDefService tztimedefService;
-
-	@Autowired
-	private CFBamJpaTZTimeTypeService tztimetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimestampDefService tztimestampdefService;
-
-	@Autowired
-	private CFBamJpaTZTimestampTypeService tztimestamptypeService;
-
-	@Autowired
-	private CFBamJpaTableColService tablecolService;
-
-	@Autowired
-	private CFBamJpaTextDefService textdefService;
-
-	@Autowired
-	private CFBamJpaTextTypeService texttypeService;
-
-	@Autowired
-	private CFBamJpaTimeDefService timedefService;
-
-	@Autowired
-	private CFBamJpaTimeTypeService timetypeService;
-
-	@Autowired
-	private CFBamJpaTimestampDefService timestampdefService;
-
-	@Autowired
-	private CFBamJpaTimestampTypeService timestamptypeService;
-
-	@Autowired
-	private CFBamJpaTokenDefService tokendefService;
-
-	@Autowired
-	private CFBamJpaTokenTypeService tokentypeService;
-
-	@Autowired
-	private CFBamJpaUInt16DefService uint16defService;
-
-	@Autowired
-	private CFBamJpaUInt16TypeService uint16typeService;
-
-	@Autowired
-	private CFBamJpaUInt32DefService uint32defService;
-
-	@Autowired
-	private CFBamJpaUInt32TypeService uint32typeService;
-
-	@Autowired
-	private CFBamJpaUInt64DefService uint64defService;
-
-	@Autowired
-	private CFBamJpaUInt64TypeService uint64typeService;
-
-	@Autowired
-	private CFBamJpaUuidDefService uuiddefService;
-
-	@Autowired
-	private CFBamJpaUuid6DefService uuid6defService;
-
-	@Autowired
-	private CFBamJpaUuidTypeService uuidtypeService;
-
-	@Autowired
-	private CFBamJpaUuid6TypeService uuid6typeService;
-
-	@Autowired
-	private CFBamJpaBlobColService blobcolService;
-
-	@Autowired
-	private CFBamJpaBoolColService boolcolService;
-
-	@Autowired
-	private CFBamJpaDateColService datecolService;
-
-	@Autowired
-	private CFBamJpaDoubleColService doublecolService;
-
-	@Autowired
-	private CFBamJpaEnumDefService enumdefService;
-
-	@Autowired
-	private CFBamJpaEnumTypeService enumtypeService;
-
-	@Autowired
-	private CFBamJpaFloatColService floatcolService;
-
-	@Autowired
-	private CFBamJpaId16GenService id16genService;
-
-	@Autowired
-	private CFBamJpaId32GenService id32genService;
-
-	@Autowired
-	private CFBamJpaId64GenService id64genService;
-
-	@Autowired
-	private CFBamJpaInt16ColService int16colService;
-
-	@Autowired
-	private CFBamJpaInt32ColService int32colService;
-
-	@Autowired
-	private CFBamJpaInt64ColService int64colService;
-
-	@Autowired
-	private CFBamJpaNmTokenColService nmtokencolService;
-
-	@Autowired
-	private CFBamJpaNmTokensColService nmtokenscolService;
-
-	@Autowired
-	private CFBamJpaNumberColService numbercolService;
-
-	@Autowired
-	private CFBamJpaStringColService stringcolService;
-
-	@Autowired
-	private CFBamJpaTZDateColService tzdatecolService;
-
-	@Autowired
-	private CFBamJpaTZTimeColService tztimecolService;
-
-	@Autowired
-	private CFBamJpaTZTimestampColService tztimestampcolService;
-
-	@Autowired
-	private CFBamJpaTextColService textcolService;
-
-	@Autowired
-	private CFBamJpaTimeColService timecolService;
-
-	@Autowired
-	private CFBamJpaTimestampColService timestampcolService;
-
-	@Autowired
-	private CFBamJpaTokenColService tokencolService;
-
-	@Autowired
-	private CFBamJpaUInt16ColService uint16colService;
-
-	@Autowired
-	private CFBamJpaUInt32ColService uint32colService;
-
-	@Autowired
-	private CFBamJpaUInt64ColService uint64colService;
-
-	@Autowired
-	private CFBamJpaUuidColService uuidcolService;
-
-	@Autowired
-	private CFBamJpaUuid6ColService uuid6colService;
-
-	@Autowired
-	private CFBamJpaUuidGenService uuidgenService;
-
-	@Autowired
-	private CFBamJpaUuid6GenService uuid6genService;
+	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaEnumTagTable(ICFBamSchema schema) {
@@ -490,6 +82,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
+			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -513,7 +106,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		}
 		else if (rec instanceof CFBamJpaEnumTag) {
 			CFBamJpaEnumTag jparec = (CFBamJpaEnumTag)rec;
-			CFBamJpaEnumTag created = enumtagService.create(jparec);
+			CFBamJpaEnumTag created = jpaHooksSchema.getEnumTagService().create(jparec);
 			return( created );
 		}
 		else {
@@ -538,7 +131,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		}
 		else if (rec instanceof CFBamJpaEnumTag) {
 			CFBamJpaEnumTag jparec = (CFBamJpaEnumTag)rec;
-			CFBamJpaEnumTag updated = enumtagService.update(jparec);
+			CFBamJpaEnumTag updated = jpaHooksSchema.getEnumTagService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -562,7 +155,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		}
 		if (rec instanceof CFBamJpaEnumTag) {
 			CFBamJpaEnumTag jparec = (CFBamJpaEnumTag)rec;
-			enumtagService.deleteByIdIdx(jparec.getPKey());
+			jpaHooksSchema.getEnumTagService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteEnumTag", "rec", rec, "CFBamJpaEnumTag");
@@ -582,7 +175,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		enumtagService.deleteByIdIdx(argKey);
+		jpaHooksSchema.getEnumTagService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -596,7 +189,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByEnumIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argEnumId )
 	{
-		enumtagService.deleteByEnumIdx(argEnumId);
+		jpaHooksSchema.getEnumTagService().deleteByEnumIdx(argEnumId);
 	}
 
 
@@ -611,7 +204,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByEnumIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTagByEnumIdxKey argKey )
 	{
-		enumtagService.deleteByEnumIdx(argKey.getRequiredEnumId());
+		jpaHooksSchema.getEnumTagService().deleteByEnumIdx(argKey.getRequiredEnumId());
 	}
 
 	/**
@@ -625,7 +218,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		enumtagService.deleteByDefSchemaIdx(argDefSchemaId);
+		jpaHooksSchema.getEnumTagService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -640,7 +233,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTagByDefSchemaIdxKey argKey )
 	{
-		enumtagService.deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		jpaHooksSchema.getEnumTagService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -657,7 +250,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		CFLibDbKeyHash256 argEnumId,
 		String argName )
 	{
-		enumtagService.deleteByEnumNameIdx(argEnumId,
+		jpaHooksSchema.getEnumTagService().deleteByEnumNameIdx(argEnumId,
 		argName);
 	}
 
@@ -673,7 +266,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByEnumNameIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTagByEnumNameIdxKey argKey )
 	{
-		enumtagService.deleteByEnumNameIdx(argKey.getRequiredEnumId(),
+		jpaHooksSchema.getEnumTagService().deleteByEnumNameIdx(argKey.getRequiredEnumId(),
 			argKey.getRequiredName());
 	}
 
@@ -688,7 +281,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		enumtagService.deleteByPrevIdx(argPrevId);
+		jpaHooksSchema.getEnumTagService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -703,7 +296,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTagByPrevIdxKey argKey )
 	{
-		enumtagService.deleteByPrevIdx(argKey.getOptionalPrevId());
+		jpaHooksSchema.getEnumTagService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -717,7 +310,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		enumtagService.deleteByNextIdx(argNextId);
+		jpaHooksSchema.getEnumTagService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -732,7 +325,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public void deleteEnumTagByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTagByNextIdxKey argKey )
 	{
-		enumtagService.deleteByNextIdx(argKey.getOptionalNextId());
+		jpaHooksSchema.getEnumTagService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 
@@ -750,7 +343,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( enumtagService.find(PKey) );
+		return( jpaHooksSchema.getEnumTagService().find(PKey) );
 	}
 
 	/**
@@ -767,7 +360,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( enumtagService.lockByIdIdx(PKey) );
+		return( jpaHooksSchema.getEnumTagService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -779,7 +372,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	 */
 	@Override
 	public ICFBamEnumTag[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaEnumTag> results = enumtagService.findAll();
+		List<CFBamJpaEnumTag> results = jpaHooksSchema.getEnumTagService().findAll();
 		ICFBamEnumTag[] retset = new ICFBamEnumTag[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumTag cur: results) {
@@ -802,7 +395,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( enumtagService.find(argId) );
+		return( jpaHooksSchema.getEnumTagService().find(argId) );
 	}
 
 	/**
@@ -818,7 +411,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag[] readDerivedByEnumIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argEnumId )
 	{
-		List<CFBamJpaEnumTag> results = enumtagService.findByEnumIdx(argEnumId);
+		List<CFBamJpaEnumTag> results = jpaHooksSchema.getEnumTagService().findByEnumIdx(argEnumId);
 		ICFBamEnumTag[] retset = new ICFBamEnumTag[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumTag cur: results) {
@@ -840,7 +433,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaEnumTag> results = enumtagService.findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaEnumTag> results = jpaHooksSchema.getEnumTagService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamEnumTag[] retset = new ICFBamEnumTag[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumTag cur: results) {
@@ -866,7 +459,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 		CFLibDbKeyHash256 argEnumId,
 		String argName )
 	{
-		return( enumtagService.findByEnumNameIdx(argEnumId,
+		return( jpaHooksSchema.getEnumTagService().findByEnumNameIdx(argEnumId,
 		argName) );
 	}
 
@@ -883,7 +476,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaEnumTag> results = enumtagService.findByPrevIdx(argPrevId);
+		List<CFBamJpaEnumTag> results = jpaHooksSchema.getEnumTagService().findByPrevIdx(argPrevId);
 		ICFBamEnumTag[] retset = new ICFBamEnumTag[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumTag cur: results) {
@@ -905,7 +498,7 @@ public class CFBamJpaEnumTagTable implements ICFBamEnumTagTable
 	public ICFBamEnumTag[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaEnumTag> results = enumtagService.findByNextIdx(argNextId);
+		List<CFBamJpaEnumTag> results = jpaHooksSchema.getEnumTagService().findByNextIdx(argNextId);
 		ICFBamEnumTag[] retset = new ICFBamEnumTag[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumTag cur: results) {

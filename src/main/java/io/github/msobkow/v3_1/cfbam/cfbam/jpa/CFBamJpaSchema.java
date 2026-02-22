@@ -45,6 +45,7 @@ import jakarta.transaction.Transactional;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.concurrent.atomic.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -57,14 +58,14 @@ import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.jpa.*;
 import io.github.msobkow.v3_1.cfint.cfint.jpa.*;
+import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 
 public class CFBamJpaSchema
 	implements ICFBamSchema,
 		ICFSecSchema,
-		ICFIntSchema, ApplicationContextAware
+		ICFIntSchema
 {
-	private static ApplicationContext applicationContext = null;
-	private CFBamJpaSchemaService cfbamJpaSchemaService = null;
+	private CFBamJpaHooksSchema cfbamJpaHooksSchema = null;
 
 	protected ICFBamAtomTable tableAtom;
 	protected ICFBamBlobColTable tableBlobCol;
@@ -2760,48 +2761,27 @@ public class CFBamJpaSchema
 		schema.wireRecConstructors();
 	}
 
-	@Override
-	public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
-
-	public static ApplicationContext getApplicationContext() {
-		return( applicationContext );
-	}
-
-	public CFBamJpaSchemaService getJpaSchemaService() {
-		final String S_ProcName = "getJpaSchemaService";
-		final String S_BeanClassName = "CFBamJpaSchemaService";
-		final String S_BeanName = "cfbam31JpaSchemaService";
-		final String S_MemberName = "cfbamJpaSchemaService";
-		if ( cfbamJpaSchemaService == null ) {
-			if (applicationContext == null) {
-				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "applicationContext");
+	public CFBamJpaHooksSchema getJpaHooksSchema() {
+		final String S_ProcName = "getJpaHooksSchema";
+		final String S_BeanClassName = "CFBamJpaHooksSchema";
+		final String S_BeanName = "cfbam31JpaHooksSchema";
+		final String S_MemberName = "cfbamJpaHooksSchema";
+		if ( cfbamJpaHooksSchema == null ) {
+			ApplicationContext ctx = ICFBamSchema.getApplicationContext();
+			if (ctx == null) {
+				throw new CFLibNullArgumentException(getClass(), S_ProcName, 0, "ICFBamSchema.getApplicationContext()");
 			}
 			try {
-				if (!applicationContext.containsBean(S_BeanName)) {
-					throw new CFLibInvalidStateException(getClass(), S_ProcName,
-						String.format(Inz.s("cflib.common.ACContainsBeanFailure"), S_BeanName),
-						String.format(Inz.x("cflib.common.ACContainsBeanFailure"), S_BeanName));
-				}
-				if (!applicationContext.isTypeMatch(S_BeanName, CFBamJpaSchemaService.class)) {
+				if (!ctx.isTypeMatch(S_BeanName, CFBamJpaHooksSchema.class)) {
 					throw new CFLibInvalidStateException(getClass(), S_ProcName,
 						String.format(Inz.s("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName),
 						String.format(Inz.x("cflib.common.ACBeanTypeFailure"), S_BeanName, S_BeanClassName));
 				}
-				if (applicationContext.isSingleton(S_BeanName)) {
-					// Resolve singletons like configuration data if they exist, hope that default construction takes place
-					cfbamJpaSchemaService = (CFBamJpaSchemaService)(applicationContext.getBean(S_BeanName, CFBamJpaSchemaService.class));
-				}
-				else if(applicationContext.isPrototype(S_BeanName)) {
-					// If it is a prototype, get a copy for our manual 'autowiring' like Spring would do
-					cfbamJpaSchemaService = (CFBamJpaSchemaService)(applicationContext.getBean(S_BeanName, CFBamJpaSchemaService.class));
-				}
-				// Otherwise it would be a scoped bean, and I've no idea how to search scoped beans as of 2026-02-21, so we'll default to constructing a local instance -- mark.sobkow@gmail.com
-				if (cfbamJpaSchemaService == null) {
+				cfbamJpaHooksSchema = (CFBamJpaHooksSchema)(ctx.getBean(S_BeanName, CFBamJpaHooksSchema.class));
+				if (cfbamJpaHooksSchema == null) {
 					// Need to manually construct and register instance; the plumbing is presumed to happen automagically via createBean()
-					cfbamJpaSchemaService = (CFBamJpaSchemaService)(applicationContext.getAutowireCapableBeanFactory().createBean(CFBamJpaSchemaService.class));
-					if (cfbamJpaSchemaService == null) {
+					cfbamJpaHooksSchema = (CFBamJpaHooksSchema)(ctx.getAutowireCapableBeanFactory().createBean(CFBamJpaHooksSchema.class));
+					if (cfbamJpaHooksSchema == null) {
 						throw new CFLibInvalidStateException( getClass(), S_ProcName,
 							String.format(Inz.s("cflib.common.ACAutowireBeanInstanceCreationFailure"),	S_BeanClassName),
 							 String.format(Inz.x("cflib.common.ACAutowireBeanInstanceCreationFailure"), S_BeanClassName));
@@ -2809,16 +2789,19 @@ public class CFBamJpaSchema
 				}
 			}
 			catch (BeansException ex) {
-				cfbamJpaSchemaService = null;
+				cfbamJpaHooksSchema = null;
 				throw new CFLibInvalidStateException(getClass(), S_ProcName, 
 					String.format(Inz.s("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getMessage()),
 					String.format(Inz.x("cflib.common.CaughtWhileTryingToResolve"), ex.getClass().getName(), S_BeanClassName, S_MemberName, ex.getLocalizedMessage()),
 					ex);
 			}
 		}
-		return( cfbamJpaSchemaService );
+		return( cfbamJpaHooksSchema );
 	}
 
+	public CFBamJpaSchemaService getSchemaService() {
+		return( getJpaHooksSchema().getSchemaService() );
+	}
 
 	public CFBamJpaSchema() {
 
@@ -6043,6 +6026,6 @@ public class CFBamJpaSchema
 	}
 
 	public void bootstrapSchema() {
-		getJpaSchemaService().bootstrapSchema();
+		getSchemaService().bootstrapSchema();
 	}
 }

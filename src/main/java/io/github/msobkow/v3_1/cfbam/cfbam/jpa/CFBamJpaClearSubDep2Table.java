@@ -65,6 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaClearSubDep2Table database implementation for ClearSubDep2
@@ -72,416 +73,7 @@ import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
 public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 {
 	protected CFBamJpaSchema schema;
-    @Autowired
-    @Qualifier("cfbam31EntityManagerFactory")
-    private LocalContainerEntityManagerFactoryBean cfbamEntityManagerFactory;
-	@Autowired
-	private CFBamJpaScopeService scopeService;
-
-	@Autowired
-	private CFBamJpaSchemaDefService schemadefService;
-
-	@Autowired
-	private CFBamJpaSchemaRefService schemarefService;
-
-	@Autowired
-	private CFBamJpaServerMethodService servermethodService;
-
-	@Autowired
-	private CFBamJpaServerObjFuncService serverobjfuncService;
-
-	@Autowired
-	private CFBamJpaServerProcService serverprocService;
-
-	@Autowired
-	private CFBamJpaTableService tableService;
-
-	@Autowired
-	private CFBamJpaValueService valueService;
-
-	@Autowired
-	private CFBamJpaAtomService atomService;
-
-	@Autowired
-	private CFBamJpaBlobDefService blobdefService;
-
-	@Autowired
-	private CFBamJpaBlobTypeService blobtypeService;
-
-	@Autowired
-	private CFBamJpaBoolDefService booldefService;
-
-	@Autowired
-	private CFBamJpaBoolTypeService booltypeService;
-
-	@Autowired
-	private CFBamJpaChainService chainService;
-
-	@Autowired
-	private CFBamJpaClearDepService cleardepService;
-
-	@Autowired
-	private CFBamJpaClearSubDep1Service clearsubdep1Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep2Service clearsubdep2Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep3Service clearsubdep3Service;
-
-	@Autowired
-	private CFBamJpaClearTopDepService cleartopdepService;
-
-	@Autowired
-	private CFBamJpaDateDefService datedefService;
-
-	@Autowired
-	private CFBamJpaDateTypeService datetypeService;
-
-	@Autowired
-	private CFBamJpaDelDepService deldepService;
-
-	@Autowired
-	private CFBamJpaDelSubDep1Service delsubdep1Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep2Service delsubdep2Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep3Service delsubdep3Service;
-
-	@Autowired
-	private CFBamJpaDelTopDepService deltopdepService;
-
-	@Autowired
-	private CFBamJpaDoubleDefService doubledefService;
-
-	@Autowired
-	private CFBamJpaDoubleTypeService doubletypeService;
-
-	@Autowired
-	private CFBamJpaEnumTagService enumtagService;
-
-	@Autowired
-	private CFBamJpaFloatDefService floatdefService;
-
-	@Autowired
-	private CFBamJpaFloatTypeService floattypeService;
-
-	@Autowired
-	private CFBamJpaIndexService indexService;
-
-	@Autowired
-	private CFBamJpaIndexColService indexcolService;
-
-	@Autowired
-	private CFBamJpaInt16DefService int16defService;
-
-	@Autowired
-	private CFBamJpaInt16TypeService int16typeService;
-
-	@Autowired
-	private CFBamJpaInt32DefService int32defService;
-
-	@Autowired
-	private CFBamJpaInt32TypeService int32typeService;
-
-	@Autowired
-	private CFBamJpaInt64DefService int64defService;
-
-	@Autowired
-	private CFBamJpaInt64TypeService int64typeService;
-
-	@Autowired
-	private CFBamJpaNmTokenDefService nmtokendefService;
-
-	@Autowired
-	private CFBamJpaNmTokenTypeService nmtokentypeService;
-
-	@Autowired
-	private CFBamJpaNmTokensDefService nmtokensdefService;
-
-	@Autowired
-	private CFBamJpaNmTokensTypeService nmtokenstypeService;
-
-	@Autowired
-	private CFBamJpaNumberDefService numberdefService;
-
-	@Autowired
-	private CFBamJpaNumberTypeService numbertypeService;
-
-	@Autowired
-	private CFBamJpaParamService paramService;
-
-	@Autowired
-	private CFBamJpaPopDepService popdepService;
-
-	@Autowired
-	private CFBamJpaPopSubDep1Service popsubdep1Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep2Service popsubdep2Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep3Service popsubdep3Service;
-
-	@Autowired
-	private CFBamJpaPopTopDepService poptopdepService;
-
-	@Autowired
-	private CFBamJpaRelationService relationService;
-
-	@Autowired
-	private CFBamJpaRelationColService relationcolService;
-
-	@Autowired
-	private CFBamJpaServerListFuncService serverlistfuncService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128DefService dbkeyhash128defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128ColService dbkeyhash128colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128TypeService dbkeyhash128typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128GenService dbkeyhash128genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160DefService dbkeyhash160defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160ColService dbkeyhash160colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160TypeService dbkeyhash160typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160GenService dbkeyhash160genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224DefService dbkeyhash224defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224ColService dbkeyhash224colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224TypeService dbkeyhash224typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224GenService dbkeyhash224genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256DefService dbkeyhash256defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256ColService dbkeyhash256colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256TypeService dbkeyhash256typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256GenService dbkeyhash256genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384DefService dbkeyhash384defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384ColService dbkeyhash384colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384TypeService dbkeyhash384typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384GenService dbkeyhash384genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512DefService dbkeyhash512defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512ColService dbkeyhash512colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512TypeService dbkeyhash512typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512GenService dbkeyhash512genService;
-
-	@Autowired
-	private CFBamJpaStringDefService stringdefService;
-
-	@Autowired
-	private CFBamJpaStringTypeService stringtypeService;
-
-	@Autowired
-	private CFBamJpaTZDateDefService tzdatedefService;
-
-	@Autowired
-	private CFBamJpaTZDateTypeService tzdatetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimeDefService tztimedefService;
-
-	@Autowired
-	private CFBamJpaTZTimeTypeService tztimetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimestampDefService tztimestampdefService;
-
-	@Autowired
-	private CFBamJpaTZTimestampTypeService tztimestamptypeService;
-
-	@Autowired
-	private CFBamJpaTableColService tablecolService;
-
-	@Autowired
-	private CFBamJpaTextDefService textdefService;
-
-	@Autowired
-	private CFBamJpaTextTypeService texttypeService;
-
-	@Autowired
-	private CFBamJpaTimeDefService timedefService;
-
-	@Autowired
-	private CFBamJpaTimeTypeService timetypeService;
-
-	@Autowired
-	private CFBamJpaTimestampDefService timestampdefService;
-
-	@Autowired
-	private CFBamJpaTimestampTypeService timestamptypeService;
-
-	@Autowired
-	private CFBamJpaTokenDefService tokendefService;
-
-	@Autowired
-	private CFBamJpaTokenTypeService tokentypeService;
-
-	@Autowired
-	private CFBamJpaUInt16DefService uint16defService;
-
-	@Autowired
-	private CFBamJpaUInt16TypeService uint16typeService;
-
-	@Autowired
-	private CFBamJpaUInt32DefService uint32defService;
-
-	@Autowired
-	private CFBamJpaUInt32TypeService uint32typeService;
-
-	@Autowired
-	private CFBamJpaUInt64DefService uint64defService;
-
-	@Autowired
-	private CFBamJpaUInt64TypeService uint64typeService;
-
-	@Autowired
-	private CFBamJpaUuidDefService uuiddefService;
-
-	@Autowired
-	private CFBamJpaUuid6DefService uuid6defService;
-
-	@Autowired
-	private CFBamJpaUuidTypeService uuidtypeService;
-
-	@Autowired
-	private CFBamJpaUuid6TypeService uuid6typeService;
-
-	@Autowired
-	private CFBamJpaBlobColService blobcolService;
-
-	@Autowired
-	private CFBamJpaBoolColService boolcolService;
-
-	@Autowired
-	private CFBamJpaDateColService datecolService;
-
-	@Autowired
-	private CFBamJpaDoubleColService doublecolService;
-
-	@Autowired
-	private CFBamJpaEnumDefService enumdefService;
-
-	@Autowired
-	private CFBamJpaEnumTypeService enumtypeService;
-
-	@Autowired
-	private CFBamJpaFloatColService floatcolService;
-
-	@Autowired
-	private CFBamJpaId16GenService id16genService;
-
-	@Autowired
-	private CFBamJpaId32GenService id32genService;
-
-	@Autowired
-	private CFBamJpaId64GenService id64genService;
-
-	@Autowired
-	private CFBamJpaInt16ColService int16colService;
-
-	@Autowired
-	private CFBamJpaInt32ColService int32colService;
-
-	@Autowired
-	private CFBamJpaInt64ColService int64colService;
-
-	@Autowired
-	private CFBamJpaNmTokenColService nmtokencolService;
-
-	@Autowired
-	private CFBamJpaNmTokensColService nmtokenscolService;
-
-	@Autowired
-	private CFBamJpaNumberColService numbercolService;
-
-	@Autowired
-	private CFBamJpaStringColService stringcolService;
-
-	@Autowired
-	private CFBamJpaTZDateColService tzdatecolService;
-
-	@Autowired
-	private CFBamJpaTZTimeColService tztimecolService;
-
-	@Autowired
-	private CFBamJpaTZTimestampColService tztimestampcolService;
-
-	@Autowired
-	private CFBamJpaTextColService textcolService;
-
-	@Autowired
-	private CFBamJpaTimeColService timecolService;
-
-	@Autowired
-	private CFBamJpaTimestampColService timestampcolService;
-
-	@Autowired
-	private CFBamJpaTokenColService tokencolService;
-
-	@Autowired
-	private CFBamJpaUInt16ColService uint16colService;
-
-	@Autowired
-	private CFBamJpaUInt32ColService uint32colService;
-
-	@Autowired
-	private CFBamJpaUInt64ColService uint64colService;
-
-	@Autowired
-	private CFBamJpaUuidColService uuidcolService;
-
-	@Autowired
-	private CFBamJpaUuid6ColService uuid6colService;
-
-	@Autowired
-	private CFBamJpaUuidGenService uuidgenService;
-
-	@Autowired
-	private CFBamJpaUuid6GenService uuid6genService;
+	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaClearSubDep2Table(ICFBamSchema schema) {
@@ -490,6 +82,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
+			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -513,7 +106,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		}
 		else if (rec instanceof CFBamJpaClearSubDep2) {
 			CFBamJpaClearSubDep2 jparec = (CFBamJpaClearSubDep2)rec;
-			CFBamJpaClearSubDep2 created = clearsubdep2Service.create(jparec);
+			CFBamJpaClearSubDep2 created = jpaHooksSchema.getClearSubDep2Service().create(jparec);
 			return( created );
 		}
 		else {
@@ -538,7 +131,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		}
 		else if (rec instanceof CFBamJpaClearSubDep2) {
 			CFBamJpaClearSubDep2 jparec = (CFBamJpaClearSubDep2)rec;
-			CFBamJpaClearSubDep2 updated = clearsubdep2Service.update(jparec);
+			CFBamJpaClearSubDep2 updated = jpaHooksSchema.getClearSubDep2Service().update(jparec);
 			return( updated );
 		}
 		else {
@@ -562,7 +155,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		}
 		if (rec instanceof CFBamJpaClearSubDep2) {
 			CFBamJpaClearSubDep2 jparec = (CFBamJpaClearSubDep2)rec;
-			clearsubdep2Service.deleteByIdIdx(jparec.getPKey());
+			jpaHooksSchema.getClearSubDep2Service().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteClearSubDep2", "rec", rec, "CFBamJpaClearSubDep2");
@@ -582,7 +175,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep1Id )
 	{
-		clearsubdep2Service.deleteByClearSubDep1Idx(argClearSubDep1Id);
+		jpaHooksSchema.getClearSubDep2Service().deleteByClearSubDep1Idx(argClearSubDep1Id);
 	}
 
 
@@ -597,7 +190,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep2ByClearSubDep1IdxKey argKey )
 	{
-		clearsubdep2Service.deleteByClearSubDep1Idx(argKey.getRequiredClearSubDep1Id());
+		jpaHooksSchema.getClearSubDep2Service().deleteByClearSubDep1Idx(argKey.getRequiredClearSubDep1Id());
 	}
 
 	/**
@@ -614,7 +207,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		CFLibDbKeyHash256 argClearSubDep1Id,
 		String argName )
 	{
-		clearsubdep2Service.deleteByUNameIdx(argClearSubDep1Id,
+		jpaHooksSchema.getClearSubDep2Service().deleteByUNameIdx(argClearSubDep1Id,
 		argName);
 	}
 
@@ -630,7 +223,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep2ByUNameIdxKey argKey )
 	{
-		clearsubdep2Service.deleteByUNameIdx(argKey.getRequiredClearSubDep1Id(),
+		jpaHooksSchema.getClearSubDep2Service().deleteByUNameIdx(argKey.getRequiredClearSubDep1Id(),
 			argKey.getRequiredName());
 	}
 
@@ -645,7 +238,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		clearsubdep2Service.deleteByClearDepIdx(argRelationId);
+		jpaHooksSchema.getClearSubDep2Service().deleteByClearDepIdx(argRelationId);
 	}
 
 
@@ -660,7 +253,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByClearDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
-		clearsubdep2Service.deleteByClearDepIdx(argKey.getRequiredRelationId());
+		jpaHooksSchema.getClearSubDep2Service().deleteByClearDepIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -674,7 +267,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		clearsubdep2Service.deleteByDefSchemaIdx(argDefSchemaId);
+		jpaHooksSchema.getClearSubDep2Service().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -689,7 +282,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
-		clearsubdep2Service.deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		jpaHooksSchema.getClearSubDep2Service().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -703,7 +296,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		clearsubdep2Service.deleteByIdIdx(argKey);
+		jpaHooksSchema.getClearSubDep2Service().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -717,7 +310,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		clearsubdep2Service.deleteByTenantIdx(argTenantId);
+		jpaHooksSchema.getClearSubDep2Service().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -732,7 +325,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public void deleteClearSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		clearsubdep2Service.deleteByTenantIdx(argKey.getRequiredTenantId());
+		jpaHooksSchema.getClearSubDep2Service().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -750,7 +343,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2 readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( clearsubdep2Service.find(PKey) );
+		return( jpaHooksSchema.getClearSubDep2Service().find(PKey) );
 	}
 
 	/**
@@ -767,7 +360,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( clearsubdep2Service.lockByIdIdx(PKey) );
+		return( jpaHooksSchema.getClearSubDep2Service().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -779,7 +372,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	 */
 	@Override
 	public ICFBamClearSubDep2[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaClearSubDep2> results = clearsubdep2Service.findAll();
+		List<CFBamJpaClearSubDep2> results = jpaHooksSchema.getClearSubDep2Service().findAll();
 		ICFBamClearSubDep2[] retset = new ICFBamClearSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep2 cur: results) {
@@ -802,7 +395,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2 readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( clearsubdep2Service.find(argId) );
+		return( jpaHooksSchema.getClearSubDep2Service().find(argId) );
 	}
 
 	/**
@@ -818,7 +411,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaClearSubDep2> results = clearsubdep2Service.findByTenantIdx(argTenantId);
+		List<CFBamJpaClearSubDep2> results = jpaHooksSchema.getClearSubDep2Service().findByTenantIdx(argTenantId);
 		ICFBamClearSubDep2[] retset = new ICFBamClearSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep2 cur: results) {
@@ -840,7 +433,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2[] readDerivedByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaClearSubDep2> results = clearsubdep2Service.findByClearDepIdx(argRelationId);
+		List<CFBamJpaClearSubDep2> results = jpaHooksSchema.getClearSubDep2Service().findByClearDepIdx(argRelationId);
 		ICFBamClearSubDep2[] retset = new ICFBamClearSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep2 cur: results) {
@@ -862,7 +455,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaClearSubDep2> results = clearsubdep2Service.findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaClearSubDep2> results = jpaHooksSchema.getClearSubDep2Service().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamClearSubDep2[] retset = new ICFBamClearSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep2 cur: results) {
@@ -884,7 +477,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 	public ICFBamClearSubDep2[] readDerivedByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep1Id )
 	{
-		List<CFBamJpaClearSubDep2> results = clearsubdep2Service.findByClearSubDep1Idx(argClearSubDep1Id);
+		List<CFBamJpaClearSubDep2> results = jpaHooksSchema.getClearSubDep2Service().findByClearSubDep1Idx(argClearSubDep1Id);
 		ICFBamClearSubDep2[] retset = new ICFBamClearSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep2 cur: results) {
@@ -910,7 +503,7 @@ public class CFBamJpaClearSubDep2Table implements ICFBamClearSubDep2Table
 		CFLibDbKeyHash256 argClearSubDep1Id,
 		String argName )
 	{
-		return( clearsubdep2Service.findByUNameIdx(argClearSubDep1Id,
+		return( jpaHooksSchema.getClearSubDep2Service().findByUNameIdx(argClearSubDep1Id,
 		argName) );
 	}
 

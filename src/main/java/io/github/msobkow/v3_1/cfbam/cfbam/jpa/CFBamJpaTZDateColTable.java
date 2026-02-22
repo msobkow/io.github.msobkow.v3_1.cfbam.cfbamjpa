@@ -65,6 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTZDateColTable database implementation for TZDateCol
@@ -72,416 +73,7 @@ import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
 public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 {
 	protected CFBamJpaSchema schema;
-    @Autowired
-    @Qualifier("cfbam31EntityManagerFactory")
-    private LocalContainerEntityManagerFactoryBean cfbamEntityManagerFactory;
-	@Autowired
-	private CFBamJpaScopeService scopeService;
-
-	@Autowired
-	private CFBamJpaSchemaDefService schemadefService;
-
-	@Autowired
-	private CFBamJpaSchemaRefService schemarefService;
-
-	@Autowired
-	private CFBamJpaServerMethodService servermethodService;
-
-	@Autowired
-	private CFBamJpaServerObjFuncService serverobjfuncService;
-
-	@Autowired
-	private CFBamJpaServerProcService serverprocService;
-
-	@Autowired
-	private CFBamJpaTableService tableService;
-
-	@Autowired
-	private CFBamJpaValueService valueService;
-
-	@Autowired
-	private CFBamJpaAtomService atomService;
-
-	@Autowired
-	private CFBamJpaBlobDefService blobdefService;
-
-	@Autowired
-	private CFBamJpaBlobTypeService blobtypeService;
-
-	@Autowired
-	private CFBamJpaBoolDefService booldefService;
-
-	@Autowired
-	private CFBamJpaBoolTypeService booltypeService;
-
-	@Autowired
-	private CFBamJpaChainService chainService;
-
-	@Autowired
-	private CFBamJpaClearDepService cleardepService;
-
-	@Autowired
-	private CFBamJpaClearSubDep1Service clearsubdep1Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep2Service clearsubdep2Service;
-
-	@Autowired
-	private CFBamJpaClearSubDep3Service clearsubdep3Service;
-
-	@Autowired
-	private CFBamJpaClearTopDepService cleartopdepService;
-
-	@Autowired
-	private CFBamJpaDateDefService datedefService;
-
-	@Autowired
-	private CFBamJpaDateTypeService datetypeService;
-
-	@Autowired
-	private CFBamJpaDelDepService deldepService;
-
-	@Autowired
-	private CFBamJpaDelSubDep1Service delsubdep1Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep2Service delsubdep2Service;
-
-	@Autowired
-	private CFBamJpaDelSubDep3Service delsubdep3Service;
-
-	@Autowired
-	private CFBamJpaDelTopDepService deltopdepService;
-
-	@Autowired
-	private CFBamJpaDoubleDefService doubledefService;
-
-	@Autowired
-	private CFBamJpaDoubleTypeService doubletypeService;
-
-	@Autowired
-	private CFBamJpaEnumTagService enumtagService;
-
-	@Autowired
-	private CFBamJpaFloatDefService floatdefService;
-
-	@Autowired
-	private CFBamJpaFloatTypeService floattypeService;
-
-	@Autowired
-	private CFBamJpaIndexService indexService;
-
-	@Autowired
-	private CFBamJpaIndexColService indexcolService;
-
-	@Autowired
-	private CFBamJpaInt16DefService int16defService;
-
-	@Autowired
-	private CFBamJpaInt16TypeService int16typeService;
-
-	@Autowired
-	private CFBamJpaInt32DefService int32defService;
-
-	@Autowired
-	private CFBamJpaInt32TypeService int32typeService;
-
-	@Autowired
-	private CFBamJpaInt64DefService int64defService;
-
-	@Autowired
-	private CFBamJpaInt64TypeService int64typeService;
-
-	@Autowired
-	private CFBamJpaNmTokenDefService nmtokendefService;
-
-	@Autowired
-	private CFBamJpaNmTokenTypeService nmtokentypeService;
-
-	@Autowired
-	private CFBamJpaNmTokensDefService nmtokensdefService;
-
-	@Autowired
-	private CFBamJpaNmTokensTypeService nmtokenstypeService;
-
-	@Autowired
-	private CFBamJpaNumberDefService numberdefService;
-
-	@Autowired
-	private CFBamJpaNumberTypeService numbertypeService;
-
-	@Autowired
-	private CFBamJpaParamService paramService;
-
-	@Autowired
-	private CFBamJpaPopDepService popdepService;
-
-	@Autowired
-	private CFBamJpaPopSubDep1Service popsubdep1Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep2Service popsubdep2Service;
-
-	@Autowired
-	private CFBamJpaPopSubDep3Service popsubdep3Service;
-
-	@Autowired
-	private CFBamJpaPopTopDepService poptopdepService;
-
-	@Autowired
-	private CFBamJpaRelationService relationService;
-
-	@Autowired
-	private CFBamJpaRelationColService relationcolService;
-
-	@Autowired
-	private CFBamJpaServerListFuncService serverlistfuncService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128DefService dbkeyhash128defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128ColService dbkeyhash128colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128TypeService dbkeyhash128typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash128GenService dbkeyhash128genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160DefService dbkeyhash160defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160ColService dbkeyhash160colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160TypeService dbkeyhash160typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash160GenService dbkeyhash160genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224DefService dbkeyhash224defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224ColService dbkeyhash224colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224TypeService dbkeyhash224typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash224GenService dbkeyhash224genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256DefService dbkeyhash256defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256ColService dbkeyhash256colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256TypeService dbkeyhash256typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash256GenService dbkeyhash256genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384DefService dbkeyhash384defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384ColService dbkeyhash384colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384TypeService dbkeyhash384typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash384GenService dbkeyhash384genService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512DefService dbkeyhash512defService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512ColService dbkeyhash512colService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512TypeService dbkeyhash512typeService;
-
-	@Autowired
-	private CFBamJpaDbKeyHash512GenService dbkeyhash512genService;
-
-	@Autowired
-	private CFBamJpaStringDefService stringdefService;
-
-	@Autowired
-	private CFBamJpaStringTypeService stringtypeService;
-
-	@Autowired
-	private CFBamJpaTZDateDefService tzdatedefService;
-
-	@Autowired
-	private CFBamJpaTZDateTypeService tzdatetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimeDefService tztimedefService;
-
-	@Autowired
-	private CFBamJpaTZTimeTypeService tztimetypeService;
-
-	@Autowired
-	private CFBamJpaTZTimestampDefService tztimestampdefService;
-
-	@Autowired
-	private CFBamJpaTZTimestampTypeService tztimestamptypeService;
-
-	@Autowired
-	private CFBamJpaTableColService tablecolService;
-
-	@Autowired
-	private CFBamJpaTextDefService textdefService;
-
-	@Autowired
-	private CFBamJpaTextTypeService texttypeService;
-
-	@Autowired
-	private CFBamJpaTimeDefService timedefService;
-
-	@Autowired
-	private CFBamJpaTimeTypeService timetypeService;
-
-	@Autowired
-	private CFBamJpaTimestampDefService timestampdefService;
-
-	@Autowired
-	private CFBamJpaTimestampTypeService timestamptypeService;
-
-	@Autowired
-	private CFBamJpaTokenDefService tokendefService;
-
-	@Autowired
-	private CFBamJpaTokenTypeService tokentypeService;
-
-	@Autowired
-	private CFBamJpaUInt16DefService uint16defService;
-
-	@Autowired
-	private CFBamJpaUInt16TypeService uint16typeService;
-
-	@Autowired
-	private CFBamJpaUInt32DefService uint32defService;
-
-	@Autowired
-	private CFBamJpaUInt32TypeService uint32typeService;
-
-	@Autowired
-	private CFBamJpaUInt64DefService uint64defService;
-
-	@Autowired
-	private CFBamJpaUInt64TypeService uint64typeService;
-
-	@Autowired
-	private CFBamJpaUuidDefService uuiddefService;
-
-	@Autowired
-	private CFBamJpaUuid6DefService uuid6defService;
-
-	@Autowired
-	private CFBamJpaUuidTypeService uuidtypeService;
-
-	@Autowired
-	private CFBamJpaUuid6TypeService uuid6typeService;
-
-	@Autowired
-	private CFBamJpaBlobColService blobcolService;
-
-	@Autowired
-	private CFBamJpaBoolColService boolcolService;
-
-	@Autowired
-	private CFBamJpaDateColService datecolService;
-
-	@Autowired
-	private CFBamJpaDoubleColService doublecolService;
-
-	@Autowired
-	private CFBamJpaEnumDefService enumdefService;
-
-	@Autowired
-	private CFBamJpaEnumTypeService enumtypeService;
-
-	@Autowired
-	private CFBamJpaFloatColService floatcolService;
-
-	@Autowired
-	private CFBamJpaId16GenService id16genService;
-
-	@Autowired
-	private CFBamJpaId32GenService id32genService;
-
-	@Autowired
-	private CFBamJpaId64GenService id64genService;
-
-	@Autowired
-	private CFBamJpaInt16ColService int16colService;
-
-	@Autowired
-	private CFBamJpaInt32ColService int32colService;
-
-	@Autowired
-	private CFBamJpaInt64ColService int64colService;
-
-	@Autowired
-	private CFBamJpaNmTokenColService nmtokencolService;
-
-	@Autowired
-	private CFBamJpaNmTokensColService nmtokenscolService;
-
-	@Autowired
-	private CFBamJpaNumberColService numbercolService;
-
-	@Autowired
-	private CFBamJpaStringColService stringcolService;
-
-	@Autowired
-	private CFBamJpaTZDateColService tzdatecolService;
-
-	@Autowired
-	private CFBamJpaTZTimeColService tztimecolService;
-
-	@Autowired
-	private CFBamJpaTZTimestampColService tztimestampcolService;
-
-	@Autowired
-	private CFBamJpaTextColService textcolService;
-
-	@Autowired
-	private CFBamJpaTimeColService timecolService;
-
-	@Autowired
-	private CFBamJpaTimestampColService timestampcolService;
-
-	@Autowired
-	private CFBamJpaTokenColService tokencolService;
-
-	@Autowired
-	private CFBamJpaUInt16ColService uint16colService;
-
-	@Autowired
-	private CFBamJpaUInt32ColService uint32colService;
-
-	@Autowired
-	private CFBamJpaUInt64ColService uint64colService;
-
-	@Autowired
-	private CFBamJpaUuidColService uuidcolService;
-
-	@Autowired
-	private CFBamJpaUuid6ColService uuid6colService;
-
-	@Autowired
-	private CFBamJpaUuidGenService uuidgenService;
-
-	@Autowired
-	private CFBamJpaUuid6GenService uuid6genService;
+	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTZDateColTable(ICFBamSchema schema) {
@@ -490,6 +82,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
+			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -513,7 +106,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		}
 		else if (rec instanceof CFBamJpaTZDateCol) {
 			CFBamJpaTZDateCol jparec = (CFBamJpaTZDateCol)rec;
-			CFBamJpaTZDateCol created = tzdatecolService.create(jparec);
+			CFBamJpaTZDateCol created = jpaHooksSchema.getTZDateColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -538,7 +131,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		}
 		else if (rec instanceof CFBamJpaTZDateCol) {
 			CFBamJpaTZDateCol jparec = (CFBamJpaTZDateCol)rec;
-			CFBamJpaTZDateCol updated = tzdatecolService.update(jparec);
+			CFBamJpaTZDateCol updated = jpaHooksSchema.getTZDateColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -562,7 +155,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		}
 		if (rec instanceof CFBamJpaTZDateCol) {
 			CFBamJpaTZDateCol jparec = (CFBamJpaTZDateCol)rec;
-			tzdatecolService.deleteByIdIdx(jparec.getPKey());
+			jpaHooksSchema.getTZDateColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTZDateCol", "rec", rec, "CFBamJpaTZDateCol");
@@ -582,7 +175,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		tzdatecolService.deleteByTableIdx(argTableId);
+		jpaHooksSchema.getTZDateColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -597,7 +190,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTZDateColByTableIdxKey argKey )
 	{
-		tzdatecolService.deleteByTableIdx(argKey.getRequiredTableId());
+		jpaHooksSchema.getTZDateColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -611,7 +204,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		tzdatecolService.deleteByIdIdx(argKey);
+		jpaHooksSchema.getTZDateColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -628,7 +221,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		tzdatecolService.deleteByUNameIdx(argScopeId,
+		jpaHooksSchema.getTZDateColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -644,7 +237,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		tzdatecolService.deleteByUNameIdx(argKey.getRequiredScopeId(),
+		jpaHooksSchema.getTZDateColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -659,7 +252,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		tzdatecolService.deleteByScopeIdx(argScopeId);
+		jpaHooksSchema.getTZDateColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -674,7 +267,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		tzdatecolService.deleteByScopeIdx(argKey.getRequiredScopeId());
+		jpaHooksSchema.getTZDateColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -688,7 +281,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		tzdatecolService.deleteByDefSchemaIdx(argDefSchemaId);
+		jpaHooksSchema.getTZDateColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -703,7 +296,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		tzdatecolService.deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		jpaHooksSchema.getTZDateColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -717,7 +310,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		tzdatecolService.deleteByPrevIdx(argPrevId);
+		jpaHooksSchema.getTZDateColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -732,7 +325,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		tzdatecolService.deleteByPrevIdx(argKey.getOptionalPrevId());
+		jpaHooksSchema.getTZDateColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -746,7 +339,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		tzdatecolService.deleteByNextIdx(argNextId);
+		jpaHooksSchema.getTZDateColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -761,7 +354,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		tzdatecolService.deleteByNextIdx(argKey.getOptionalNextId());
+		jpaHooksSchema.getTZDateColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -778,7 +371,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		tzdatecolService.deleteByContPrevIdx(argScopeId,
+		jpaHooksSchema.getTZDateColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -794,7 +387,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		tzdatecolService.deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		jpaHooksSchema.getTZDateColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -812,7 +405,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		tzdatecolService.deleteByContNextIdx(argScopeId,
+		jpaHooksSchema.getTZDateColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -828,7 +421,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public void deleteTZDateColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		tzdatecolService.deleteByContNextIdx(argKey.getRequiredScopeId(),
+		jpaHooksSchema.getTZDateColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -847,7 +440,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( tzdatecolService.find(PKey) );
+		return( jpaHooksSchema.getTZDateColService().find(PKey) );
 	}
 
 	/**
@@ -864,7 +457,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( tzdatecolService.lockByIdIdx(PKey) );
+		return( jpaHooksSchema.getTZDateColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -876,7 +469,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	 */
 	@Override
 	public ICFBamTZDateCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findAll();
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findAll();
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {
@@ -899,7 +492,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( tzdatecolService.find(argId) );
+		return( jpaHooksSchema.getTZDateColService().find(argId) );
 	}
 
 	/**
@@ -919,7 +512,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( tzdatecolService.findByUNameIdx(argScopeId,
+		return( jpaHooksSchema.getTZDateColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -936,7 +529,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByScopeIdx(argScopeId);
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByScopeIdx(argScopeId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {
@@ -958,7 +551,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {
@@ -980,7 +573,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByPrevIdx(argPrevId);
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByPrevIdx(argPrevId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {
@@ -1002,7 +595,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByNextIdx(argNextId);
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByNextIdx(argNextId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {
@@ -1027,7 +620,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByContPrevIdx(argScopeId,
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
@@ -1053,7 +646,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByContNextIdx(argScopeId,
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
@@ -1076,7 +669,7 @@ public class CFBamJpaTZDateColTable implements ICFBamTZDateColTable
 	public ICFBamTZDateCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaTZDateCol> results = tzdatecolService.findByTableIdx(argTableId);
+		List<CFBamJpaTZDateCol> results = jpaHooksSchema.getTZDateColService().findByTableIdx(argTableId);
 		ICFBamTZDateCol[] retset = new ICFBamTZDateCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZDateCol cur: results) {

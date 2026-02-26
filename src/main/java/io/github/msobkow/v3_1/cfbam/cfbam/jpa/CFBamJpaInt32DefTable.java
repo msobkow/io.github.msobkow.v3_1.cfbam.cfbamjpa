@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaInt32DefTable database implementation for Int32Def
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaInt32DefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		}
 		else if (rec instanceof CFBamJpaInt32Def) {
 			CFBamJpaInt32Def jparec = (CFBamJpaInt32Def)rec;
-			CFBamJpaInt32Def created = jpaHooksSchema.getInt32DefService().create(jparec);
+			CFBamJpaInt32Def created = schema.getJpaHooksSchema().getInt32DefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		}
 		else if (rec instanceof CFBamJpaInt32Def) {
 			CFBamJpaInt32Def jparec = (CFBamJpaInt32Def)rec;
-			CFBamJpaInt32Def updated = jpaHooksSchema.getInt32DefService().update(jparec);
+			CFBamJpaInt32Def updated = schema.getJpaHooksSchema().getInt32DefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		}
 		if (rec instanceof CFBamJpaInt32Def) {
 			CFBamJpaInt32Def jparec = (CFBamJpaInt32Def)rec;
-			jpaHooksSchema.getInt32DefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getInt32DefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteInt32Def", "rec", rec, "CFBamJpaInt32Def");
@@ -175,7 +173,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getInt32DefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getInt32DefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getInt32DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getInt32DefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getInt32DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getInt32DefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getInt32DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getInt32DefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getInt32DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getInt32DefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getInt32DefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getInt32DefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getInt32DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getInt32DefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public void deleteInt32DefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getInt32DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getInt32DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getInt32DefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getInt32DefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getInt32DefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getInt32DefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	 */
 	@Override
 	public ICFBamInt32Def[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findAll();
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findAll();
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaInt32Def cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getInt32DefService().find(argId) );
+		return( schema.getJpaHooksSchema().getInt32DefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getInt32DefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getInt32DefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByScopeIdx(argScopeId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaInt32Def cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaInt32Def cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByPrevIdx(argPrevId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaInt32Def cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 	public ICFBamInt32Def[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByNextIdx(argNextId);
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByNextIdx(argNextId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaInt32Def cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaInt32DefTable implements ICFBamInt32DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaInt32Def> results = jpaHooksSchema.getInt32DefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaInt32Def> results = schema.getJpaHooksSchema().getInt32DefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamInt32Def[] retset = new ICFBamInt32Def[results.size()];
 		int idx = 0;

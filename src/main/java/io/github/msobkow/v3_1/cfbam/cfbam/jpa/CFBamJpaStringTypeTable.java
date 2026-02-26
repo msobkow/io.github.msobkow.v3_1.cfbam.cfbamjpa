@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaStringTypeTable database implementation for StringType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaStringTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		}
 		else if (rec instanceof CFBamJpaStringType) {
 			CFBamJpaStringType jparec = (CFBamJpaStringType)rec;
-			CFBamJpaStringType created = jpaHooksSchema.getStringTypeService().create(jparec);
+			CFBamJpaStringType created = schema.getJpaHooksSchema().getStringTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		}
 		else if (rec instanceof CFBamJpaStringType) {
 			CFBamJpaStringType jparec = (CFBamJpaStringType)rec;
-			CFBamJpaStringType updated = jpaHooksSchema.getStringTypeService().update(jparec);
+			CFBamJpaStringType updated = schema.getJpaHooksSchema().getStringTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		}
 		if (rec instanceof CFBamJpaStringType) {
 			CFBamJpaStringType jparec = (CFBamJpaStringType)rec;
-			jpaHooksSchema.getStringTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getStringTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteStringType", "rec", rec, "CFBamJpaStringType");
@@ -175,7 +173,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getStringTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamStringTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getStringTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getStringTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getStringTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getStringTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getStringTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getStringTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getStringTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getStringTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getStringTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getStringTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public void deleteStringTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getStringTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getStringTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getStringTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getStringTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getStringTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	 */
 	@Override
 	public ICFBamStringType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findAll();
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findAll();
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getStringTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getStringTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getStringTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getStringTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByScopeIdx(argScopeId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByPrevIdx(argPrevId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByNextIdx(argNextId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaStringTypeTable implements ICFBamStringTypeTable
 	public ICFBamStringType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaStringType> results = jpaHooksSchema.getStringTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaStringType> results = schema.getJpaHooksSchema().getStringTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamStringType[] retset = new ICFBamStringType[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringType cur: results) {

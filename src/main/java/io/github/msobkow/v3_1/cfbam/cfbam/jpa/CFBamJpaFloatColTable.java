@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaFloatColTable database implementation for FloatCol
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaFloatColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		}
 		else if (rec instanceof CFBamJpaFloatCol) {
 			CFBamJpaFloatCol jparec = (CFBamJpaFloatCol)rec;
-			CFBamJpaFloatCol created = jpaHooksSchema.getFloatColService().create(jparec);
+			CFBamJpaFloatCol created = schema.getJpaHooksSchema().getFloatColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		}
 		else if (rec instanceof CFBamJpaFloatCol) {
 			CFBamJpaFloatCol jparec = (CFBamJpaFloatCol)rec;
-			CFBamJpaFloatCol updated = jpaHooksSchema.getFloatColService().update(jparec);
+			CFBamJpaFloatCol updated = schema.getJpaHooksSchema().getFloatColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		}
 		if (rec instanceof CFBamJpaFloatCol) {
 			CFBamJpaFloatCol jparec = (CFBamJpaFloatCol)rec;
-			jpaHooksSchema.getFloatColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getFloatColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteFloatCol", "rec", rec, "CFBamJpaFloatCol");
@@ -175,7 +173,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getFloatColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamFloatColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getFloatColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getFloatColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getFloatColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getFloatColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getFloatColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getFloatColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getFloatColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getFloatColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getFloatColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getFloatColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getFloatColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getFloatColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getFloatColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getFloatColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getFloatColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getFloatColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getFloatColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public void deleteFloatColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getFloatColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getFloatColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getFloatColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getFloatColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getFloatColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getFloatColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	 */
 	@Override
 	public ICFBamFloatCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findAll();
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findAll();
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getFloatColService().find(argId) );
+		return( schema.getJpaHooksSchema().getFloatColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getFloatColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getFloatColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByScopeIdx(argScopeId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByPrevIdx(argPrevId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByNextIdx(argNextId);
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByNextIdx(argNextId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaFloatColTable implements ICFBamFloatColTable
 	public ICFBamFloatCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaFloatCol> results = jpaHooksSchema.getFloatColService().findByTableIdx(argTableId);
+		List<CFBamJpaFloatCol> results = schema.getJpaHooksSchema().getFloatColService().findByTableIdx(argTableId);
 		ICFBamFloatCol[] retset = new ICFBamFloatCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaFloatCol cur: results) {

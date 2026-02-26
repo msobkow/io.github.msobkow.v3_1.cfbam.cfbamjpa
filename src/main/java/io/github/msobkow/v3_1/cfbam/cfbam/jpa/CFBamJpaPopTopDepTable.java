@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaPopTopDepTable database implementation for PopTopDep
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaPopTopDepTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		}
 		else if (rec instanceof CFBamJpaPopTopDep) {
 			CFBamJpaPopTopDep jparec = (CFBamJpaPopTopDep)rec;
-			CFBamJpaPopTopDep created = jpaHooksSchema.getPopTopDepService().create(jparec);
+			CFBamJpaPopTopDep created = schema.getJpaHooksSchema().getPopTopDepService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		}
 		else if (rec instanceof CFBamJpaPopTopDep) {
 			CFBamJpaPopTopDep jparec = (CFBamJpaPopTopDep)rec;
-			CFBamJpaPopTopDep updated = jpaHooksSchema.getPopTopDepService().update(jparec);
+			CFBamJpaPopTopDep updated = schema.getJpaHooksSchema().getPopTopDepService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		}
 		if (rec instanceof CFBamJpaPopTopDep) {
 			CFBamJpaPopTopDep jparec = (CFBamJpaPopTopDep)rec;
-			jpaHooksSchema.getPopTopDepService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getPopTopDepService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deletePopTopDep", "rec", rec, "CFBamJpaPopTopDep");
@@ -175,7 +173,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByContRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argContRelationId )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByContRelIdx(argContRelationId);
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByContRelIdx(argContRelationId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByContRelIdx( ICFSecAuthorization Authorization,
 		ICFBamPopTopDepByContRelIdxKey argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByContRelIdx(argKey.getRequiredContRelationId());
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByContRelIdx(argKey.getRequiredContRelationId());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		CFLibDbKeyHash256 argContRelationId,
 		String argName )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByUNameIdx(argContRelationId,
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByUNameIdx(argContRelationId,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamPopTopDepByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByUNameIdx(argKey.getRequiredContRelationId(),
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByUNameIdx(argKey.getRequiredContRelationId(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByRelationIdx(argRelationId);
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByRelationIdx(argRelationId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByRelationIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByRelationIdxKey argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByRelationIdx(argKey.getRequiredRelationId());
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByRelationIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public void deletePopTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getPopTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getPopTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -343,7 +341,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getPopTopDepService().find(PKey) );
+		return( schema.getJpaHooksSchema().getPopTopDepService().find(PKey) );
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getPopTopDepService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getPopTopDepService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -372,7 +370,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	 */
 	@Override
 	public ICFBamPopTopDep[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaPopTopDep> results = jpaHooksSchema.getPopTopDepService().findAll();
+		List<CFBamJpaPopTopDep> results = schema.getJpaHooksSchema().getPopTopDepService().findAll();
 		ICFBamPopTopDep[] retset = new ICFBamPopTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaPopTopDep cur: results) {
@@ -395,7 +393,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getPopTopDepService().find(argId) );
+		return( schema.getJpaHooksSchema().getPopTopDepService().find(argId) );
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaPopTopDep> results = jpaHooksSchema.getPopTopDepService().findByTenantIdx(argTenantId);
+		List<CFBamJpaPopTopDep> results = schema.getJpaHooksSchema().getPopTopDepService().findByTenantIdx(argTenantId);
 		ICFBamPopTopDep[] retset = new ICFBamPopTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaPopTopDep cur: results) {
@@ -433,7 +431,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep[] readDerivedByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaPopTopDep> results = jpaHooksSchema.getPopTopDepService().findByRelationIdx(argRelationId);
+		List<CFBamJpaPopTopDep> results = schema.getJpaHooksSchema().getPopTopDepService().findByRelationIdx(argRelationId);
 		ICFBamPopTopDep[] retset = new ICFBamPopTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaPopTopDep cur: results) {
@@ -455,7 +453,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaPopTopDep> results = jpaHooksSchema.getPopTopDepService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaPopTopDep> results = schema.getJpaHooksSchema().getPopTopDepService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamPopTopDep[] retset = new ICFBamPopTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaPopTopDep cur: results) {
@@ -477,7 +475,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 	public ICFBamPopTopDep[] readDerivedByContRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argContRelationId )
 	{
-		List<CFBamJpaPopTopDep> results = jpaHooksSchema.getPopTopDepService().findByContRelIdx(argContRelationId);
+		List<CFBamJpaPopTopDep> results = schema.getJpaHooksSchema().getPopTopDepService().findByContRelIdx(argContRelationId);
 		ICFBamPopTopDep[] retset = new ICFBamPopTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaPopTopDep cur: results) {
@@ -503,7 +501,7 @@ public class CFBamJpaPopTopDepTable implements ICFBamPopTopDepTable
 		CFLibDbKeyHash256 argContRelationId,
 		String argName )
 	{
-		return( jpaHooksSchema.getPopTopDepService().findByUNameIdx(argContRelationId,
+		return( schema.getJpaHooksSchema().getPopTopDepService().findByUNameIdx(argContRelationId,
 		argName) );
 	}
 

@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTextTypeTable database implementation for TextType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTextTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		}
 		else if (rec instanceof CFBamJpaTextType) {
 			CFBamJpaTextType jparec = (CFBamJpaTextType)rec;
-			CFBamJpaTextType created = jpaHooksSchema.getTextTypeService().create(jparec);
+			CFBamJpaTextType created = schema.getJpaHooksSchema().getTextTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		}
 		else if (rec instanceof CFBamJpaTextType) {
 			CFBamJpaTextType jparec = (CFBamJpaTextType)rec;
-			CFBamJpaTextType updated = jpaHooksSchema.getTextTypeService().update(jparec);
+			CFBamJpaTextType updated = schema.getJpaHooksSchema().getTextTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		}
 		if (rec instanceof CFBamJpaTextType) {
 			CFBamJpaTextType jparec = (CFBamJpaTextType)rec;
-			jpaHooksSchema.getTextTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTextTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTextType", "rec", rec, "CFBamJpaTextType");
@@ -175,7 +173,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getTextTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTextTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getTextTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTextTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTextTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTextTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTextTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTextTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTextTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTextTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTextTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTextTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public void deleteTextTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTextTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTextTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTextTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTextTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTextTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	 */
 	@Override
 	public ICFBamTextType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findAll();
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findAll();
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTextTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getTextTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTextTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTextTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByScopeIdx(argScopeId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByPrevIdx(argPrevId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByNextIdx(argNextId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaTextTypeTable implements ICFBamTextTypeTable
 	public ICFBamTextType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaTextType> results = jpaHooksSchema.getTextTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaTextType> results = schema.getJpaHooksSchema().getTextTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamTextType[] retset = new ICFBamTextType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextType cur: results) {

@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTextColTable database implementation for TextCol
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTextColTable implements ICFBamTextColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTextColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		}
 		else if (rec instanceof CFBamJpaTextCol) {
 			CFBamJpaTextCol jparec = (CFBamJpaTextCol)rec;
-			CFBamJpaTextCol created = jpaHooksSchema.getTextColService().create(jparec);
+			CFBamJpaTextCol created = schema.getJpaHooksSchema().getTextColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		}
 		else if (rec instanceof CFBamJpaTextCol) {
 			CFBamJpaTextCol jparec = (CFBamJpaTextCol)rec;
-			CFBamJpaTextCol updated = jpaHooksSchema.getTextColService().update(jparec);
+			CFBamJpaTextCol updated = schema.getJpaHooksSchema().getTextColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		}
 		if (rec instanceof CFBamJpaTextCol) {
 			CFBamJpaTextCol jparec = (CFBamJpaTextCol)rec;
-			jpaHooksSchema.getTextColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTextColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTextCol", "rec", rec, "CFBamJpaTextCol");
@@ -175,7 +173,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getTextColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getTextColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTextColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getTextColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTextColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTextColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTextColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTextColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTextColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTextColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTextColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTextColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTextColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTextColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTextColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTextColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTextColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTextColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTextColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTextColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTextColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public void deleteTextColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTextColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTextColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTextColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTextColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTextColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTextColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	 */
 	@Override
 	public ICFBamTextCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findAll();
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findAll();
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTextColService().find(argId) );
+		return( schema.getJpaHooksSchema().getTextColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTextColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTextColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByScopeIdx(argScopeId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByPrevIdx(argPrevId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByNextIdx(argNextId);
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByNextIdx(argNextId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaTextColTable implements ICFBamTextColTable
 	public ICFBamTextCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaTextCol> results = jpaHooksSchema.getTextColService().findByTableIdx(argTableId);
+		List<CFBamJpaTextCol> results = schema.getJpaHooksSchema().getTextColService().findByTableIdx(argTableId);
 		ICFBamTextCol[] retset = new ICFBamTextCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTextCol cur: results) {

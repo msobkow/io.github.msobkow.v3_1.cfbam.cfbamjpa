@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaUuid6DefTable database implementation for Uuid6Def
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaUuid6DefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		}
 		else if (rec instanceof CFBamJpaUuid6Def) {
 			CFBamJpaUuid6Def jparec = (CFBamJpaUuid6Def)rec;
-			CFBamJpaUuid6Def created = jpaHooksSchema.getUuid6DefService().create(jparec);
+			CFBamJpaUuid6Def created = schema.getJpaHooksSchema().getUuid6DefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		}
 		else if (rec instanceof CFBamJpaUuid6Def) {
 			CFBamJpaUuid6Def jparec = (CFBamJpaUuid6Def)rec;
-			CFBamJpaUuid6Def updated = jpaHooksSchema.getUuid6DefService().update(jparec);
+			CFBamJpaUuid6Def updated = schema.getJpaHooksSchema().getUuid6DefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		}
 		if (rec instanceof CFBamJpaUuid6Def) {
 			CFBamJpaUuid6Def jparec = (CFBamJpaUuid6Def)rec;
-			jpaHooksSchema.getUuid6DefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getUuid6DefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteUuid6Def", "rec", rec, "CFBamJpaUuid6Def");
@@ -175,7 +173,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public void deleteUuid6DefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUuid6DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUuid6DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUuid6DefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getUuid6DefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUuid6DefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getUuid6DefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	 */
 	@Override
 	public ICFBamUuid6Def[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findAll();
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findAll();
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaUuid6Def cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getUuid6DefService().find(argId) );
+		return( schema.getJpaHooksSchema().getUuid6DefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getUuid6DefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getUuid6DefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByScopeIdx(argScopeId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaUuid6Def cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaUuid6Def cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByPrevIdx(argPrevId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaUuid6Def cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 	public ICFBamUuid6Def[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByNextIdx(argNextId);
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByNextIdx(argNextId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaUuid6Def cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaUuid6DefTable implements ICFBamUuid6DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUuid6Def> results = jpaHooksSchema.getUuid6DefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaUuid6Def> results = schema.getJpaHooksSchema().getUuid6DefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamUuid6Def[] retset = new ICFBamUuid6Def[results.size()];
 		int idx = 0;

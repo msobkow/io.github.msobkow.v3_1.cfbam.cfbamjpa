@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaParamTable database implementation for Param
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaParamTable implements ICFBamParamTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaParamTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		}
 		else if (rec instanceof CFBamJpaParam) {
 			CFBamJpaParam jparec = (CFBamJpaParam)rec;
-			CFBamJpaParam created = jpaHooksSchema.getParamService().create(jparec);
+			CFBamJpaParam created = schema.getJpaHooksSchema().getParamService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		}
 		else if (rec instanceof CFBamJpaParam) {
 			CFBamJpaParam jparec = (CFBamJpaParam)rec;
-			CFBamJpaParam updated = jpaHooksSchema.getParamService().update(jparec);
+			CFBamJpaParam updated = schema.getJpaHooksSchema().getParamService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		}
 		if (rec instanceof CFBamJpaParam) {
 			CFBamJpaParam jparec = (CFBamJpaParam)rec;
-			jpaHooksSchema.getParamService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getParamService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteParam", "rec", rec, "CFBamJpaParam");
@@ -175,7 +173,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getParamService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		String argName )
 	{
-		jpaHooksSchema.getParamService().deleteByUNameIdx(argServerMethodId,
+		schema.getJpaHooksSchema().getParamService().deleteByUNameIdx(argServerMethodId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByUNameIdx(argKey.getRequiredServerMethodId(),
+		schema.getJpaHooksSchema().getParamService().deleteByUNameIdx(argKey.getRequiredServerMethodId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByServerMethodIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argServerMethodId )
 	{
-		jpaHooksSchema.getParamService().deleteByServerMethodIdx(argServerMethodId);
+		schema.getJpaHooksSchema().getParamService().deleteByServerMethodIdx(argServerMethodId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByServerMethodIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByServerMethodIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByServerMethodIdx(argKey.getRequiredServerMethodId());
+		schema.getJpaHooksSchema().getParamService().deleteByServerMethodIdx(argKey.getRequiredServerMethodId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getParamService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getParamService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getParamService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByServerTypeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTypeId )
 	{
-		jpaHooksSchema.getParamService().deleteByServerTypeIdx(argTypeId);
+		schema.getJpaHooksSchema().getParamService().deleteByServerTypeIdx(argTypeId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByServerTypeIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByServerTypeIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByServerTypeIdx(argKey.getOptionalTypeId());
+		schema.getJpaHooksSchema().getParamService().deleteByServerTypeIdx(argKey.getOptionalTypeId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getParamService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getParamService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getParamService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getParamService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getParamService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getParamService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getParamService().deleteByContPrevIdx(argServerMethodId,
+		schema.getJpaHooksSchema().getParamService().deleteByContPrevIdx(argServerMethodId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByContPrevIdx(argKey.getRequiredServerMethodId(),
+		schema.getJpaHooksSchema().getParamService().deleteByContPrevIdx(argKey.getRequiredServerMethodId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getParamService().deleteByContNextIdx(argServerMethodId,
+		schema.getJpaHooksSchema().getParamService().deleteByContNextIdx(argServerMethodId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public void deleteParamByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getParamService().deleteByContNextIdx(argKey.getRequiredServerMethodId(),
+		schema.getJpaHooksSchema().getParamService().deleteByContNextIdx(argKey.getRequiredServerMethodId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getParamService().find(PKey) );
+		return( schema.getJpaHooksSchema().getParamService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getParamService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getParamService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	 */
 	@Override
 	public ICFBamParam[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findAll();
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findAll();
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getParamService().find(argId) );
+		return( schema.getJpaHooksSchema().getParamService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		String argName )
 	{
-		return( jpaHooksSchema.getParamService().findByUNameIdx(argServerMethodId,
+		return( schema.getJpaHooksSchema().getParamService().findByUNameIdx(argServerMethodId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam[] readDerivedByServerMethodIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argServerMethodId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByServerMethodIdx(argServerMethodId);
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByServerMethodIdx(argServerMethodId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam[] readDerivedByServerTypeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTypeId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByServerTypeIdx(argTypeId);
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByServerTypeIdx(argTypeId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByPrevIdx(argPrevId);
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByPrevIdx(argPrevId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -617,7 +615,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 	public ICFBamParam[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByNextIdx(argNextId);
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByNextIdx(argNextId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
 		for (CFBamJpaParam cur: results) {
@@ -642,7 +640,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByContPrevIdx(argServerMethodId,
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByContPrevIdx(argServerMethodId,
 		argPrevId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;
@@ -668,7 +666,7 @@ public class CFBamJpaParamTable implements ICFBamParamTable
 		CFLibDbKeyHash256 argServerMethodId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaParam> results = jpaHooksSchema.getParamService().findByContNextIdx(argServerMethodId,
+		List<CFBamJpaParam> results = schema.getJpaHooksSchema().getParamService().findByContNextIdx(argServerMethodId,
 		argNextId);
 		ICFBamParam[] retset = new ICFBamParam[results.size()];
 		int idx = 0;

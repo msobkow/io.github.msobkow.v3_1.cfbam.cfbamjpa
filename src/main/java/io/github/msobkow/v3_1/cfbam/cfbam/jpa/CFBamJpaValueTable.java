@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaValueTable database implementation for Value
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaValueTable implements ICFBamValueTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaValueTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		}
 		else if (rec instanceof CFBamJpaValue) {
 			CFBamJpaValue jparec = (CFBamJpaValue)rec;
-			CFBamJpaValue created = jpaHooksSchema.getValueService().create(jparec);
+			CFBamJpaValue created = schema.getJpaHooksSchema().getValueService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		}
 		else if (rec instanceof CFBamJpaValue) {
 			CFBamJpaValue jparec = (CFBamJpaValue)rec;
-			CFBamJpaValue updated = jpaHooksSchema.getValueService().update(jparec);
+			CFBamJpaValue updated = schema.getJpaHooksSchema().getValueService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		}
 		if (rec instanceof CFBamJpaValue) {
 			CFBamJpaValue jparec = (CFBamJpaValue)rec;
-			jpaHooksSchema.getValueService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getValueService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteValue", "rec", rec, "CFBamJpaValue");
@@ -175,7 +173,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getValueService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getValueService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getValueService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getValueService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getValueService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getValueService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getValueService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getValueService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getValueService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getValueService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getValueService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getValueService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getValueService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getValueService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getValueService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getValueService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getValueService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getValueService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getValueService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getValueService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getValueService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public void deleteValueByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getValueService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getValueService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getValueService().find(PKey) );
+		return( schema.getJpaHooksSchema().getValueService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getValueService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getValueService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	 */
 	@Override
 	public ICFBamValue[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findAll();
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findAll();
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
 		for (CFBamJpaValue cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getValueService().find(argId) );
+		return( schema.getJpaHooksSchema().getValueService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getValueService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getValueService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByScopeIdx(argScopeId);
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByScopeIdx(argScopeId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
 		for (CFBamJpaValue cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
 		for (CFBamJpaValue cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByPrevIdx(argPrevId);
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByPrevIdx(argPrevId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
 		for (CFBamJpaValue cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 	public ICFBamValue[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByNextIdx(argNextId);
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByNextIdx(argNextId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
 		for (CFBamJpaValue cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaValueTable implements ICFBamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaValue> results = jpaHooksSchema.getValueService().findByContNextIdx(argScopeId,
+		List<CFBamJpaValue> results = schema.getJpaHooksSchema().getValueService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamValue[] retset = new ICFBamValue[results.size()];
 		int idx = 0;

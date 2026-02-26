@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDbKeyHash384GenTable database implementation for DbKeyHash384Gen
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDbKeyHash384GenTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash384Gen) {
 			CFBamJpaDbKeyHash384Gen jparec = (CFBamJpaDbKeyHash384Gen)rec;
-			CFBamJpaDbKeyHash384Gen created = jpaHooksSchema.getDbKeyHash384GenService().create(jparec);
+			CFBamJpaDbKeyHash384Gen created = schema.getJpaHooksSchema().getDbKeyHash384GenService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash384Gen) {
 			CFBamJpaDbKeyHash384Gen jparec = (CFBamJpaDbKeyHash384Gen)rec;
-			CFBamJpaDbKeyHash384Gen updated = jpaHooksSchema.getDbKeyHash384GenService().update(jparec);
+			CFBamJpaDbKeyHash384Gen updated = schema.getJpaHooksSchema().getDbKeyHash384GenService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		}
 		if (rec instanceof CFBamJpaDbKeyHash384Gen) {
 			CFBamJpaDbKeyHash384Gen jparec = (CFBamJpaDbKeyHash384Gen)rec;
-			jpaHooksSchema.getDbKeyHash384GenService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDbKeyHash384Gen", "rec", rec, "CFBamJpaDbKeyHash384Gen");
@@ -175,7 +173,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash384TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public void deleteDbKeyHash384GenByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash384GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash384GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash384GenService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash384GenService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash384GenService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash384GenService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	 */
 	@Override
 	public ICFBamDbKeyHash384Gen[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findAll();
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findAll();
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDbKeyHash384GenService().find(argId) );
+		return( schema.getJpaHooksSchema().getDbKeyHash384GenService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDbKeyHash384GenService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDbKeyHash384GenService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByScopeIdx(argScopeId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByPrevIdx(argPrevId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByNextIdx(argNextId);
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByNextIdx(argNextId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDbKeyHash384GenTable implements ICFBamDbKeyHash384GenTable
 	public ICFBamDbKeyHash384Gen[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaDbKeyHash384Gen> results = jpaHooksSchema.getDbKeyHash384GenService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaDbKeyHash384Gen> results = schema.getJpaHooksSchema().getDbKeyHash384GenService().findBySchemaIdx(argSchemaDefId);
 		ICFBamDbKeyHash384Gen[] retset = new ICFBamDbKeyHash384Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash384Gen cur: results) {

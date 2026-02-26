@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDelSubDep2Table database implementation for DelSubDep2
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDelSubDep2Table(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		}
 		else if (rec instanceof CFBamJpaDelSubDep2) {
 			CFBamJpaDelSubDep2 jparec = (CFBamJpaDelSubDep2)rec;
-			CFBamJpaDelSubDep2 created = jpaHooksSchema.getDelSubDep2Service().create(jparec);
+			CFBamJpaDelSubDep2 created = schema.getJpaHooksSchema().getDelSubDep2Service().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		}
 		else if (rec instanceof CFBamJpaDelSubDep2) {
 			CFBamJpaDelSubDep2 jparec = (CFBamJpaDelSubDep2)rec;
-			CFBamJpaDelSubDep2 updated = jpaHooksSchema.getDelSubDep2Service().update(jparec);
+			CFBamJpaDelSubDep2 updated = schema.getJpaHooksSchema().getDelSubDep2Service().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		}
 		if (rec instanceof CFBamJpaDelSubDep2) {
 			CFBamJpaDelSubDep2 jparec = (CFBamJpaDelSubDep2)rec;
-			jpaHooksSchema.getDelSubDep2Service().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDelSubDep2Service().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDelSubDep2", "rec", rec, "CFBamJpaDelSubDep2");
@@ -175,7 +173,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByContDelDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDelSubDep1Id )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByContDelDep1Idx(argDelSubDep1Id);
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByContDelDep1Idx(argDelSubDep1Id);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByContDelDep1Idx( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep2ByContDelDep1IdxKey argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByContDelDep1Idx(argKey.getRequiredDelSubDep1Id());
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByContDelDep1Idx(argKey.getRequiredDelSubDep1Id());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		CFLibDbKeyHash256 argDelSubDep1Id,
 		String argName )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByUNameIdx(argDelSubDep1Id,
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByUNameIdx(argDelSubDep1Id,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep2ByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByUNameIdx(argKey.getRequiredDelSubDep1Id(),
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByUNameIdx(argKey.getRequiredDelSubDep1Id(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByDelDepIdx(argRelationId);
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByDelDepIdx(argRelationId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByDelDepIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDelDepIdxKey argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByDelDepIdx(argKey.getRequiredRelationId());
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByDelDepIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public void deleteDelSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getDelSubDep2Service().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getDelSubDep2Service().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -343,7 +341,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2 readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDelSubDep2Service().find(PKey) );
+		return( schema.getJpaHooksSchema().getDelSubDep2Service().find(PKey) );
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDelSubDep2Service().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDelSubDep2Service().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -372,7 +370,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	 */
 	@Override
 	public ICFBamDelSubDep2[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDelSubDep2> results = jpaHooksSchema.getDelSubDep2Service().findAll();
+		List<CFBamJpaDelSubDep2> results = schema.getJpaHooksSchema().getDelSubDep2Service().findAll();
 		ICFBamDelSubDep2[] retset = new ICFBamDelSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelSubDep2 cur: results) {
@@ -395,7 +393,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2 readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDelSubDep2Service().find(argId) );
+		return( schema.getJpaHooksSchema().getDelSubDep2Service().find(argId) );
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaDelSubDep2> results = jpaHooksSchema.getDelSubDep2Service().findByTenantIdx(argTenantId);
+		List<CFBamJpaDelSubDep2> results = schema.getJpaHooksSchema().getDelSubDep2Service().findByTenantIdx(argTenantId);
 		ICFBamDelSubDep2[] retset = new ICFBamDelSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelSubDep2 cur: results) {
@@ -433,7 +431,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDelSubDep2> results = jpaHooksSchema.getDelSubDep2Service().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDelSubDep2> results = schema.getJpaHooksSchema().getDelSubDep2Service().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDelSubDep2[] retset = new ICFBamDelSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelSubDep2 cur: results) {
@@ -455,7 +453,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2[] readDerivedByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaDelSubDep2> results = jpaHooksSchema.getDelSubDep2Service().findByDelDepIdx(argRelationId);
+		List<CFBamJpaDelSubDep2> results = schema.getJpaHooksSchema().getDelSubDep2Service().findByDelDepIdx(argRelationId);
 		ICFBamDelSubDep2[] retset = new ICFBamDelSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelSubDep2 cur: results) {
@@ -477,7 +475,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 	public ICFBamDelSubDep2[] readDerivedByContDelDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDelSubDep1Id )
 	{
-		List<CFBamJpaDelSubDep2> results = jpaHooksSchema.getDelSubDep2Service().findByContDelDep1Idx(argDelSubDep1Id);
+		List<CFBamJpaDelSubDep2> results = schema.getJpaHooksSchema().getDelSubDep2Service().findByContDelDep1Idx(argDelSubDep1Id);
 		ICFBamDelSubDep2[] retset = new ICFBamDelSubDep2[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelSubDep2 cur: results) {
@@ -503,7 +501,7 @@ public class CFBamJpaDelSubDep2Table implements ICFBamDelSubDep2Table
 		CFLibDbKeyHash256 argDelSubDep1Id,
 		String argName )
 	{
-		return( jpaHooksSchema.getDelSubDep2Service().findByUNameIdx(argDelSubDep1Id,
+		return( schema.getJpaHooksSchema().getDelSubDep2Service().findByUNameIdx(argDelSubDep1Id,
 		argName) );
 	}
 

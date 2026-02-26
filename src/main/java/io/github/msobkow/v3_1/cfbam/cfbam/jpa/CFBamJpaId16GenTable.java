@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaId16GenTable database implementation for Id16Gen
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaId16GenTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		}
 		else if (rec instanceof CFBamJpaId16Gen) {
 			CFBamJpaId16Gen jparec = (CFBamJpaId16Gen)rec;
-			CFBamJpaId16Gen created = jpaHooksSchema.getId16GenService().create(jparec);
+			CFBamJpaId16Gen created = schema.getJpaHooksSchema().getId16GenService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		}
 		else if (rec instanceof CFBamJpaId16Gen) {
 			CFBamJpaId16Gen jparec = (CFBamJpaId16Gen)rec;
-			CFBamJpaId16Gen updated = jpaHooksSchema.getId16GenService().update(jparec);
+			CFBamJpaId16Gen updated = schema.getJpaHooksSchema().getId16GenService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		}
 		if (rec instanceof CFBamJpaId16Gen) {
 			CFBamJpaId16Gen jparec = (CFBamJpaId16Gen)rec;
-			jpaHooksSchema.getId16GenService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getId16GenService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteId16Gen", "rec", rec, "CFBamJpaId16Gen");
@@ -175,7 +173,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getId16GenService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getId16GenService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamInt16TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getId16GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getId16GenService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getId16GenService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getId16GenService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getId16GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getId16GenService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getId16GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getId16GenService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getId16GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getId16GenService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getId16GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getId16GenService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getId16GenService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getId16GenService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getId16GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getId16GenService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getId16GenService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public void deleteId16GenByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getId16GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getId16GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getId16GenService().find(PKey) );
+		return( schema.getJpaHooksSchema().getId16GenService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getId16GenService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getId16GenService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	 */
 	@Override
 	public ICFBamId16Gen[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findAll();
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findAll();
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getId16GenService().find(argId) );
+		return( schema.getJpaHooksSchema().getId16GenService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getId16GenService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getId16GenService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByScopeIdx(argScopeId);
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByScopeIdx(argScopeId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByPrevIdx(argPrevId);
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByPrevIdx(argPrevId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByNextIdx(argNextId);
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByNextIdx(argNextId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findByContNextIdx(argScopeId,
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaId16GenTable implements ICFBamId16GenTable
 	public ICFBamId16Gen[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaId16Gen> results = jpaHooksSchema.getId16GenService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaId16Gen> results = schema.getJpaHooksSchema().getId16GenService().findBySchemaIdx(argSchemaDefId);
 		ICFBamId16Gen[] retset = new ICFBamId16Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaId16Gen cur: results) {

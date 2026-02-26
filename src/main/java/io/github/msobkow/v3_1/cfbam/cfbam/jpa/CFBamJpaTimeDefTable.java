@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTimeDefTable database implementation for TimeDef
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTimeDefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		}
 		else if (rec instanceof CFBamJpaTimeDef) {
 			CFBamJpaTimeDef jparec = (CFBamJpaTimeDef)rec;
-			CFBamJpaTimeDef created = jpaHooksSchema.getTimeDefService().create(jparec);
+			CFBamJpaTimeDef created = schema.getJpaHooksSchema().getTimeDefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		}
 		else if (rec instanceof CFBamJpaTimeDef) {
 			CFBamJpaTimeDef jparec = (CFBamJpaTimeDef)rec;
-			CFBamJpaTimeDef updated = jpaHooksSchema.getTimeDefService().update(jparec);
+			CFBamJpaTimeDef updated = schema.getJpaHooksSchema().getTimeDefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		}
 		if (rec instanceof CFBamJpaTimeDef) {
 			CFBamJpaTimeDef jparec = (CFBamJpaTimeDef)rec;
-			jpaHooksSchema.getTimeDefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTimeDefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTimeDef", "rec", rec, "CFBamJpaTimeDef");
@@ -175,7 +173,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTimeDefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimeDefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimeDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTimeDefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTimeDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTimeDefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTimeDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTimeDefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTimeDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTimeDefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTimeDefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimeDefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimeDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimeDefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public void deleteTimeDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTimeDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimeDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTimeDefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTimeDefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTimeDefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTimeDefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	 */
 	@Override
 	public ICFBamTimeDef[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findAll();
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findAll();
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimeDef cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTimeDefService().find(argId) );
+		return( schema.getJpaHooksSchema().getTimeDefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTimeDefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTimeDefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByScopeIdx(argScopeId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimeDef cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimeDef cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByPrevIdx(argPrevId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimeDef cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 	public ICFBamTimeDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByNextIdx(argNextId);
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByNextIdx(argNextId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimeDef cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaTimeDefTable implements ICFBamTimeDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTimeDef> results = jpaHooksSchema.getTimeDefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTimeDef> results = schema.getJpaHooksSchema().getTimeDefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTimeDef[] retset = new ICFBamTimeDef[results.size()];
 		int idx = 0;

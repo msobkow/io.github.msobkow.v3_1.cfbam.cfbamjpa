@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDateTypeTable database implementation for DateType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDateTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		}
 		else if (rec instanceof CFBamJpaDateType) {
 			CFBamJpaDateType jparec = (CFBamJpaDateType)rec;
-			CFBamJpaDateType created = jpaHooksSchema.getDateTypeService().create(jparec);
+			CFBamJpaDateType created = schema.getJpaHooksSchema().getDateTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		}
 		else if (rec instanceof CFBamJpaDateType) {
 			CFBamJpaDateType jparec = (CFBamJpaDateType)rec;
-			CFBamJpaDateType updated = jpaHooksSchema.getDateTypeService().update(jparec);
+			CFBamJpaDateType updated = schema.getJpaHooksSchema().getDateTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		}
 		if (rec instanceof CFBamJpaDateType) {
 			CFBamJpaDateType jparec = (CFBamJpaDateType)rec;
-			jpaHooksSchema.getDateTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDateTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDateType", "rec", rec, "CFBamJpaDateType");
@@ -175,7 +173,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getDateTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDateTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getDateTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDateTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDateTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDateTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDateTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDateTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDateTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDateTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDateTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDateTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDateTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDateTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDateTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDateTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDateTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public void deleteDateTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDateTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDateTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDateTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDateTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDateTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDateTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	 */
 	@Override
 	public ICFBamDateType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findAll();
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findAll();
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDateTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getDateTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDateTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDateTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByScopeIdx(argScopeId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByPrevIdx(argPrevId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByNextIdx(argNextId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDateTypeTable implements ICFBamDateTypeTable
 	public ICFBamDateType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaDateType> results = jpaHooksSchema.getDateTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaDateType> results = schema.getJpaHooksSchema().getDateTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamDateType[] retset = new ICFBamDateType[results.size()];
 		int idx = 0;
 		for (CFBamJpaDateType cur: results) {

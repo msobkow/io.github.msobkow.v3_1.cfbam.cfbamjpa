@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaBoolTypeTable database implementation for BoolType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaBoolTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		}
 		else if (rec instanceof CFBamJpaBoolType) {
 			CFBamJpaBoolType jparec = (CFBamJpaBoolType)rec;
-			CFBamJpaBoolType created = jpaHooksSchema.getBoolTypeService().create(jparec);
+			CFBamJpaBoolType created = schema.getJpaHooksSchema().getBoolTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		}
 		else if (rec instanceof CFBamJpaBoolType) {
 			CFBamJpaBoolType jparec = (CFBamJpaBoolType)rec;
-			CFBamJpaBoolType updated = jpaHooksSchema.getBoolTypeService().update(jparec);
+			CFBamJpaBoolType updated = schema.getJpaHooksSchema().getBoolTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		}
 		if (rec instanceof CFBamJpaBoolType) {
 			CFBamJpaBoolType jparec = (CFBamJpaBoolType)rec;
-			jpaHooksSchema.getBoolTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getBoolTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteBoolType", "rec", rec, "CFBamJpaBoolType");
@@ -175,7 +173,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamBoolTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getBoolTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public void deleteBoolTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getBoolTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getBoolTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getBoolTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getBoolTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getBoolTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getBoolTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	 */
 	@Override
 	public ICFBamBoolType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findAll();
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findAll();
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getBoolTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getBoolTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getBoolTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getBoolTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByScopeIdx(argScopeId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByPrevIdx(argPrevId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByNextIdx(argNextId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaBoolTypeTable implements ICFBamBoolTypeTable
 	public ICFBamBoolType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaBoolType> results = jpaHooksSchema.getBoolTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaBoolType> results = schema.getJpaHooksSchema().getBoolTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamBoolType[] retset = new ICFBamBoolType[results.size()];
 		int idx = 0;
 		for (CFBamJpaBoolType cur: results) {

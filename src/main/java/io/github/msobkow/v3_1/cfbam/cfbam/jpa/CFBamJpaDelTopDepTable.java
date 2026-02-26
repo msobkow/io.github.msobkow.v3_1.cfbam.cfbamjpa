@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDelTopDepTable database implementation for DelTopDep
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDelTopDepTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		}
 		else if (rec instanceof CFBamJpaDelTopDep) {
 			CFBamJpaDelTopDep jparec = (CFBamJpaDelTopDep)rec;
-			CFBamJpaDelTopDep created = jpaHooksSchema.getDelTopDepService().create(jparec);
+			CFBamJpaDelTopDep created = schema.getJpaHooksSchema().getDelTopDepService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		}
 		else if (rec instanceof CFBamJpaDelTopDep) {
 			CFBamJpaDelTopDep jparec = (CFBamJpaDelTopDep)rec;
-			CFBamJpaDelTopDep updated = jpaHooksSchema.getDelTopDepService().update(jparec);
+			CFBamJpaDelTopDep updated = schema.getJpaHooksSchema().getDelTopDepService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		}
 		if (rec instanceof CFBamJpaDelTopDep) {
 			CFBamJpaDelTopDep jparec = (CFBamJpaDelTopDep)rec;
-			jpaHooksSchema.getDelTopDepService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDelTopDepService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDelTopDep", "rec", rec, "CFBamJpaDelTopDep");
@@ -175,7 +173,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDelTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDelTopDepTblIdx(argTableId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDelTopDepTblIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDelTopDepTblIdx( ICFSecAuthorization Authorization,
 		ICFBamDelTopDepByDelTopDepTblIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDelTopDepTblIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDelTopDepTblIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamDelTopDepByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamDelTopDepByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamDelTopDepByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -311,7 +309,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -325,7 +323,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDelDepIdx(argRelationId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDelDepIdx(argRelationId);
 	}
 
 
@@ -340,7 +338,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByDelDepIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDelDepIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByDelDepIdx(argKey.getRequiredRelationId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByDelDepIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -354,7 +352,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -368,7 +366,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -383,7 +381,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public void deleteDelTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getDelTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getDelTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -401,7 +399,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDelTopDepService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDelTopDepService().find(PKey) );
 	}
 
 	/**
@@ -418,7 +416,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDelTopDepService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDelTopDepService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -430,7 +428,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	 */
 	@Override
 	public ICFBamDelTopDep[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findAll();
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findAll();
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -453,7 +451,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDelTopDepService().find(argId) );
+		return( schema.getJpaHooksSchema().getDelTopDepService().find(argId) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByTenantIdx(argTenantId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByTenantIdx(argTenantId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -491,7 +489,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -513,7 +511,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByDelDepIdx(argRelationId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByDelDepIdx(argRelationId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -535,7 +533,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByDelTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByDelTopDepTblIdx(argTableId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByDelTopDepTblIdx(argTableId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -561,7 +559,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDelTopDepService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getDelTopDepService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -578,7 +576,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByPrevIdx(argPrevId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {
@@ -600,7 +598,7 @@ public class CFBamJpaDelTopDepTable implements ICFBamDelTopDepTable
 	public ICFBamDelTopDep[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDelTopDep> results = jpaHooksSchema.getDelTopDepService().findByNextIdx(argNextId);
+		List<CFBamJpaDelTopDep> results = schema.getJpaHooksSchema().getDelTopDepService().findByNextIdx(argNextId);
 		ICFBamDelTopDep[] retset = new ICFBamDelTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaDelTopDep cur: results) {

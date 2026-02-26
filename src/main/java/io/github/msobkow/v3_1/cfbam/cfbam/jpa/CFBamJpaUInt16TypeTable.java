@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaUInt16TypeTable database implementation for UInt16Type
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaUInt16TypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		}
 		else if (rec instanceof CFBamJpaUInt16Type) {
 			CFBamJpaUInt16Type jparec = (CFBamJpaUInt16Type)rec;
-			CFBamJpaUInt16Type created = jpaHooksSchema.getUInt16TypeService().create(jparec);
+			CFBamJpaUInt16Type created = schema.getJpaHooksSchema().getUInt16TypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		}
 		else if (rec instanceof CFBamJpaUInt16Type) {
 			CFBamJpaUInt16Type jparec = (CFBamJpaUInt16Type)rec;
-			CFBamJpaUInt16Type updated = jpaHooksSchema.getUInt16TypeService().update(jparec);
+			CFBamJpaUInt16Type updated = schema.getJpaHooksSchema().getUInt16TypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		}
 		if (rec instanceof CFBamJpaUInt16Type) {
 			CFBamJpaUInt16Type jparec = (CFBamJpaUInt16Type)rec;
-			jpaHooksSchema.getUInt16TypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getUInt16TypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteUInt16Type", "rec", rec, "CFBamJpaUInt16Type");
@@ -175,7 +173,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamUInt16TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public void deleteUInt16TypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt16TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt16TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUInt16TypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getUInt16TypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUInt16TypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getUInt16TypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	 */
 	@Override
 	public ICFBamUInt16Type[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findAll();
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findAll();
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getUInt16TypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getUInt16TypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getUInt16TypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getUInt16TypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByScopeIdx(argScopeId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByPrevIdx(argPrevId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByNextIdx(argNextId);
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByNextIdx(argNextId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaUInt16TypeTable implements ICFBamUInt16TypeTable
 	public ICFBamUInt16Type[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaUInt16Type> results = jpaHooksSchema.getUInt16TypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaUInt16Type> results = schema.getJpaHooksSchema().getUInt16TypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamUInt16Type[] retset = new ICFBamUInt16Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt16Type cur: results) {

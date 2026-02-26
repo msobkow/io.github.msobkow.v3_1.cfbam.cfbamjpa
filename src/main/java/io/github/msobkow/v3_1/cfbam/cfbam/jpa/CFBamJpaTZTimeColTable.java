@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTZTimeColTable database implementation for TZTimeCol
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTZTimeColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		}
 		else if (rec instanceof CFBamJpaTZTimeCol) {
 			CFBamJpaTZTimeCol jparec = (CFBamJpaTZTimeCol)rec;
-			CFBamJpaTZTimeCol created = jpaHooksSchema.getTZTimeColService().create(jparec);
+			CFBamJpaTZTimeCol created = schema.getJpaHooksSchema().getTZTimeColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		}
 		else if (rec instanceof CFBamJpaTZTimeCol) {
 			CFBamJpaTZTimeCol jparec = (CFBamJpaTZTimeCol)rec;
-			CFBamJpaTZTimeCol updated = jpaHooksSchema.getTZTimeColService().update(jparec);
+			CFBamJpaTZTimeCol updated = schema.getJpaHooksSchema().getTZTimeColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		}
 		if (rec instanceof CFBamJpaTZTimeCol) {
 			CFBamJpaTZTimeCol jparec = (CFBamJpaTZTimeCol)rec;
-			jpaHooksSchema.getTZTimeColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTZTimeColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTZTimeCol", "rec", rec, "CFBamJpaTZTimeCol");
@@ -175,7 +173,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTZTimeColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public void deleteTZTimeColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimeColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimeColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTZTimeColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTZTimeColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTZTimeColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTZTimeColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	 */
 	@Override
 	public ICFBamTZTimeCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findAll();
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findAll();
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTZTimeColService().find(argId) );
+		return( schema.getJpaHooksSchema().getTZTimeColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTZTimeColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTZTimeColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByScopeIdx(argScopeId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByPrevIdx(argPrevId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByNextIdx(argNextId);
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByNextIdx(argNextId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaTZTimeColTable implements ICFBamTZTimeColTable
 	public ICFBamTZTimeCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaTZTimeCol> results = jpaHooksSchema.getTZTimeColService().findByTableIdx(argTableId);
+		List<CFBamJpaTZTimeCol> results = schema.getJpaHooksSchema().getTZTimeColService().findByTableIdx(argTableId);
 		ICFBamTZTimeCol[] retset = new ICFBamTZTimeCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimeCol cur: results) {

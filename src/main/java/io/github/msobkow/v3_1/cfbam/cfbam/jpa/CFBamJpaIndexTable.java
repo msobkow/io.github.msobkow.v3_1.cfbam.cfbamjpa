@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaIndexTable database implementation for Index
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaIndexTable implements ICFBamIndexTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaIndexTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		}
 		else if (rec instanceof CFBamJpaIndex) {
 			CFBamJpaIndex jparec = (CFBamJpaIndex)rec;
-			CFBamJpaIndex created = jpaHooksSchema.getIndexService().create(jparec);
+			CFBamJpaIndex created = schema.getJpaHooksSchema().getIndexService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		}
 		else if (rec instanceof CFBamJpaIndex) {
 			CFBamJpaIndex jparec = (CFBamJpaIndex)rec;
-			CFBamJpaIndex updated = jpaHooksSchema.getIndexService().update(jparec);
+			CFBamJpaIndex updated = schema.getJpaHooksSchema().getIndexService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		}
 		if (rec instanceof CFBamJpaIndex) {
 			CFBamJpaIndex jparec = (CFBamJpaIndex)rec;
-			jpaHooksSchema.getIndexService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getIndexService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteIndex", "rec", rec, "CFBamJpaIndex");
@@ -178,7 +176,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getIndexService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getIndexService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -194,7 +192,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamIndexByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getIndexService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getIndexService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -209,7 +207,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByIdxTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getIndexService().deleteByIdxTableIdx(argTableId);
+		schema.getJpaHooksSchema().getIndexService().deleteByIdxTableIdx(argTableId);
 	}
 
 
@@ -224,7 +222,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByIdxTableIdx( ICFSecAuthorization Authorization,
 		ICFBamIndexByIdxTableIdxKey argKey )
 	{
-		jpaHooksSchema.getIndexService().deleteByIdxTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getIndexService().deleteByIdxTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -238,7 +236,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getIndexService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getIndexService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamIndexByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getIndexService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getIndexService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getIndexService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getIndexService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getIndexService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getIndexService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public void deleteIndexByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getIndexService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getIndexService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -314,7 +312,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getIndexService().find(PKey) );
+		return( schema.getJpaHooksSchema().getIndexService().find(PKey) );
 	}
 
 	/**
@@ -331,7 +329,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getIndexService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getIndexService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -343,7 +341,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	 */
 	@Override
 	public ICFBamIndex[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaIndex> results = jpaHooksSchema.getIndexService().findAll();
+		List<CFBamJpaIndex> results = schema.getJpaHooksSchema().getIndexService().findAll();
 		ICFBamIndex[] retset = new ICFBamIndex[results.size()];
 		int idx = 0;
 		for (CFBamJpaIndex cur: results) {
@@ -366,7 +364,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getIndexService().find(argId) );
+		return( schema.getJpaHooksSchema().getIndexService().find(argId) );
 	}
 
 	/**
@@ -382,7 +380,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaIndex> results = jpaHooksSchema.getIndexService().findByTenantIdx(argTenantId);
+		List<CFBamJpaIndex> results = schema.getJpaHooksSchema().getIndexService().findByTenantIdx(argTenantId);
 		ICFBamIndex[] retset = new ICFBamIndex[results.size()];
 		int idx = 0;
 		for (CFBamJpaIndex cur: results) {
@@ -408,7 +406,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getIndexService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getIndexService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -425,7 +423,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex[] readDerivedByIdxTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaIndex> results = jpaHooksSchema.getIndexService().findByIdxTableIdx(argTableId);
+		List<CFBamJpaIndex> results = schema.getJpaHooksSchema().getIndexService().findByIdxTableIdx(argTableId);
 		ICFBamIndex[] retset = new ICFBamIndex[results.size()];
 		int idx = 0;
 		for (CFBamJpaIndex cur: results) {
@@ -447,7 +445,7 @@ public class CFBamJpaIndexTable implements ICFBamIndexTable
 	public ICFBamIndex[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaIndex> results = jpaHooksSchema.getIndexService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaIndex> results = schema.getJpaHooksSchema().getIndexService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamIndex[] retset = new ICFBamIndex[results.size()];
 		int idx = 0;
 		for (CFBamJpaIndex cur: results) {

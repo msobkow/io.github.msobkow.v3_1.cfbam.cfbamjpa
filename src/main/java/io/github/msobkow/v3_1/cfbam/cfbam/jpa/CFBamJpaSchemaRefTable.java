@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaSchemaRefTable database implementation for SchemaRef
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaSchemaRefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		}
 		else if (rec instanceof CFBamJpaSchemaRef) {
 			CFBamJpaSchemaRef jparec = (CFBamJpaSchemaRef)rec;
-			CFBamJpaSchemaRef created = jpaHooksSchema.getSchemaRefService().create(jparec);
+			CFBamJpaSchemaRef created = schema.getJpaHooksSchema().getSchemaRefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		}
 		else if (rec instanceof CFBamJpaSchemaRef) {
 			CFBamJpaSchemaRef jparec = (CFBamJpaSchemaRef)rec;
-			CFBamJpaSchemaRef updated = jpaHooksSchema.getSchemaRefService().update(jparec);
+			CFBamJpaSchemaRef updated = schema.getJpaHooksSchema().getSchemaRefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		}
 		if (rec instanceof CFBamJpaSchemaRef) {
 			CFBamJpaSchemaRef jparec = (CFBamJpaSchemaRef)rec;
-			jpaHooksSchema.getSchemaRefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getSchemaRefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteSchemaRef", "rec", rec, "CFBamJpaSchemaRef");
@@ -175,7 +173,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaId )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteBySchemaIdx(argSchemaId);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteBySchemaIdx(argSchemaId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaRefBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteBySchemaIdx(argKey.getRequiredSchemaId());
+		schema.getJpaHooksSchema().getSchemaRefService().deleteBySchemaIdx(argKey.getRequiredSchemaId());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		CFLibDbKeyHash256 argSchemaId,
 		String argName )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByUNameIdx(argSchemaId,
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByUNameIdx(argSchemaId,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaRefByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByUNameIdx(argKey.getRequiredSchemaId(),
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByUNameIdx(argKey.getRequiredSchemaId(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByRefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRefSchemaId )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByRefSchemaIdx(argRefSchemaId);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByRefSchemaIdx(argRefSchemaId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByRefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaRefByRefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByRefSchemaIdx(argKey.getOptionalRefSchemaId());
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByRefSchemaIdx(argKey.getOptionalRefSchemaId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaRefByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -311,7 +309,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaRefByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -325,7 +323,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public void deleteSchemaRefByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getSchemaRefService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getSchemaRefService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -372,7 +370,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getSchemaRefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getSchemaRefService().find(PKey) );
 	}
 
 	/**
@@ -389,7 +387,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getSchemaRefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getSchemaRefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -401,7 +399,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	 */
 	@Override
 	public ICFBamSchemaRef[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findAll();
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findAll();
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {
@@ -424,7 +422,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getSchemaRefService().find(argId) );
+		return( schema.getJpaHooksSchema().getSchemaRefService().find(argId) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findByTenantIdx(argTenantId);
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findByTenantIdx(argTenantId);
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {
@@ -462,7 +460,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaId )
 	{
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findBySchemaIdx(argSchemaId);
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findBySchemaIdx(argSchemaId);
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {
@@ -488,7 +486,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 		CFLibDbKeyHash256 argSchemaId,
 		String argName )
 	{
-		return( jpaHooksSchema.getSchemaRefService().findByUNameIdx(argSchemaId,
+		return( schema.getJpaHooksSchema().getSchemaRefService().findByUNameIdx(argSchemaId,
 		argName) );
 	}
 
@@ -505,7 +503,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef[] readDerivedByRefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRefSchemaId )
 	{
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findByRefSchemaIdx(argRefSchemaId);
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findByRefSchemaIdx(argRefSchemaId);
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {
@@ -527,7 +525,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findByPrevIdx(argPrevId);
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {
@@ -549,7 +547,7 @@ public class CFBamJpaSchemaRefTable implements ICFBamSchemaRefTable
 	public ICFBamSchemaRef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaSchemaRef> results = jpaHooksSchema.getSchemaRefService().findByNextIdx(argNextId);
+		List<CFBamJpaSchemaRef> results = schema.getJpaHooksSchema().getSchemaRefService().findByNextIdx(argNextId);
 		ICFBamSchemaRef[] retset = new ICFBamSchemaRef[results.size()];
 		int idx = 0;
 		for (CFBamJpaSchemaRef cur: results) {

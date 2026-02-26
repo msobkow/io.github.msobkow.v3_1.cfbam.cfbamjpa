@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaEnumDefTable database implementation for EnumDef
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaEnumDefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		}
 		else if (rec instanceof CFBamJpaEnumDef) {
 			CFBamJpaEnumDef jparec = (CFBamJpaEnumDef)rec;
-			CFBamJpaEnumDef created = jpaHooksSchema.getEnumDefService().create(jparec);
+			CFBamJpaEnumDef created = schema.getJpaHooksSchema().getEnumDefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		}
 		else if (rec instanceof CFBamJpaEnumDef) {
 			CFBamJpaEnumDef jparec = (CFBamJpaEnumDef)rec;
-			CFBamJpaEnumDef updated = jpaHooksSchema.getEnumDefService().update(jparec);
+			CFBamJpaEnumDef updated = schema.getJpaHooksSchema().getEnumDefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		}
 		if (rec instanceof CFBamJpaEnumDef) {
 			CFBamJpaEnumDef jparec = (CFBamJpaEnumDef)rec;
-			jpaHooksSchema.getEnumDefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getEnumDefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteEnumDef", "rec", rec, "CFBamJpaEnumDef");
@@ -175,7 +173,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getEnumDefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getEnumDefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getEnumDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getEnumDefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getEnumDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getEnumDefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getEnumDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getEnumDefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getEnumDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getEnumDefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getEnumDefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getEnumDefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getEnumDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getEnumDefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public void deleteEnumDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getEnumDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getEnumDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getEnumDefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getEnumDefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getEnumDefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getEnumDefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	 */
 	@Override
 	public ICFBamEnumDef[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findAll();
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findAll();
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumDef cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getEnumDefService().find(argId) );
+		return( schema.getJpaHooksSchema().getEnumDefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getEnumDefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getEnumDefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByScopeIdx(argScopeId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumDef cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumDef cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByPrevIdx(argPrevId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumDef cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 	public ICFBamEnumDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByNextIdx(argNextId);
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByNextIdx(argNextId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaEnumDef cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaEnumDefTable implements ICFBamEnumDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaEnumDef> results = jpaHooksSchema.getEnumDefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaEnumDef> results = schema.getJpaHooksSchema().getEnumDefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamEnumDef[] retset = new ICFBamEnumDef[results.size()];
 		int idx = 0;

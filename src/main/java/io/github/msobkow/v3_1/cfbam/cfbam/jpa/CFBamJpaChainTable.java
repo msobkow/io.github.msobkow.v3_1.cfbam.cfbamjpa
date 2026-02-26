@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaChainTable database implementation for Chain
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaChainTable implements ICFBamChainTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaChainTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		}
 		else if (rec instanceof CFBamJpaChain) {
 			CFBamJpaChain jparec = (CFBamJpaChain)rec;
-			CFBamJpaChain created = jpaHooksSchema.getChainService().create(jparec);
+			CFBamJpaChain created = schema.getJpaHooksSchema().getChainService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		}
 		else if (rec instanceof CFBamJpaChain) {
 			CFBamJpaChain jparec = (CFBamJpaChain)rec;
-			CFBamJpaChain updated = jpaHooksSchema.getChainService().update(jparec);
+			CFBamJpaChain updated = schema.getJpaHooksSchema().getChainService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		}
 		if (rec instanceof CFBamJpaChain) {
 			CFBamJpaChain jparec = (CFBamJpaChain)rec;
-			jpaHooksSchema.getChainService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getChainService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteChain", "rec", rec, "CFBamJpaChain");
@@ -175,7 +173,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getChainService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -189,7 +187,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getChainService().deleteByChainTableIdx(argTableId);
+		schema.getJpaHooksSchema().getChainService().deleteByChainTableIdx(argTableId);
 	}
 
 
@@ -204,7 +202,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByChainTableIdxKey argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByChainTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getChainService().deleteByChainTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -218,7 +216,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getChainService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getChainService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -233,7 +231,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getChainService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -250,7 +248,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getChainService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getChainService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -266,7 +264,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getChainService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -281,7 +279,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevRelationId )
 	{
-		jpaHooksSchema.getChainService().deleteByPrevRelIdx(argPrevRelationId);
+		schema.getJpaHooksSchema().getChainService().deleteByPrevRelIdx(argPrevRelationId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByPrevRelIdxKey argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByPrevRelIdx(argKey.getRequiredPrevRelationId());
+		schema.getJpaHooksSchema().getChainService().deleteByPrevRelIdx(argKey.getRequiredPrevRelationId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextRelationId )
 	{
-		jpaHooksSchema.getChainService().deleteByNextRelIdx(argNextRelationId);
+		schema.getJpaHooksSchema().getChainService().deleteByNextRelIdx(argNextRelationId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByNextRelIdxKey argKey )
 	{
-		jpaHooksSchema.getChainService().deleteByNextRelIdx(argKey.getRequiredNextRelationId());
+		schema.getJpaHooksSchema().getChainService().deleteByNextRelIdx(argKey.getRequiredNextRelationId());
 	}
 
 
@@ -343,7 +341,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getChainService().find(PKey) );
+		return( schema.getJpaHooksSchema().getChainService().find(PKey) );
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getChainService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getChainService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -372,7 +370,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	 */
 	@Override
 	public ICFBamChain[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaChain> results = jpaHooksSchema.getChainService().findAll();
+		List<CFBamJpaChain> results = schema.getJpaHooksSchema().getChainService().findAll();
 		ICFBamChain[] retset = new ICFBamChain[results.size()];
 		int idx = 0;
 		for (CFBamJpaChain cur: results) {
@@ -395,7 +393,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getChainService().find(argId) );
+		return( schema.getJpaHooksSchema().getChainService().find(argId) );
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain[] readDerivedByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaChain> results = jpaHooksSchema.getChainService().findByChainTableIdx(argTableId);
+		List<CFBamJpaChain> results = schema.getJpaHooksSchema().getChainService().findByChainTableIdx(argTableId);
 		ICFBamChain[] retset = new ICFBamChain[results.size()];
 		int idx = 0;
 		for (CFBamJpaChain cur: results) {
@@ -433,7 +431,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaChain> results = jpaHooksSchema.getChainService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaChain> results = schema.getJpaHooksSchema().getChainService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamChain[] retset = new ICFBamChain[results.size()];
 		int idx = 0;
 		for (CFBamJpaChain cur: results) {
@@ -459,7 +457,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getChainService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getChainService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -476,7 +474,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain[] readDerivedByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevRelationId )
 	{
-		List<CFBamJpaChain> results = jpaHooksSchema.getChainService().findByPrevRelIdx(argPrevRelationId);
+		List<CFBamJpaChain> results = schema.getJpaHooksSchema().getChainService().findByPrevRelIdx(argPrevRelationId);
 		ICFBamChain[] retset = new ICFBamChain[results.size()];
 		int idx = 0;
 		for (CFBamJpaChain cur: results) {
@@ -498,7 +496,7 @@ public class CFBamJpaChainTable implements ICFBamChainTable
 	public ICFBamChain[] readDerivedByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextRelationId )
 	{
-		List<CFBamJpaChain> results = jpaHooksSchema.getChainService().findByNextRelIdx(argNextRelationId);
+		List<CFBamJpaChain> results = schema.getJpaHooksSchema().getChainService().findByNextRelIdx(argNextRelationId);
 		ICFBamChain[] retset = new ICFBamChain[results.size()];
 		int idx = 0;
 		for (CFBamJpaChain cur: results) {

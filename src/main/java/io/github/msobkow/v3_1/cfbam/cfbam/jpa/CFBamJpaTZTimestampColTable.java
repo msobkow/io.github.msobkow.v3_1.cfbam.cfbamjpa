@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTZTimestampColTable database implementation for TZTimestampCol
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTZTimestampColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		}
 		else if (rec instanceof CFBamJpaTZTimestampCol) {
 			CFBamJpaTZTimestampCol jparec = (CFBamJpaTZTimestampCol)rec;
-			CFBamJpaTZTimestampCol created = jpaHooksSchema.getTZTimestampColService().create(jparec);
+			CFBamJpaTZTimestampCol created = schema.getJpaHooksSchema().getTZTimestampColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		}
 		else if (rec instanceof CFBamJpaTZTimestampCol) {
 			CFBamJpaTZTimestampCol jparec = (CFBamJpaTZTimestampCol)rec;
-			CFBamJpaTZTimestampCol updated = jpaHooksSchema.getTZTimestampColService().update(jparec);
+			CFBamJpaTZTimestampCol updated = schema.getJpaHooksSchema().getTZTimestampColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		}
 		if (rec instanceof CFBamJpaTZTimestampCol) {
 			CFBamJpaTZTimestampCol jparec = (CFBamJpaTZTimestampCol)rec;
-			jpaHooksSchema.getTZTimestampColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTZTimestampColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTZTimestampCol", "rec", rec, "CFBamJpaTZTimestampCol");
@@ -175,7 +173,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTZTimestampColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public void deleteTZTimestampColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTZTimestampColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTZTimestampColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTZTimestampColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTZTimestampColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTZTimestampColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTZTimestampColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	 */
 	@Override
 	public ICFBamTZTimestampCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findAll();
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findAll();
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTZTimestampColService().find(argId) );
+		return( schema.getJpaHooksSchema().getTZTimestampColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTZTimestampColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTZTimestampColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByScopeIdx(argScopeId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByPrevIdx(argPrevId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByNextIdx(argNextId);
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByNextIdx(argNextId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaTZTimestampColTable implements ICFBamTZTimestampColTable
 	public ICFBamTZTimestampCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaTZTimestampCol> results = jpaHooksSchema.getTZTimestampColService().findByTableIdx(argTableId);
+		List<CFBamJpaTZTimestampCol> results = schema.getJpaHooksSchema().getTZTimestampColService().findByTableIdx(argTableId);
 		ICFBamTZTimestampCol[] retset = new ICFBamTZTimestampCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaTZTimestampCol cur: results) {

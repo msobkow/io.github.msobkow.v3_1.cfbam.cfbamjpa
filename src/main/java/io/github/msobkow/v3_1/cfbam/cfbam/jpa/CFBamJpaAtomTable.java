@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaAtomTable database implementation for Atom
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaAtomTable implements ICFBamAtomTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaAtomTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		}
 		else if (rec instanceof CFBamJpaAtom) {
 			CFBamJpaAtom jparec = (CFBamJpaAtom)rec;
-			CFBamJpaAtom created = jpaHooksSchema.getAtomService().create(jparec);
+			CFBamJpaAtom created = schema.getJpaHooksSchema().getAtomService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		}
 		else if (rec instanceof CFBamJpaAtom) {
 			CFBamJpaAtom jparec = (CFBamJpaAtom)rec;
-			CFBamJpaAtom updated = jpaHooksSchema.getAtomService().update(jparec);
+			CFBamJpaAtom updated = schema.getJpaHooksSchema().getAtomService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		}
 		if (rec instanceof CFBamJpaAtom) {
 			CFBamJpaAtom jparec = (CFBamJpaAtom)rec;
-			jpaHooksSchema.getAtomService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getAtomService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteAtom", "rec", rec, "CFBamJpaAtom");
@@ -175,7 +173,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getAtomService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getAtomService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getAtomService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getAtomService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getAtomService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getAtomService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getAtomService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getAtomService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getAtomService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getAtomService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getAtomService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getAtomService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getAtomService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getAtomService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getAtomService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getAtomService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getAtomService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getAtomService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getAtomService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getAtomService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getAtomService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public void deleteAtomByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getAtomService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getAtomService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getAtomService().find(PKey) );
+		return( schema.getJpaHooksSchema().getAtomService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getAtomService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getAtomService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	 */
 	@Override
 	public ICFBamAtom[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findAll();
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findAll();
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
 		for (CFBamJpaAtom cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getAtomService().find(argId) );
+		return( schema.getJpaHooksSchema().getAtomService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getAtomService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getAtomService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByScopeIdx(argScopeId);
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByScopeIdx(argScopeId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
 		for (CFBamJpaAtom cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
 		for (CFBamJpaAtom cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByPrevIdx(argPrevId);
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByPrevIdx(argPrevId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
 		for (CFBamJpaAtom cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 	public ICFBamAtom[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByNextIdx(argNextId);
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByNextIdx(argNextId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
 		for (CFBamJpaAtom cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaAtomTable implements ICFBamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaAtom> results = jpaHooksSchema.getAtomService().findByContNextIdx(argScopeId,
+		List<CFBamJpaAtom> results = schema.getJpaHooksSchema().getAtomService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamAtom[] retset = new ICFBamAtom[results.size()];
 		int idx = 0;

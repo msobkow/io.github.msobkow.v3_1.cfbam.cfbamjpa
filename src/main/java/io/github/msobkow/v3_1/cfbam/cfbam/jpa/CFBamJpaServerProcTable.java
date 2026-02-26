@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaServerProcTable database implementation for ServerProc
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaServerProcTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		}
 		else if (rec instanceof CFBamJpaServerProc) {
 			CFBamJpaServerProc jparec = (CFBamJpaServerProc)rec;
-			CFBamJpaServerProc created = jpaHooksSchema.getServerProcService().create(jparec);
+			CFBamJpaServerProc created = schema.getJpaHooksSchema().getServerProcService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		}
 		else if (rec instanceof CFBamJpaServerProc) {
 			CFBamJpaServerProc jparec = (CFBamJpaServerProc)rec;
-			CFBamJpaServerProc updated = jpaHooksSchema.getServerProcService().update(jparec);
+			CFBamJpaServerProc updated = schema.getJpaHooksSchema().getServerProcService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		}
 		if (rec instanceof CFBamJpaServerProc) {
 			CFBamJpaServerProc jparec = (CFBamJpaServerProc)rec;
-			jpaHooksSchema.getServerProcService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getServerProcService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteServerProc", "rec", rec, "CFBamJpaServerProc");
@@ -178,7 +176,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getServerProcService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getServerProcService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -194,7 +192,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getServerProcService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getServerProcService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -209,7 +207,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getServerProcService().deleteByMethTableIdx(argTableId);
+		schema.getJpaHooksSchema().getServerProcService().deleteByMethTableIdx(argTableId);
 	}
 
 
@@ -224,7 +222,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
-		jpaHooksSchema.getServerProcService().deleteByMethTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getServerProcService().deleteByMethTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -238,7 +236,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getServerProcService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getServerProcService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getServerProcService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getServerProcService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getServerProcService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getServerProcService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getServerProcService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getServerProcService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public void deleteServerProcByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getServerProcService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getServerProcService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -314,7 +312,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getServerProcService().find(PKey) );
+		return( schema.getJpaHooksSchema().getServerProcService().find(PKey) );
 	}
 
 	/**
@@ -331,7 +329,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getServerProcService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getServerProcService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -343,7 +341,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	 */
 	@Override
 	public ICFBamServerProc[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaServerProc> results = jpaHooksSchema.getServerProcService().findAll();
+		List<CFBamJpaServerProc> results = schema.getJpaHooksSchema().getServerProcService().findAll();
 		ICFBamServerProc[] retset = new ICFBamServerProc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerProc cur: results) {
@@ -366,7 +364,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getServerProcService().find(argId) );
+		return( schema.getJpaHooksSchema().getServerProcService().find(argId) );
 	}
 
 	/**
@@ -382,7 +380,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaServerProc> results = jpaHooksSchema.getServerProcService().findByTenantIdx(argTenantId);
+		List<CFBamJpaServerProc> results = schema.getJpaHooksSchema().getServerProcService().findByTenantIdx(argTenantId);
 		ICFBamServerProc[] retset = new ICFBamServerProc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerProc cur: results) {
@@ -408,7 +406,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getServerProcService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getServerProcService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -425,7 +423,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc[] readDerivedByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaServerProc> results = jpaHooksSchema.getServerProcService().findByMethTableIdx(argTableId);
+		List<CFBamJpaServerProc> results = schema.getJpaHooksSchema().getServerProcService().findByMethTableIdx(argTableId);
 		ICFBamServerProc[] retset = new ICFBamServerProc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerProc cur: results) {
@@ -447,7 +445,7 @@ public class CFBamJpaServerProcTable implements ICFBamServerProcTable
 	public ICFBamServerProc[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaServerProc> results = jpaHooksSchema.getServerProcService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaServerProc> results = schema.getJpaHooksSchema().getServerProcService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamServerProc[] retset = new ICFBamServerProc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerProc cur: results) {

@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaScopeTable database implementation for Scope
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaScopeTable implements ICFBamScopeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaScopeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 		}
 		else if (rec instanceof CFBamJpaScope) {
 			CFBamJpaScope jparec = (CFBamJpaScope)rec;
-			CFBamJpaScope created = jpaHooksSchema.getScopeService().create(jparec);
+			CFBamJpaScope created = schema.getJpaHooksSchema().getScopeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 		}
 		else if (rec instanceof CFBamJpaScope) {
 			CFBamJpaScope jparec = (CFBamJpaScope)rec;
-			CFBamJpaScope updated = jpaHooksSchema.getScopeService().update(jparec);
+			CFBamJpaScope updated = schema.getJpaHooksSchema().getScopeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 		}
 		if (rec instanceof CFBamJpaScope) {
 			CFBamJpaScope jparec = (CFBamJpaScope)rec;
-			jpaHooksSchema.getScopeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getScopeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteScope", "rec", rec, "CFBamJpaScope");
@@ -175,7 +173,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getScopeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getScopeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -189,7 +187,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getScopeService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getScopeService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -204,7 +202,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getScopeService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getScopeService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -222,7 +220,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public ICFBamScope readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getScopeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getScopeService().find(PKey) );
 	}
 
 	/**
@@ -239,7 +237,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public ICFBamScope lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getScopeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getScopeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -251,7 +249,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	 */
 	@Override
 	public ICFBamScope[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaScope> results = jpaHooksSchema.getScopeService().findAll();
+		List<CFBamJpaScope> results = schema.getJpaHooksSchema().getScopeService().findAll();
 		ICFBamScope[] retset = new ICFBamScope[results.size()];
 		int idx = 0;
 		for (CFBamJpaScope cur: results) {
@@ -274,7 +272,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public ICFBamScope readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getScopeService().find(argId) );
+		return( schema.getJpaHooksSchema().getScopeService().find(argId) );
 	}
 
 	/**
@@ -290,7 +288,7 @@ public class CFBamJpaScopeTable implements ICFBamScopeTable
 	public ICFBamScope[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaScope> results = jpaHooksSchema.getScopeService().findByTenantIdx(argTenantId);
+		List<CFBamJpaScope> results = schema.getJpaHooksSchema().getScopeService().findByTenantIdx(argTenantId);
 		ICFBamScope[] retset = new ICFBamScope[results.size()];
 		int idx = 0;
 		for (CFBamJpaScope cur: results) {

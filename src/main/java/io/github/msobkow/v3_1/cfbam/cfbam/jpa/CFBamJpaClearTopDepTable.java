@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaClearTopDepTable database implementation for ClearTopDep
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaClearTopDepTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		}
 		else if (rec instanceof CFBamJpaClearTopDep) {
 			CFBamJpaClearTopDep jparec = (CFBamJpaClearTopDep)rec;
-			CFBamJpaClearTopDep created = jpaHooksSchema.getClearTopDepService().create(jparec);
+			CFBamJpaClearTopDep created = schema.getJpaHooksSchema().getClearTopDepService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		}
 		else if (rec instanceof CFBamJpaClearTopDep) {
 			CFBamJpaClearTopDep jparec = (CFBamJpaClearTopDep)rec;
-			CFBamJpaClearTopDep updated = jpaHooksSchema.getClearTopDepService().update(jparec);
+			CFBamJpaClearTopDep updated = schema.getJpaHooksSchema().getClearTopDepService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		}
 		if (rec instanceof CFBamJpaClearTopDep) {
 			CFBamJpaClearTopDep jparec = (CFBamJpaClearTopDep)rec;
-			jpaHooksSchema.getClearTopDepService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getClearTopDepService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteClearTopDep", "rec", rec, "CFBamJpaClearTopDep");
@@ -175,7 +173,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByClrTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByClrTopDepTblIdx(argTableId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByClrTopDepTblIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByClrTopDepTblIdx( ICFSecAuthorization Authorization,
 		ICFBamClearTopDepByClrTopDepTblIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByClrTopDepTblIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByClrTopDepTblIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamClearTopDepByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamClearTopDepByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamClearTopDepByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByClearDepIdx(argRelationId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByClearDepIdx(argRelationId);
 	}
 
 
@@ -311,7 +309,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByClearDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByClearDepIdx(argKey.getRequiredRelationId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByClearDepIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -325,7 +323,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -340,7 +338,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -354,7 +352,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -368,7 +366,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -383,7 +381,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public void deleteClearTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getClearTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getClearTopDepService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -401,7 +399,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getClearTopDepService().find(PKey) );
+		return( schema.getJpaHooksSchema().getClearTopDepService().find(PKey) );
 	}
 
 	/**
@@ -418,7 +416,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getClearTopDepService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getClearTopDepService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -430,7 +428,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	 */
 	@Override
 	public ICFBamClearTopDep[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findAll();
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findAll();
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -453,7 +451,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getClearTopDepService().find(argId) );
+		return( schema.getJpaHooksSchema().getClearTopDepService().find(argId) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByTenantIdx(argTenantId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByTenantIdx(argTenantId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -491,7 +489,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByClearDepIdx(argRelationId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByClearDepIdx(argRelationId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -513,7 +511,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -535,7 +533,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByClrTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByClrTopDepTblIdx(argTableId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByClrTopDepTblIdx(argTableId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -561,7 +559,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getClearTopDepService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getClearTopDepService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -578,7 +576,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByPrevIdx(argPrevId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByPrevIdx(argPrevId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {
@@ -600,7 +598,7 @@ public class CFBamJpaClearTopDepTable implements ICFBamClearTopDepTable
 	public ICFBamClearTopDep[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaClearTopDep> results = jpaHooksSchema.getClearTopDepService().findByNextIdx(argNextId);
+		List<CFBamJpaClearTopDep> results = schema.getJpaHooksSchema().getClearTopDepService().findByNextIdx(argNextId);
 		ICFBamClearTopDep[] retset = new ICFBamClearTopDep[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearTopDep cur: results) {

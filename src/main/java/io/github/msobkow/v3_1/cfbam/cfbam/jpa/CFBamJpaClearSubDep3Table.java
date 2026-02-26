@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaClearSubDep3Table database implementation for ClearSubDep3
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaClearSubDep3Table(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		}
 		else if (rec instanceof CFBamJpaClearSubDep3) {
 			CFBamJpaClearSubDep3 jparec = (CFBamJpaClearSubDep3)rec;
-			CFBamJpaClearSubDep3 created = jpaHooksSchema.getClearSubDep3Service().create(jparec);
+			CFBamJpaClearSubDep3 created = schema.getJpaHooksSchema().getClearSubDep3Service().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		}
 		else if (rec instanceof CFBamJpaClearSubDep3) {
 			CFBamJpaClearSubDep3 jparec = (CFBamJpaClearSubDep3)rec;
-			CFBamJpaClearSubDep3 updated = jpaHooksSchema.getClearSubDep3Service().update(jparec);
+			CFBamJpaClearSubDep3 updated = schema.getJpaHooksSchema().getClearSubDep3Service().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		}
 		if (rec instanceof CFBamJpaClearSubDep3) {
 			CFBamJpaClearSubDep3 jparec = (CFBamJpaClearSubDep3)rec;
-			jpaHooksSchema.getClearSubDep3Service().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getClearSubDep3Service().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteClearSubDep3", "rec", rec, "CFBamJpaClearSubDep3");
@@ -175,7 +173,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByClearSubDep2Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep2Id )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByClearSubDep2Idx(argClearSubDep2Id);
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByClearSubDep2Idx(argClearSubDep2Id);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByClearSubDep2Idx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep3ByClearSubDep2IdxKey argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByClearSubDep2Idx(argKey.getRequiredClearSubDep2Id());
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByClearSubDep2Idx(argKey.getRequiredClearSubDep2Id());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		CFLibDbKeyHash256 argClearSubDep2Id,
 		String argName )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByUNameIdx(argClearSubDep2Id,
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByUNameIdx(argClearSubDep2Id,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep3ByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByUNameIdx(argKey.getRequiredClearSubDep2Id(),
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByUNameIdx(argKey.getRequiredClearSubDep2Id(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByClearDepIdx(argRelationId);
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByClearDepIdx(argRelationId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByClearDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByClearDepIdx(argKey.getRequiredRelationId());
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByClearDepIdx(argKey.getRequiredRelationId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public void deleteClearSubDep3ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getClearSubDep3Service().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getClearSubDep3Service().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -343,7 +341,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3 readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getClearSubDep3Service().find(PKey) );
+		return( schema.getJpaHooksSchema().getClearSubDep3Service().find(PKey) );
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getClearSubDep3Service().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getClearSubDep3Service().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -372,7 +370,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	 */
 	@Override
 	public ICFBamClearSubDep3[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaClearSubDep3> results = jpaHooksSchema.getClearSubDep3Service().findAll();
+		List<CFBamJpaClearSubDep3> results = schema.getJpaHooksSchema().getClearSubDep3Service().findAll();
 		ICFBamClearSubDep3[] retset = new ICFBamClearSubDep3[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep3 cur: results) {
@@ -395,7 +393,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3 readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getClearSubDep3Service().find(argId) );
+		return( schema.getJpaHooksSchema().getClearSubDep3Service().find(argId) );
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaClearSubDep3> results = jpaHooksSchema.getClearSubDep3Service().findByTenantIdx(argTenantId);
+		List<CFBamJpaClearSubDep3> results = schema.getJpaHooksSchema().getClearSubDep3Service().findByTenantIdx(argTenantId);
 		ICFBamClearSubDep3[] retset = new ICFBamClearSubDep3[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep3 cur: results) {
@@ -433,7 +431,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3[] readDerivedByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		List<CFBamJpaClearSubDep3> results = jpaHooksSchema.getClearSubDep3Service().findByClearDepIdx(argRelationId);
+		List<CFBamJpaClearSubDep3> results = schema.getJpaHooksSchema().getClearSubDep3Service().findByClearDepIdx(argRelationId);
 		ICFBamClearSubDep3[] retset = new ICFBamClearSubDep3[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep3 cur: results) {
@@ -455,7 +453,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaClearSubDep3> results = jpaHooksSchema.getClearSubDep3Service().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaClearSubDep3> results = schema.getJpaHooksSchema().getClearSubDep3Service().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamClearSubDep3[] retset = new ICFBamClearSubDep3[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep3 cur: results) {
@@ -477,7 +475,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 	public ICFBamClearSubDep3[] readDerivedByClearSubDep2Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep2Id )
 	{
-		List<CFBamJpaClearSubDep3> results = jpaHooksSchema.getClearSubDep3Service().findByClearSubDep2Idx(argClearSubDep2Id);
+		List<CFBamJpaClearSubDep3> results = schema.getJpaHooksSchema().getClearSubDep3Service().findByClearSubDep2Idx(argClearSubDep2Id);
 		ICFBamClearSubDep3[] retset = new ICFBamClearSubDep3[results.size()];
 		int idx = 0;
 		for (CFBamJpaClearSubDep3 cur: results) {
@@ -503,7 +501,7 @@ public class CFBamJpaClearSubDep3Table implements ICFBamClearSubDep3Table
 		CFLibDbKeyHash256 argClearSubDep2Id,
 		String argName )
 	{
-		return( jpaHooksSchema.getClearSubDep3Service().findByUNameIdx(argClearSubDep2Id,
+		return( schema.getJpaHooksSchema().getClearSubDep3Service().findByUNameIdx(argClearSubDep2Id,
 		argName) );
 	}
 

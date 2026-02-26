@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDbKeyHash512GenTable database implementation for DbKeyHash512Gen
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDbKeyHash512GenTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash512Gen) {
 			CFBamJpaDbKeyHash512Gen jparec = (CFBamJpaDbKeyHash512Gen)rec;
-			CFBamJpaDbKeyHash512Gen created = jpaHooksSchema.getDbKeyHash512GenService().create(jparec);
+			CFBamJpaDbKeyHash512Gen created = schema.getJpaHooksSchema().getDbKeyHash512GenService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash512Gen) {
 			CFBamJpaDbKeyHash512Gen jparec = (CFBamJpaDbKeyHash512Gen)rec;
-			CFBamJpaDbKeyHash512Gen updated = jpaHooksSchema.getDbKeyHash512GenService().update(jparec);
+			CFBamJpaDbKeyHash512Gen updated = schema.getJpaHooksSchema().getDbKeyHash512GenService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		}
 		if (rec instanceof CFBamJpaDbKeyHash512Gen) {
 			CFBamJpaDbKeyHash512Gen jparec = (CFBamJpaDbKeyHash512Gen)rec;
-			jpaHooksSchema.getDbKeyHash512GenService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDbKeyHash512Gen", "rec", rec, "CFBamJpaDbKeyHash512Gen");
@@ -175,7 +173,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash512TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public void deleteDbKeyHash512GenByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512GenService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash512GenService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512GenService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash512GenService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512GenService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	 */
 	@Override
 	public ICFBamDbKeyHash512Gen[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findAll();
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findAll();
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDbKeyHash512GenService().find(argId) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512GenService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDbKeyHash512GenService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDbKeyHash512GenService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByScopeIdx(argScopeId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByPrevIdx(argPrevId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByNextIdx(argNextId);
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByNextIdx(argNextId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDbKeyHash512GenTable implements ICFBamDbKeyHash512GenTable
 	public ICFBamDbKeyHash512Gen[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaDbKeyHash512Gen> results = jpaHooksSchema.getDbKeyHash512GenService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaDbKeyHash512Gen> results = schema.getJpaHooksSchema().getDbKeyHash512GenService().findBySchemaIdx(argSchemaDefId);
 		ICFBamDbKeyHash512Gen[] retset = new ICFBamDbKeyHash512Gen[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Gen cur: results) {

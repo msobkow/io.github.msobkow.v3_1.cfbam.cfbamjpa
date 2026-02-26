@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaRelationTable database implementation for Relation
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaRelationTable implements ICFBamRelationTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaRelationTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		}
 		else if (rec instanceof CFBamJpaRelation) {
 			CFBamJpaRelation jparec = (CFBamJpaRelation)rec;
-			CFBamJpaRelation created = jpaHooksSchema.getRelationService().create(jparec);
+			CFBamJpaRelation created = schema.getJpaHooksSchema().getRelationService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		}
 		else if (rec instanceof CFBamJpaRelation) {
 			CFBamJpaRelation jparec = (CFBamJpaRelation)rec;
-			CFBamJpaRelation updated = jpaHooksSchema.getRelationService().update(jparec);
+			CFBamJpaRelation updated = schema.getJpaHooksSchema().getRelationService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		}
 		if (rec instanceof CFBamJpaRelation) {
 			CFBamJpaRelation jparec = (CFBamJpaRelation)rec;
-			jpaHooksSchema.getRelationService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getRelationService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteRelation", "rec", rec, "CFBamJpaRelation");
@@ -178,7 +176,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getRelationService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getRelationService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -194,7 +192,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getRelationService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -209,7 +207,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByRelTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getRelationService().deleteByRelTableIdx(argTableId);
+		schema.getJpaHooksSchema().getRelationService().deleteByRelTableIdx(argTableId);
 	}
 
 
@@ -224,7 +222,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByRelTableIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByRelTableIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByRelTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getRelationService().deleteByRelTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -238,7 +236,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getRelationService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getRelationService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getRelationService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByFromKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argFromIndexId )
 	{
-		jpaHooksSchema.getRelationService().deleteByFromKeyIdx(argFromIndexId);
+		schema.getJpaHooksSchema().getRelationService().deleteByFromKeyIdx(argFromIndexId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByFromKeyIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByFromKeyIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByFromKeyIdx(argKey.getRequiredFromIndexId());
+		schema.getJpaHooksSchema().getRelationService().deleteByFromKeyIdx(argKey.getRequiredFromIndexId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByToTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToTableId )
 	{
-		jpaHooksSchema.getRelationService().deleteByToTblIdx(argToTableId);
+		schema.getJpaHooksSchema().getRelationService().deleteByToTblIdx(argToTableId);
 	}
 
 
@@ -311,7 +309,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByToTblIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByToTblIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByToTblIdx(argKey.getRequiredToTableId());
+		schema.getJpaHooksSchema().getRelationService().deleteByToTblIdx(argKey.getRequiredToTableId());
 	}
 
 	/**
@@ -325,7 +323,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByToKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToIndexId )
 	{
-		jpaHooksSchema.getRelationService().deleteByToKeyIdx(argToIndexId);
+		schema.getJpaHooksSchema().getRelationService().deleteByToKeyIdx(argToIndexId);
 	}
 
 
@@ -340,7 +338,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByToKeyIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByToKeyIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByToKeyIdx(argKey.getRequiredToIndexId());
+		schema.getJpaHooksSchema().getRelationService().deleteByToKeyIdx(argKey.getRequiredToIndexId());
 	}
 
 	/**
@@ -354,7 +352,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByNarrowedIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNarrowedId )
 	{
-		jpaHooksSchema.getRelationService().deleteByNarrowedIdx(argNarrowedId);
+		schema.getJpaHooksSchema().getRelationService().deleteByNarrowedIdx(argNarrowedId);
 	}
 
 
@@ -369,7 +367,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByNarrowedIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByNarrowedIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByNarrowedIdx(argKey.getOptionalNarrowedId());
+		schema.getJpaHooksSchema().getRelationService().deleteByNarrowedIdx(argKey.getOptionalNarrowedId());
 	}
 
 	/**
@@ -383,7 +381,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getRelationService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -397,7 +395,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getRelationService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getRelationService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -412,7 +410,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public void deleteRelationByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getRelationService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getRelationService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -430,7 +428,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getRelationService().find(PKey) );
+		return( schema.getJpaHooksSchema().getRelationService().find(PKey) );
 	}
 
 	/**
@@ -447,7 +445,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getRelationService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getRelationService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -459,7 +457,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	 */
 	@Override
 	public ICFBamRelation[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findAll();
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findAll();
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -482,7 +480,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getRelationService().find(argId) );
+		return( schema.getJpaHooksSchema().getRelationService().find(argId) );
 	}
 
 	/**
@@ -498,7 +496,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByTenantIdx(argTenantId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByTenantIdx(argTenantId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -524,7 +522,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getRelationService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getRelationService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -541,7 +539,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByRelTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByRelTableIdx(argTableId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByRelTableIdx(argTableId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -563,7 +561,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -585,7 +583,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByFromKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argFromIndexId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByFromKeyIdx(argFromIndexId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByFromKeyIdx(argFromIndexId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -607,7 +605,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByToTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToTableId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByToTblIdx(argToTableId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByToTblIdx(argToTableId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -629,7 +627,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByToKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToIndexId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByToKeyIdx(argToIndexId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByToKeyIdx(argToIndexId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {
@@ -651,7 +649,7 @@ public class CFBamJpaRelationTable implements ICFBamRelationTable
 	public ICFBamRelation[] readDerivedByNarrowedIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNarrowedId )
 	{
-		List<CFBamJpaRelation> results = jpaHooksSchema.getRelationService().findByNarrowedIdx(argNarrowedId);
+		List<CFBamJpaRelation> results = schema.getJpaHooksSchema().getRelationService().findByNarrowedIdx(argNarrowedId);
 		ICFBamRelation[] retset = new ICFBamRelation[results.size()];
 		int idx = 0;
 		for (CFBamJpaRelation cur: results) {

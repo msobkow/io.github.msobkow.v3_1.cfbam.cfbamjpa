@@ -32,7 +32,7 @@
  *	
  */
 
-package io.github.msobkow.v3_1.cfbam.cfbamjpahooks;
+package io.github.msobkow.v3_1.cfbam.cfbam.jpa;
 
 import java.io.Serializable;
 import java.math.*;

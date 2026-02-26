@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDbKeyHash512ColTable database implementation for DbKeyHash512Col
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDbKeyHash512ColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash512Col) {
 			CFBamJpaDbKeyHash512Col jparec = (CFBamJpaDbKeyHash512Col)rec;
-			CFBamJpaDbKeyHash512Col created = jpaHooksSchema.getDbKeyHash512ColService().create(jparec);
+			CFBamJpaDbKeyHash512Col created = schema.getJpaHooksSchema().getDbKeyHash512ColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash512Col) {
 			CFBamJpaDbKeyHash512Col jparec = (CFBamJpaDbKeyHash512Col)rec;
-			CFBamJpaDbKeyHash512Col updated = jpaHooksSchema.getDbKeyHash512ColService().update(jparec);
+			CFBamJpaDbKeyHash512Col updated = schema.getJpaHooksSchema().getDbKeyHash512ColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		}
 		if (rec instanceof CFBamJpaDbKeyHash512Col) {
 			CFBamJpaDbKeyHash512Col jparec = (CFBamJpaDbKeyHash512Col)rec;
-			jpaHooksSchema.getDbKeyHash512ColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDbKeyHash512Col", "rec", rec, "CFBamJpaDbKeyHash512Col");
@@ -175,7 +173,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash512ColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public void deleteDbKeyHash512ColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash512ColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash512ColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash512ColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512ColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash512ColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512ColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	 */
 	@Override
 	public ICFBamDbKeyHash512Col[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findAll();
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findAll();
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDbKeyHash512ColService().find(argId) );
+		return( schema.getJpaHooksSchema().getDbKeyHash512ColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDbKeyHash512ColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDbKeyHash512ColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByScopeIdx(argScopeId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByPrevIdx(argPrevId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByNextIdx(argNextId);
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByNextIdx(argNextId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDbKeyHash512ColTable implements ICFBamDbKeyHash512ColTable
 	public ICFBamDbKeyHash512Col[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaDbKeyHash512Col> results = jpaHooksSchema.getDbKeyHash512ColService().findByTableIdx(argTableId);
+		List<CFBamJpaDbKeyHash512Col> results = schema.getJpaHooksSchema().getDbKeyHash512ColService().findByTableIdx(argTableId);
 		ICFBamDbKeyHash512Col[] retset = new ICFBamDbKeyHash512Col[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash512Col cur: results) {

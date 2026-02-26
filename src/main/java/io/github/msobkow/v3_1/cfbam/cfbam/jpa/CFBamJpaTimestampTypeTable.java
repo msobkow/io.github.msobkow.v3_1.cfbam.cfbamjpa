@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTimestampTypeTable database implementation for TimestampType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTimestampTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		}
 		else if (rec instanceof CFBamJpaTimestampType) {
 			CFBamJpaTimestampType jparec = (CFBamJpaTimestampType)rec;
-			CFBamJpaTimestampType created = jpaHooksSchema.getTimestampTypeService().create(jparec);
+			CFBamJpaTimestampType created = schema.getJpaHooksSchema().getTimestampTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		}
 		else if (rec instanceof CFBamJpaTimestampType) {
 			CFBamJpaTimestampType jparec = (CFBamJpaTimestampType)rec;
-			CFBamJpaTimestampType updated = jpaHooksSchema.getTimestampTypeService().update(jparec);
+			CFBamJpaTimestampType updated = schema.getJpaHooksSchema().getTimestampTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		}
 		if (rec instanceof CFBamJpaTimestampType) {
 			CFBamJpaTimestampType jparec = (CFBamJpaTimestampType)rec;
-			jpaHooksSchema.getTimestampTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTimestampTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTimestampType", "rec", rec, "CFBamJpaTimestampType");
@@ -175,7 +173,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTimestampTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public void deleteTimestampTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTimestampTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTimestampTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTimestampTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTimestampTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTimestampTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTimestampTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	 */
 	@Override
 	public ICFBamTimestampType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findAll();
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findAll();
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTimestampTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getTimestampTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTimestampTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTimestampTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByScopeIdx(argScopeId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByPrevIdx(argPrevId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByNextIdx(argNextId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaTimestampTypeTable implements ICFBamTimestampTypeTable
 	public ICFBamTimestampType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaTimestampType> results = jpaHooksSchema.getTimestampTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaTimestampType> results = schema.getJpaHooksSchema().getTimestampTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamTimestampType[] retset = new ICFBamTimestampType[results.size()];
 		int idx = 0;
 		for (CFBamJpaTimestampType cur: results) {

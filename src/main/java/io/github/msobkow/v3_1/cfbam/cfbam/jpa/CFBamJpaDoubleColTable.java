@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDoubleColTable database implementation for DoubleCol
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDoubleColTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		}
 		else if (rec instanceof CFBamJpaDoubleCol) {
 			CFBamJpaDoubleCol jparec = (CFBamJpaDoubleCol)rec;
-			CFBamJpaDoubleCol created = jpaHooksSchema.getDoubleColService().create(jparec);
+			CFBamJpaDoubleCol created = schema.getJpaHooksSchema().getDoubleColService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		}
 		else if (rec instanceof CFBamJpaDoubleCol) {
 			CFBamJpaDoubleCol jparec = (CFBamJpaDoubleCol)rec;
-			CFBamJpaDoubleCol updated = jpaHooksSchema.getDoubleColService().update(jparec);
+			CFBamJpaDoubleCol updated = schema.getJpaHooksSchema().getDoubleColService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		}
 		if (rec instanceof CFBamJpaDoubleCol) {
 			CFBamJpaDoubleCol jparec = (CFBamJpaDoubleCol)rec;
-			jpaHooksSchema.getDoubleColService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDoubleColService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDoubleCol", "rec", rec, "CFBamJpaDoubleCol");
@@ -175,7 +173,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByTableIdx(argTableId);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByTableIdx(argTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamDoubleColByTableIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getDoubleColService().deleteByTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDoubleColService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDoubleColService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDoubleColService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDoubleColService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDoubleColService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDoubleColService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDoubleColService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDoubleColService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDoubleColService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDoubleColService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public void deleteDoubleColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDoubleColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDoubleColService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDoubleColService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDoubleColService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDoubleColService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDoubleColService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	 */
 	@Override
 	public ICFBamDoubleCol[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findAll();
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findAll();
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDoubleColService().find(argId) );
+		return( schema.getJpaHooksSchema().getDoubleColService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDoubleColService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDoubleColService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByScopeIdx(argScopeId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByPrevIdx(argPrevId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByNextIdx(argNextId);
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByNextIdx(argNextId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDoubleColTable implements ICFBamDoubleColTable
 	public ICFBamDoubleCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaDoubleCol> results = jpaHooksSchema.getDoubleColService().findByTableIdx(argTableId);
+		List<CFBamJpaDoubleCol> results = schema.getJpaHooksSchema().getDoubleColService().findByTableIdx(argTableId);
 		ICFBamDoubleCol[] retset = new ICFBamDoubleCol[results.size()];
 		int idx = 0;
 		for (CFBamJpaDoubleCol cur: results) {

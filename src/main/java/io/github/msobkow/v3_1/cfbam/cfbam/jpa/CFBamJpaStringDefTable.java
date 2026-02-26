@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaStringDefTable database implementation for StringDef
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaStringDefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		}
 		else if (rec instanceof CFBamJpaStringDef) {
 			CFBamJpaStringDef jparec = (CFBamJpaStringDef)rec;
-			CFBamJpaStringDef created = jpaHooksSchema.getStringDefService().create(jparec);
+			CFBamJpaStringDef created = schema.getJpaHooksSchema().getStringDefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		}
 		else if (rec instanceof CFBamJpaStringDef) {
 			CFBamJpaStringDef jparec = (CFBamJpaStringDef)rec;
-			CFBamJpaStringDef updated = jpaHooksSchema.getStringDefService().update(jparec);
+			CFBamJpaStringDef updated = schema.getJpaHooksSchema().getStringDefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		}
 		if (rec instanceof CFBamJpaStringDef) {
 			CFBamJpaStringDef jparec = (CFBamJpaStringDef)rec;
-			jpaHooksSchema.getStringDefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getStringDefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteStringDef", "rec", rec, "CFBamJpaStringDef");
@@ -175,7 +173,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getStringDefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getStringDefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringDefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getStringDefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getStringDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getStringDefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getStringDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getStringDefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getStringDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getStringDefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getStringDefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringDefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getStringDefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getStringDefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public void deleteStringDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getStringDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getStringDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getStringDefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getStringDefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getStringDefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getStringDefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	 */
 	@Override
 	public ICFBamStringDef[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findAll();
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findAll();
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringDef cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getStringDefService().find(argId) );
+		return( schema.getJpaHooksSchema().getStringDefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getStringDefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getStringDefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByScopeIdx(argScopeId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringDef cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringDef cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByPrevIdx(argPrevId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringDef cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 	public ICFBamStringDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByNextIdx(argNextId);
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByNextIdx(argNextId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaStringDef cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaStringDefTable implements ICFBamStringDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaStringDef> results = jpaHooksSchema.getStringDefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaStringDef> results = schema.getJpaHooksSchema().getStringDefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamStringDef[] retset = new ICFBamStringDef[results.size()];
 		int idx = 0;

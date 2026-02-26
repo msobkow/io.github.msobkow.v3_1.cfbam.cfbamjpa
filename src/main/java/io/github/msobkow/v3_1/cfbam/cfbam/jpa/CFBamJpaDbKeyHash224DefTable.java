@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDbKeyHash224DefTable database implementation for DbKeyHash224Def
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDbKeyHash224DefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash224Def) {
 			CFBamJpaDbKeyHash224Def jparec = (CFBamJpaDbKeyHash224Def)rec;
-			CFBamJpaDbKeyHash224Def created = jpaHooksSchema.getDbKeyHash224DefService().create(jparec);
+			CFBamJpaDbKeyHash224Def created = schema.getJpaHooksSchema().getDbKeyHash224DefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash224Def) {
 			CFBamJpaDbKeyHash224Def jparec = (CFBamJpaDbKeyHash224Def)rec;
-			CFBamJpaDbKeyHash224Def updated = jpaHooksSchema.getDbKeyHash224DefService().update(jparec);
+			CFBamJpaDbKeyHash224Def updated = schema.getJpaHooksSchema().getDbKeyHash224DefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		}
 		if (rec instanceof CFBamJpaDbKeyHash224Def) {
 			CFBamJpaDbKeyHash224Def jparec = (CFBamJpaDbKeyHash224Def)rec;
-			jpaHooksSchema.getDbKeyHash224DefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDbKeyHash224Def", "rec", rec, "CFBamJpaDbKeyHash224Def");
@@ -175,7 +173,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public void deleteDbKeyHash224DefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash224DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash224DefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash224DefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash224DefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash224DefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash224DefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	 */
 	@Override
 	public ICFBamDbKeyHash224Def[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findAll();
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findAll();
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash224Def cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDbKeyHash224DefService().find(argId) );
+		return( schema.getJpaHooksSchema().getDbKeyHash224DefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDbKeyHash224DefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDbKeyHash224DefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByScopeIdx(argScopeId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash224Def cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash224Def cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByPrevIdx(argPrevId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash224Def cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 	public ICFBamDbKeyHash224Def[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByNextIdx(argNextId);
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByNextIdx(argNextId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash224Def cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaDbKeyHash224DefTable implements ICFBamDbKeyHash224DefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash224Def> results = jpaHooksSchema.getDbKeyHash224DefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDbKeyHash224Def> results = schema.getJpaHooksSchema().getDbKeyHash224DefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDbKeyHash224Def[] retset = new ICFBamDbKeyHash224Def[results.size()];
 		int idx = 0;

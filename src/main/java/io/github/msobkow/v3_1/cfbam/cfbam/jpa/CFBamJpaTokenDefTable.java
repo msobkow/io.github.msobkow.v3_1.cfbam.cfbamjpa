@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaTokenDefTable database implementation for TokenDef
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaTokenDefTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		}
 		else if (rec instanceof CFBamJpaTokenDef) {
 			CFBamJpaTokenDef jparec = (CFBamJpaTokenDef)rec;
-			CFBamJpaTokenDef created = jpaHooksSchema.getTokenDefService().create(jparec);
+			CFBamJpaTokenDef created = schema.getJpaHooksSchema().getTokenDefService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		}
 		else if (rec instanceof CFBamJpaTokenDef) {
 			CFBamJpaTokenDef jparec = (CFBamJpaTokenDef)rec;
-			CFBamJpaTokenDef updated = jpaHooksSchema.getTokenDefService().update(jparec);
+			CFBamJpaTokenDef updated = schema.getJpaHooksSchema().getTokenDefService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		}
 		if (rec instanceof CFBamJpaTokenDef) {
 			CFBamJpaTokenDef jparec = (CFBamJpaTokenDef)rec;
-			jpaHooksSchema.getTokenDefService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getTokenDefService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteTokenDef", "rec", rec, "CFBamJpaTokenDef");
@@ -175,7 +173,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getTokenDefService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -192,7 +190,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getTokenDefService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -208,7 +206,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTokenDefService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getTokenDefService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -238,7 +236,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getTokenDefService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getTokenDefService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getTokenDefService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getTokenDefService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getTokenDefService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getTokenDefService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getTokenDefService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -342,7 +340,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getTokenDefService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -358,7 +356,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTokenDefService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -376,7 +374,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getTokenDefService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -392,7 +390,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public void deleteTokenDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getTokenDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getTokenDefService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -411,7 +409,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTokenDefService().find(PKey) );
+		return( schema.getJpaHooksSchema().getTokenDefService().find(PKey) );
 	}
 
 	/**
@@ -428,7 +426,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getTokenDefService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getTokenDefService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -440,7 +438,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	 */
 	@Override
 	public ICFBamTokenDef[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findAll();
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findAll();
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTokenDef cur: results) {
@@ -463,7 +461,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getTokenDefService().find(argId) );
+		return( schema.getJpaHooksSchema().getTokenDefService().find(argId) );
 	}
 
 	/**
@@ -483,7 +481,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getTokenDefService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getTokenDefService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -500,7 +498,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByScopeIdx(argScopeId);
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByScopeIdx(argScopeId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTokenDef cur: results) {
@@ -522,7 +520,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTokenDef cur: results) {
@@ -544,7 +542,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByPrevIdx(argPrevId);
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByPrevIdx(argPrevId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTokenDef cur: results) {
@@ -566,7 +564,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 	public ICFBamTokenDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByNextIdx(argNextId);
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByNextIdx(argNextId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
 		for (CFBamJpaTokenDef cur: results) {
@@ -591,7 +589,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;
@@ -617,7 +615,7 @@ public class CFBamJpaTokenDefTable implements ICFBamTokenDefTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaTokenDef> results = jpaHooksSchema.getTokenDefService().findByContNextIdx(argScopeId,
+		List<CFBamJpaTokenDef> results = schema.getJpaHooksSchema().getTokenDefService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamTokenDef[] retset = new ICFBamTokenDef[results.size()];
 		int idx = 0;

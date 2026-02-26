@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaServerListFuncTable database implementation for ServerListFunc
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaServerListFuncTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		}
 		else if (rec instanceof CFBamJpaServerListFunc) {
 			CFBamJpaServerListFunc jparec = (CFBamJpaServerListFunc)rec;
-			CFBamJpaServerListFunc created = jpaHooksSchema.getServerListFuncService().create(jparec);
+			CFBamJpaServerListFunc created = schema.getJpaHooksSchema().getServerListFuncService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		}
 		else if (rec instanceof CFBamJpaServerListFunc) {
 			CFBamJpaServerListFunc jparec = (CFBamJpaServerListFunc)rec;
-			CFBamJpaServerListFunc updated = jpaHooksSchema.getServerListFuncService().update(jparec);
+			CFBamJpaServerListFunc updated = schema.getJpaHooksSchema().getServerListFuncService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		}
 		if (rec instanceof CFBamJpaServerListFunc) {
 			CFBamJpaServerListFunc jparec = (CFBamJpaServerListFunc)rec;
-			jpaHooksSchema.getServerListFuncService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getServerListFuncService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteServerListFunc", "rec", rec, "CFBamJpaServerListFunc");
@@ -175,7 +173,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRetTableId )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByRetTblIdx(argRetTableId);
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByRetTblIdx(argRetTableId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		ICFBamServerListFuncByRetTblIdxKey argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByRetTblIdx(argKey.getOptionalRetTableId());
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByRetTblIdx(argKey.getOptionalRetTableId());
 	}
 
 	/**
@@ -207,7 +205,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByUNameIdx(argTableId,
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByUNameIdx(argTableId,
 		argName);
 	}
 
@@ -223,7 +221,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByUNameIdx(argKey.getRequiredTableId(),
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByUNameIdx(argKey.getRequiredTableId(),
 			argKey.getRequiredName());
 	}
 
@@ -238,7 +236,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByMethTableIdx(argTableId);
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByMethTableIdx(argTableId);
 	}
 
 
@@ -253,7 +251,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByMethTableIdx(argKey.getRequiredTableId());
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByMethTableIdx(argKey.getRequiredTableId());
 	}
 
 	/**
@@ -267,7 +265,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -282,7 +280,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByTenantIdx(argTenantId);
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByTenantIdx(argTenantId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public void deleteServerListFuncByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		jpaHooksSchema.getServerListFuncService().deleteByTenantIdx(argKey.getRequiredTenantId());
+		schema.getJpaHooksSchema().getServerListFuncService().deleteByTenantIdx(argKey.getRequiredTenantId());
 	}
 
 
@@ -343,7 +341,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getServerListFuncService().find(PKey) );
+		return( schema.getJpaHooksSchema().getServerListFuncService().find(PKey) );
 	}
 
 	/**
@@ -360,7 +358,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getServerListFuncService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getServerListFuncService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -372,7 +370,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	 */
 	@Override
 	public ICFBamServerListFunc[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaServerListFunc> results = jpaHooksSchema.getServerListFuncService().findAll();
+		List<CFBamJpaServerListFunc> results = schema.getJpaHooksSchema().getServerListFuncService().findAll();
 		ICFBamServerListFunc[] retset = new ICFBamServerListFunc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerListFunc cur: results) {
@@ -395,7 +393,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getServerListFuncService().find(argId) );
+		return( schema.getJpaHooksSchema().getServerListFuncService().find(argId) );
 	}
 
 	/**
@@ -411,7 +409,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		List<CFBamJpaServerListFunc> results = jpaHooksSchema.getServerListFuncService().findByTenantIdx(argTenantId);
+		List<CFBamJpaServerListFunc> results = schema.getJpaHooksSchema().getServerListFuncService().findByTenantIdx(argTenantId);
 		ICFBamServerListFunc[] retset = new ICFBamServerListFunc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerListFunc cur: results) {
@@ -437,7 +435,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		return( jpaHooksSchema.getServerListFuncService().findByUNameIdx(argTableId,
+		return( schema.getJpaHooksSchema().getServerListFuncService().findByUNameIdx(argTableId,
 		argName) );
 	}
 
@@ -454,7 +452,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc[] readDerivedByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		List<CFBamJpaServerListFunc> results = jpaHooksSchema.getServerListFuncService().findByMethTableIdx(argTableId);
+		List<CFBamJpaServerListFunc> results = schema.getJpaHooksSchema().getServerListFuncService().findByMethTableIdx(argTableId);
 		ICFBamServerListFunc[] retset = new ICFBamServerListFunc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerListFunc cur: results) {
@@ -476,7 +474,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaServerListFunc> results = jpaHooksSchema.getServerListFuncService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaServerListFunc> results = schema.getJpaHooksSchema().getServerListFuncService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamServerListFunc[] retset = new ICFBamServerListFunc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerListFunc cur: results) {
@@ -498,7 +496,7 @@ public class CFBamJpaServerListFuncTable implements ICFBamServerListFuncTable
 	public ICFBamServerListFunc[] readDerivedByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRetTableId )
 	{
-		List<CFBamJpaServerListFunc> results = jpaHooksSchema.getServerListFuncService().findByRetTblIdx(argRetTableId);
+		List<CFBamJpaServerListFunc> results = schema.getJpaHooksSchema().getServerListFuncService().findByRetTblIdx(argRetTableId);
 		ICFBamServerListFunc[] retset = new ICFBamServerListFunc[results.size()];
 		int idx = 0;
 		for (CFBamJpaServerListFunc cur: results) {

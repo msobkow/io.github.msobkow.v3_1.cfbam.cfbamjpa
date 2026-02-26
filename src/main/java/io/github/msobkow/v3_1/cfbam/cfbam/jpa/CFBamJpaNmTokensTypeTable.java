@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaNmTokensTypeTable database implementation for NmTokensType
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaNmTokensTypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		}
 		else if (rec instanceof CFBamJpaNmTokensType) {
 			CFBamJpaNmTokensType jparec = (CFBamJpaNmTokensType)rec;
-			CFBamJpaNmTokensType created = jpaHooksSchema.getNmTokensTypeService().create(jparec);
+			CFBamJpaNmTokensType created = schema.getJpaHooksSchema().getNmTokensTypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		}
 		else if (rec instanceof CFBamJpaNmTokensType) {
 			CFBamJpaNmTokensType jparec = (CFBamJpaNmTokensType)rec;
-			CFBamJpaNmTokensType updated = jpaHooksSchema.getNmTokensTypeService().update(jparec);
+			CFBamJpaNmTokensType updated = schema.getJpaHooksSchema().getNmTokensTypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		}
 		if (rec instanceof CFBamJpaNmTokensType) {
 			CFBamJpaNmTokensType jparec = (CFBamJpaNmTokensType)rec;
-			jpaHooksSchema.getNmTokensTypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getNmTokensTypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteNmTokensType", "rec", rec, "CFBamJpaNmTokensType");
@@ -175,7 +173,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamNmTokensTypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public void deleteNmTokensTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getNmTokensTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getNmTokensTypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getNmTokensTypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getNmTokensTypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getNmTokensTypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getNmTokensTypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	 */
 	@Override
 	public ICFBamNmTokensType[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findAll();
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findAll();
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getNmTokensTypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getNmTokensTypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getNmTokensTypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getNmTokensTypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByScopeIdx(argScopeId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByPrevIdx(argPrevId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByNextIdx(argNextId);
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByNextIdx(argNextId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaNmTokensTypeTable implements ICFBamNmTokensTypeTable
 	public ICFBamNmTokensType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaNmTokensType> results = jpaHooksSchema.getNmTokensTypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaNmTokensType> results = schema.getJpaHooksSchema().getNmTokensTypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamNmTokensType[] retset = new ICFBamNmTokensType[results.size()];
 		int idx = 0;
 		for (CFBamJpaNmTokensType cur: results) {

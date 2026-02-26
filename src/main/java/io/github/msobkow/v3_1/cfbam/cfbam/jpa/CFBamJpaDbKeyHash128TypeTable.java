@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaDbKeyHash128TypeTable database implementation for DbKeyHash128Type
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaDbKeyHash128TypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash128Type) {
 			CFBamJpaDbKeyHash128Type jparec = (CFBamJpaDbKeyHash128Type)rec;
-			CFBamJpaDbKeyHash128Type created = jpaHooksSchema.getDbKeyHash128TypeService().create(jparec);
+			CFBamJpaDbKeyHash128Type created = schema.getJpaHooksSchema().getDbKeyHash128TypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		}
 		else if (rec instanceof CFBamJpaDbKeyHash128Type) {
 			CFBamJpaDbKeyHash128Type jparec = (CFBamJpaDbKeyHash128Type)rec;
-			CFBamJpaDbKeyHash128Type updated = jpaHooksSchema.getDbKeyHash128TypeService().update(jparec);
+			CFBamJpaDbKeyHash128Type updated = schema.getJpaHooksSchema().getDbKeyHash128TypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		}
 		if (rec instanceof CFBamJpaDbKeyHash128Type) {
 			CFBamJpaDbKeyHash128Type jparec = (CFBamJpaDbKeyHash128Type)rec;
-			jpaHooksSchema.getDbKeyHash128TypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteDbKeyHash128Type", "rec", rec, "CFBamJpaDbKeyHash128Type");
@@ -175,7 +173,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash128TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public void deleteDbKeyHash128TypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getDbKeyHash128TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getDbKeyHash128TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash128TypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash128TypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getDbKeyHash128TypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getDbKeyHash128TypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	 */
 	@Override
 	public ICFBamDbKeyHash128Type[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findAll();
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findAll();
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getDbKeyHash128TypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getDbKeyHash128TypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getDbKeyHash128TypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByScopeIdx(argScopeId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByPrevIdx(argPrevId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByNextIdx(argNextId);
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByNextIdx(argNextId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaDbKeyHash128TypeTable implements ICFBamDbKeyHash128TypeTabl
 	public ICFBamDbKeyHash128Type[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaDbKeyHash128Type> results = jpaHooksSchema.getDbKeyHash128TypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaDbKeyHash128Type> results = schema.getJpaHooksSchema().getDbKeyHash128TypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamDbKeyHash128Type[] retset = new ICFBamDbKeyHash128Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaDbKeyHash128Type cur: results) {

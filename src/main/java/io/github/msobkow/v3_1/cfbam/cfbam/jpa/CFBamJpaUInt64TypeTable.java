@@ -65,7 +65,7 @@ import io.github.msobkow.v3_1.cfbam.cfbam.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
-import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
+import io.github.msobkow.v3_1.cfbam.cfbam.jpa.CFBamJpaHooksSchema;
 
 /*
  *	CFBamJpaUInt64TypeTable database implementation for UInt64Type
@@ -73,7 +73,6 @@ import io.github.msobkow.v3_1.cfbam.cfbamjpahooks.CFBamJpaHooksSchema;
 public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 {
 	protected CFBamJpaSchema schema;
-	protected CFBamJpaHooksSchema jpaHooksSchema;
 
 
 	public CFBamJpaUInt64TypeTable(ICFBamSchema schema) {
@@ -82,7 +81,6 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		}
 		if (schema instanceof CFBamJpaSchema) {
 			this.schema = (CFBamJpaSchema)schema;
-			this.jpaHooksSchema = this.schema.getJpaHooksSchema();
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "constructor", "schema", schema, "CFBamJpaSchema");
@@ -106,7 +104,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		}
 		else if (rec instanceof CFBamJpaUInt64Type) {
 			CFBamJpaUInt64Type jparec = (CFBamJpaUInt64Type)rec;
-			CFBamJpaUInt64Type created = jpaHooksSchema.getUInt64TypeService().create(jparec);
+			CFBamJpaUInt64Type created = schema.getJpaHooksSchema().getUInt64TypeService().create(jparec);
 			return( created );
 		}
 		else {
@@ -131,7 +129,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		}
 		else if (rec instanceof CFBamJpaUInt64Type) {
 			CFBamJpaUInt64Type jparec = (CFBamJpaUInt64Type)rec;
-			CFBamJpaUInt64Type updated = jpaHooksSchema.getUInt64TypeService().update(jparec);
+			CFBamJpaUInt64Type updated = schema.getJpaHooksSchema().getUInt64TypeService().update(jparec);
 			return( updated );
 		}
 		else {
@@ -155,7 +153,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		}
 		if (rec instanceof CFBamJpaUInt64Type) {
 			CFBamJpaUInt64Type jparec = (CFBamJpaUInt64Type)rec;
-			jpaHooksSchema.getUInt64TypeService().deleteByIdIdx(jparec.getPKey());
+			schema.getJpaHooksSchema().getUInt64TypeService().deleteByIdIdx(jparec.getPKey());
 		}
 		else {
 			throw new CFLibUnsupportedClassException(getClass(), "deleteUInt64Type", "rec", rec, "CFBamJpaUInt64Type");
@@ -175,7 +173,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteBySchemaIdx(argSchemaDefId);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteBySchemaIdx(argSchemaDefId);
 	}
 
 
@@ -190,7 +188,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamUInt64TypeBySchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteBySchemaIdx(argKey.getRequiredSchemaDefId());
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByIdIdx(argKey);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByIdIdx(argKey);
 	}
 
 	/**
@@ -221,7 +219,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByUNameIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByUNameIdx(argScopeId,
 		argName);
 	}
 
@@ -237,7 +235,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByUNameIdx(argKey.getRequiredScopeId(),
 			argKey.getRequiredName());
 	}
 
@@ -252,7 +250,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByScopeIdx(argScopeId);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByScopeIdx(argScopeId);
 	}
 
 
@@ -267,7 +265,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByScopeIdx(argKey.getRequiredScopeId());
 	}
 
 	/**
@@ -281,7 +279,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByDefSchemaIdx(argDefSchemaId);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByDefSchemaIdx(argDefSchemaId);
 	}
 
 
@@ -296,7 +294,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByDefSchemaIdx(argKey.getOptionalDefSchemaId());
 	}
 
 	/**
@@ -310,7 +308,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByPrevIdx(argPrevId);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByPrevIdx(argPrevId);
 	}
 
 
@@ -325,7 +323,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByPrevIdx(argKey.getOptionalPrevId());
 	}
 
 	/**
@@ -339,7 +337,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByNextIdx(argNextId);
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByNextIdx(argNextId);
 	}
 
 
@@ -354,7 +352,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByNextIdx(argKey.getOptionalNextId());
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByNextIdx(argKey.getOptionalNextId());
 	}
 
 	/**
@@ -371,7 +369,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByContPrevIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByContPrevIdx(argScopeId,
 		argPrevId);
 	}
 
@@ -387,7 +385,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByContPrevIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalPrevId());
 	}
 
@@ -405,7 +403,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByContNextIdx(argScopeId,
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByContNextIdx(argScopeId,
 		argNextId);
 	}
 
@@ -421,7 +419,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public void deleteUInt64TypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		jpaHooksSchema.getUInt64TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
+		schema.getJpaHooksSchema().getUInt64TypeService().deleteByContNextIdx(argKey.getRequiredScopeId(),
 			argKey.getOptionalNextId());
 	}
 
@@ -440,7 +438,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUInt64TypeService().find(PKey) );
+		return( schema.getJpaHooksSchema().getUInt64TypeService().find(PKey) );
 	}
 
 	/**
@@ -457,7 +455,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		return( jpaHooksSchema.getUInt64TypeService().lockByIdIdx(PKey) );
+		return( schema.getJpaHooksSchema().getUInt64TypeService().lockByIdIdx(PKey) );
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	 */
 	@Override
 	public ICFBamUInt64Type[] readAllDerived( ICFSecAuthorization Authorization ) {
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findAll();
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findAll();
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
@@ -492,7 +490,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		return( jpaHooksSchema.getUInt64TypeService().find(argId) );
+		return( schema.getJpaHooksSchema().getUInt64TypeService().find(argId) );
 	}
 
 	/**
@@ -512,7 +510,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		return( jpaHooksSchema.getUInt64TypeService().findByUNameIdx(argScopeId,
+		return( schema.getJpaHooksSchema().getUInt64TypeService().findByUNameIdx(argScopeId,
 		argName) );
 	}
 
@@ -529,7 +527,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByScopeIdx(argScopeId);
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByScopeIdx(argScopeId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
@@ -551,7 +549,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByDefSchemaIdx(argDefSchemaId);
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByDefSchemaIdx(argDefSchemaId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
@@ -573,7 +571,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByPrevIdx(argPrevId);
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByPrevIdx(argPrevId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
@@ -595,7 +593,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByNextIdx(argNextId);
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByNextIdx(argNextId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
@@ -620,7 +618,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByContPrevIdx(argScopeId,
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByContPrevIdx(argScopeId,
 		argPrevId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
@@ -646,7 +644,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findByContNextIdx(argScopeId,
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findByContNextIdx(argScopeId,
 		argNextId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
@@ -669,7 +667,7 @@ public class CFBamJpaUInt64TypeTable implements ICFBamUInt64TypeTable
 	public ICFBamUInt64Type[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		List<CFBamJpaUInt64Type> results = jpaHooksSchema.getUInt64TypeService().findBySchemaIdx(argSchemaDefId);
+		List<CFBamJpaUInt64Type> results = schema.getJpaHooksSchema().getUInt64TypeService().findBySchemaIdx(argSchemaDefId);
 		ICFBamUInt64Type[] retset = new ICFBamUInt64Type[results.size()];
 		int idx = 0;
 		for (CFBamJpaUInt64Type cur: results) {
